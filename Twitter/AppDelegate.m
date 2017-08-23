@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <TwitterKit/TwitterKit.h>
+#import "NavigationHelper.h"
 
 @interface AppDelegate ()
 
@@ -14,10 +16,29 @@
 
 @implementation AppDelegate
 
+static NSString *TWITTER_CONSUMER_KEY = @"wtoP0QWgr1jfYrn89l3nVodvE";
+static NSString *TWITTER_CONSUMER_SECRET = @"WQohdEFydBcYXvPJFj90liiSXWwZyiyrpNnl6ssndzaEucOonN";
+static NSString *SUCCESSFULLY_LOGGED_IN_VIEW_CONTROLLER_IDENTIFIER = @"";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[Twitter sharedInstance] startWithConsumerKey:TWITTER_CONSUMER_KEY consumerSecret:TWITTER_CONSUMER_SECRET];
+    TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
+    TWTRSession *lastSession = store.session;
+    if (lastSession) {
+        NSLog(@"User already logged in");
+        [self navigateToSuccessfullyLoggedinView];
+    }
     return YES;
+}
+
+- (void)navigateToSuccessfullyLoggedinView {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreen"];
+    appDelegate.window.rootViewController = viewController;
+    [appDelegate.window makeKeyAndVisible];
 }
 
 
@@ -47,5 +68,8 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+    return [[Twitter sharedInstance] application:app openURL:url options:options];
+}
 
 @end
