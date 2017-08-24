@@ -19,6 +19,10 @@
 #define TWITTER_USER_VERIFIED_FLAG @"verified"
 #define TWITTER_USER_PROFILE_IMAGE @"profile_image_url_https"
 
+//Keys in Tweet Dictionary
+#define TWITTER_TWEET_USER @"user"
+#define TWITTER_TWEET_TEXT @"text"
+
 
 @interface TwitterFetcher : NSObject
 

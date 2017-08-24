@@ -55,7 +55,7 @@ static NSString *friendsListEndpoint = @"https://api.twitter.com/1.1/friends/lis
                     if (data) {
                         NSError *jsonError;
                         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-                        NSLog(@"%@", json);
+                        //NSLog(@"%@", json);
                         self.nextCursor = [NSString stringWithFormat:@"%@",[json valueForKey:TWITTER_NEXT_CURSOR]];
                         NSMutableArray *followingList = [json valueForKeyPath:TWITTER_USER];
                         if (!self.followingList || [cursor isEqualToString:@"-1"])

@@ -8,6 +8,8 @@
 
 #import "FollowingTableViewController.h"
 #import "CustomUserDetailCell.h"
+#import "UserProfileTableViewController.h"
+#import "FetchUserProfileTVC.h"
 
 @interface FollowingTableViewController ()
 
@@ -62,5 +64,20 @@
     return cell;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([sender isKindOfClass:[CustomUserDetailCell class]]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        if(indexPath) {
+            if([segue.identifier isEqualToString:@"showUserDetail"]) {
+                if ([segue.destinationViewController isKindOfClass:[FetchUserProfileTVC class]]) {
+                    UserProfileTableViewController *upTVC = (UserProfileTableViewController *)segue.destinationViewController;
+                    upTVC.userID = [NSString stringWithFormat:@"%@",[self.followingList[indexPath.row] valueForKey:@"id"]];
+                    
+                }
+            }
+        }
+    }
+    
+}
 
 @end

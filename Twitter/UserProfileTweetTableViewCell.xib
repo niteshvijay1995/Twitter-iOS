@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserProfileTweetCell" rowHeight="100" id="tzD-3E-a5a" customClass="UserProfileTweetTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="389" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tzD-3E-a5a" id="5JS-8B-ePg">
+                <rect key="frame" x="0.0" y="0.0" width="389" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDo-LT-IrJ">
+                        <rect key="frame" x="70" y="12" width="45" height="19.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sVp-qc-9ha">
+                        <rect key="frame" x="12" y="12" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="664-1K-Md3"/>
+                            <constraint firstAttribute="height" constant="50" id="EAN-Lm-2fa"/>
+                            <constraint firstAttribute="width" secondItem="sVp-qc-9ha" secondAttribute="height" multiplier="1:1" id="TO8-Vc-K04"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ov5-ok-XjJ">
+                        <rect key="frame" x="70" y="36" width="303" height="47.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter_verified_icon" translatesAutoresizingMaskIntoConstraints="NO" id="rfg-01-mP9">
+                        <rect key="frame" x="123" y="15" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="5vr-Kf-ONe"/>
+                            <constraint firstAttribute="width" constant="14" id="HOP-ly-14e"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="ov5-ok-XjJ" secondAttribute="bottom" constant="8" id="0Ox-qa-WiB"/>
+                    <constraint firstItem="sVp-qc-9ha" firstAttribute="leading" secondItem="5JS-8B-ePg" secondAttribute="leadingMargin" constant="4" id="4Y5-8r-BUT"/>
+                    <constraint firstItem="rfg-01-mP9" firstAttribute="centerY" secondItem="KDo-LT-IrJ" secondAttribute="centerY" id="E9j-4x-vqv"/>
+                    <constraint firstItem="KDo-LT-IrJ" firstAttribute="top" secondItem="5JS-8B-ePg" secondAttribute="topMargin" constant="4" id="HJ0-Tm-Sk4"/>
+                    <constraint firstItem="ov5-ok-XjJ" firstAttribute="top" secondItem="KDo-LT-IrJ" secondAttribute="bottom" constant="4" id="I0m-uo-ZW4"/>
+                    <constraint firstItem="sVp-qc-9ha" firstAttribute="top" secondItem="5JS-8B-ePg" secondAttribute="topMargin" constant="4" id="Igh-Qw-L3e"/>
+                    <constraint firstItem="KDo-LT-IrJ" firstAttribute="leading" secondItem="sVp-qc-9ha" secondAttribute="trailing" constant="8" id="Odp-yO-aal"/>
+                    <constraint firstItem="rfg-01-mP9" firstAttribute="leading" secondItem="KDo-LT-IrJ" secondAttribute="trailing" constant="8" id="qlV-1a-kEV"/>
+                    <constraint firstItem="ov5-ok-XjJ" firstAttribute="leading" secondItem="sVp-qc-9ha" secondAttribute="trailing" constant="8" id="vnt-tt-WBJ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ov5-ok-XjJ" secondAttribute="trailing" constant="8" id="xZg-1G-81w"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="twitterVerifiedIcon" destination="rfg-01-mP9" id="Z4z-MD-evu"/>
+                <outlet property="userFullName" destination="KDo-LT-IrJ" id="ssE-p2-YVz"/>
+                <outlet property="userProfileImage" destination="sVp-qc-9ha" id="F9x-ws-cXD"/>
+                <outlet property="userTweetText" destination="ov5-ok-XjJ" id="y6v-PO-2Eo"/>
+            </connections>
+            <point key="canvasLocation" x="-111.5" y="60"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="twitter_verified_icon" width="158" height="158"/>
+    </resources>
+</document>

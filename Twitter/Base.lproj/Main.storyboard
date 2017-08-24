@@ -145,6 +145,7 @@
                                     <outlet property="userFullName" destination="eat-Ve-r10" id="FW0-AM-M2G"/>
                                     <outlet property="userHandle" destination="nPe-RN-9bK" id="WAL-pF-gYY"/>
                                     <outlet property="userProfileImage" destination="jtp-l0-zP5" id="QXm-Sj-SRU"/>
+                                    <segue destination="8mJ-Ym-ona" kind="show" identifier="showUserDetail" action="showDetailViewController:sender:" id="fMn-se-eZU"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -158,6 +159,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0DW-f0-irc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3832.8000000000002" y="541.97901049475263"/>
+        </scene>
+        <!--Fetch User ProfileTVC-->
+        <scene sceneID="tsJ-k5-fki">
+            <objects>
+                <tableViewController id="8mJ-Ym-ona" customClass="FetchUserProfileTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2Mt-UP-RgZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="8mJ-Ym-ona" id="RUf-W7-PaW"/>
+                            <outlet property="delegate" destination="8mJ-Ym-ona" id="Rso-fx-Xie"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CX2-Nu-fQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4657" y="542"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aQj-tz-3qu">
