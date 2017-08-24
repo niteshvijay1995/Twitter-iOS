@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1D43341F4EA83D00D6DECD /* TwitterFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D43331F4EA83D00D6DECD /* TwitterFetcher.m */; };
 		0A28696A1F4D75B400F3135A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2869691F4D75B400F3135A /* main.m */; };
 		0A28696D1F4D75B400F3135A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28696C1F4D75B400F3135A /* AppDelegate.m */; };
 		0A2869701F4D75B400F3135A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28696F1F4D75B400F3135A /* ViewController.m */; };
@@ -17,6 +18,10 @@
 		0A28698F1F4D780900F3135A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28698E1F4D780900F3135A /* LoginViewController.m */; };
 		0A2869921F4D78CC00F3135A /* NavigationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2869911F4D78CC00F3135A /* NavigationHelper.m */; };
 		0A2869951F4D7D6D00F3135A /* HomeScreenCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2869941F4D7D6D00F3135A /* HomeScreenCollectionViewController.m */; };
+		0A2869981F4D87BD00F3135A /* FollowingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2869971F4D87BD00F3135A /* FollowingTableViewController.m */; };
+		0A28699E1F4D8F9500F3135A /* FetchFollowingListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28699D1F4D8F9500F3135A /* FetchFollowingListTVC.m */; };
+		0A2869A41F4DA5DA00F3135A /* CustomUserDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2869A31F4DA5DA00F3135A /* CustomUserDetailCell.m */; };
+		0A2869A61F4DA61B00F3135A /* CustomUserDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A2869A51F4DA61B00F3135A /* CustomUserDetailCell.xib */; };
 		65CEC2F4FF20E4E6400C7382 /* libPods-TwitterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E023468DAFF4BCB4D9525D8D /* libPods-TwitterTests.a */; };
 		7F2B6538DAA3E3776144586C /* libPods-Twitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */; };
 /* End PBXBuildFile section */
@@ -32,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A1D43321F4EA83D00D6DECD /* TwitterFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFetcher.h; sourceTree = "<group>"; };
+		0A1D43331F4EA83D00D6DECD /* TwitterFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFetcher.m; sourceTree = "<group>"; };
 		0A2869651F4D75B400F3135A /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2869691F4D75B400F3135A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A28696B1F4D75B400F3135A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +58,13 @@
 		0A2869911F4D78CC00F3135A /* NavigationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationHelper.m; sourceTree = "<group>"; };
 		0A2869931F4D7D6D00F3135A /* HomeScreenCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenCollectionViewController.h; sourceTree = "<group>"; };
 		0A2869941F4D7D6D00F3135A /* HomeScreenCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenCollectionViewController.m; sourceTree = "<group>"; };
+		0A2869961F4D87BD00F3135A /* FollowingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTableViewController.h; sourceTree = "<group>"; };
+		0A2869971F4D87BD00F3135A /* FollowingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTableViewController.m; sourceTree = "<group>"; };
+		0A28699C1F4D8F9500F3135A /* FetchFollowingListTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchFollowingListTVC.h; sourceTree = "<group>"; };
+		0A28699D1F4D8F9500F3135A /* FetchFollowingListTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchFollowingListTVC.m; sourceTree = "<group>"; };
+		0A2869A21F4DA5DA00F3135A /* CustomUserDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUserDetailCell.h; sourceTree = "<group>"; };
+		0A2869A31F4DA5DA00F3135A /* CustomUserDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUserDetailCell.m; sourceTree = "<group>"; };
+		0A2869A51F4DA61B00F3135A /* CustomUserDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomUserDetailCell.xib; sourceTree = "<group>"; };
 		39802BB1F61BC44163C792E2 /* Pods-TwitterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Twitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF9EA335EEB058E5DD31D3F /* Pods-TwitterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +93,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A1D43351F4EAC1400D6DECD /* FollowingList */ = {
+			isa = PBXGroup;
+			children = (
+				0A2869961F4D87BD00F3135A /* FollowingTableViewController.h */,
+				0A2869971F4D87BD00F3135A /* FollowingTableViewController.m */,
+				0A28699C1F4D8F9500F3135A /* FetchFollowingListTVC.h */,
+				0A28699D1F4D8F9500F3135A /* FetchFollowingListTVC.m */,
+				0A2869A51F4DA61B00F3135A /* CustomUserDetailCell.xib */,
+				0A2869A21F4DA5DA00F3135A /* CustomUserDetailCell.h */,
+				0A2869A31F4DA5DA00F3135A /* CustomUserDetailCell.m */,
+			);
+			name = FollowingList;
+			sourceTree = "<group>";
+		};
+		0A1D43371F4EAC4400D6DECD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0A2869901F4D78CC00F3135A /* NavigationHelper.h */,
+				0A2869911F4D78CC00F3135A /* NavigationHelper.m */,
+				0A28698D1F4D780900F3135A /* LoginViewController.h */,
+				0A28698E1F4D780900F3135A /* LoginViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		0A1D43381F4EAC8F00D6DECD /* TwitterFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				0A1D43321F4EA83D00D6DECD /* TwitterFetcher.h */,
+				0A1D43331F4EA83D00D6DECD /* TwitterFetcher.m */,
+			);
+			name = TwitterFetcher;
+			sourceTree = "<group>";
+		};
 		0A28695C1F4D75B400F3135A = {
 			isa = PBXGroup;
 			children = (
@@ -102,16 +150,13 @@
 		0A2869671F4D75B400F3135A /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
-				0A28696B1F4D75B400F3135A /* AppDelegate.h */,
-				0A28696C1F4D75B400F3135A /* AppDelegate.m */,
+				0A1D43381F4EAC8F00D6DECD /* TwitterFetcher */,
+				0A1D43371F4EAC4400D6DECD /* Login */,
+				0A1D43351F4EAC1400D6DECD /* FollowingList */,
+				0A28696E1F4D75B400F3135A /* ViewController.h */,
 				0A2869931F4D7D6D00F3135A /* HomeScreenCollectionViewController.h */,
 				0A2869941F4D7D6D00F3135A /* HomeScreenCollectionViewController.m */,
-				0A2869901F4D78CC00F3135A /* NavigationHelper.h */,
-				0A2869911F4D78CC00F3135A /* NavigationHelper.m */,
-				0A28696E1F4D75B400F3135A /* ViewController.h */,
 				0A28696F1F4D75B400F3135A /* ViewController.m */,
-				0A28698D1F4D780900F3135A /* LoginViewController.h */,
-				0A28698E1F4D780900F3135A /* LoginViewController.m */,
 				0A2869711F4D75B400F3135A /* Main.storyboard */,
 				0A2869741F4D75B400F3135A /* Assets.xcassets */,
 				0A2869761F4D75B400F3135A /* LaunchScreen.storyboard */,
@@ -124,6 +169,8 @@
 		0A2869681F4D75B400F3135A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A28696B1F4D75B400F3135A /* AppDelegate.h */,
+				0A28696C1F4D75B400F3135A /* AppDelegate.m */,
 				0A2869691F4D75B400F3135A /* main.m */,
 			);
 			name = "Supporting Files";
@@ -248,6 +295,7 @@
 			files = (
 				0A2869781F4D75B400F3135A /* LaunchScreen.storyboard in Resources */,
 				0A2869751F4D75B400F3135A /* Assets.xcassets in Resources */,
+				0A2869A61F4DA61B00F3135A /* CustomUserDetailCell.xib in Resources */,
 				0A2869731F4D75B400F3135A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,11 +418,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A28698F1F4D780900F3135A /* LoginViewController.m in Sources */,
+				0A1D43341F4EA83D00D6DECD /* TwitterFetcher.m in Sources */,
 				0A2869951F4D7D6D00F3135A /* HomeScreenCollectionViewController.m in Sources */,
 				0A2869701F4D75B400F3135A /* ViewController.m in Sources */,
 				0A28696D1F4D75B400F3135A /* AppDelegate.m in Sources */,
 				0A28696A1F4D75B400F3135A /* main.m in Sources */,
 				0A2869921F4D78CC00F3135A /* NavigationHelper.m in Sources */,
+				0A28699E1F4D8F9500F3135A /* FetchFollowingListTVC.m in Sources */,
+				0A2869981F4D87BD00F3135A /* FollowingTableViewController.m in Sources */,
+				0A2869A41F4DA5DA00F3135A /* CustomUserDetailCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
