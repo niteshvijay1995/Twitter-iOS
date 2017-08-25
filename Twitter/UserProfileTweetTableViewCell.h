@@ -13,6 +13,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *userTweetText;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
 @property (weak, nonatomic) IBOutlet UIImageView *twitterVerifiedIcon;
+@property (weak, nonatomic) IBOutlet UILabel *retweetLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userTweetBottomContraintWithoutImage;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *userFullNameTopRetweetLabelContraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *userProfileImageTopRetweetLabelContraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *userProfileImageTopMarginConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *userFullNameLabelTopMarginContraint;
+
 
 - (void)configureCellUsingTweet:(NSDictionary *)tweet;
 
