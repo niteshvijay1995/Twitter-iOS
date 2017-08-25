@@ -48,31 +48,41 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Retweet message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RaQ-Ne-iLX">
-                        <rect key="frame" x="32" y="8" width="100" height="14.5"/>
+                        <rect key="frame" x="65" y="8" width="100" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="M0d-HI-hrk">
+                        <rect key="frame" x="49" y="10" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="7wS-Ef-TQg"/>
+                            <constraint firstAttribute="width" constant="12" id="Xsx-tV-Uei"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="ov5-ok-XjJ" secondAttribute="bottom" constant="2" id="0Ox-qa-WiB"/>
                     <constraint firstItem="sVp-qc-9ha" firstAttribute="leading" secondItem="5JS-8B-ePg" secondAttribute="leadingMargin" constant="4" id="4Y5-8r-BUT"/>
+                    <constraint firstItem="RaQ-Ne-iLX" firstAttribute="leading" secondItem="M0d-HI-hrk" secondAttribute="trailing" constant="4" id="DqU-vs-XaS"/>
                     <constraint firstItem="rfg-01-mP9" firstAttribute="centerY" secondItem="KDo-LT-IrJ" secondAttribute="centerY" id="E9j-4x-vqv"/>
                     <constraint firstItem="ov5-ok-XjJ" firstAttribute="top" secondItem="KDo-LT-IrJ" secondAttribute="bottom" constant="2" id="I0m-uo-ZW4"/>
                     <constraint firstItem="KDo-LT-IrJ" firstAttribute="leading" secondItem="sVp-qc-9ha" secondAttribute="trailing" constant="8" id="Odp-yO-aal"/>
+                    <constraint firstItem="M0d-HI-hrk" firstAttribute="centerY" secondItem="RaQ-Ne-iLX" secondAttribute="centerY" id="P5G-eA-kl8"/>
                     <constraint firstItem="sVp-qc-9ha" firstAttribute="top" secondItem="RaQ-Ne-iLX" secondAttribute="bottom" priority="250" constant="4" id="Ryn-b7-xMr"/>
                     <constraint firstItem="sVp-qc-9ha" firstAttribute="top" secondItem="5JS-8B-ePg" secondAttribute="topMargin" priority="750" constant="4" id="Vzc-EL-Hfh"/>
                     <constraint firstItem="KDo-LT-IrJ" firstAttribute="top" secondItem="5JS-8B-ePg" secondAttribute="topMargin" priority="750" constant="4" id="WwJ-OP-bka"/>
                     <constraint firstAttribute="topMargin" secondItem="RaQ-Ne-iLX" secondAttribute="top" id="Zzq-Lj-cHo"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="sVp-qc-9ha" secondAttribute="bottom" constant="4" id="c4k-un-FJc"/>
-                    <constraint firstItem="RaQ-Ne-iLX" firstAttribute="leading" secondItem="5JS-8B-ePg" secondAttribute="leadingMargin" constant="24" id="dSs-mp-fjO"/>
                     <constraint firstItem="KDo-LT-IrJ" firstAttribute="top" secondItem="RaQ-Ne-iLX" secondAttribute="bottom" priority="250" constant="4" id="p12-wj-OIG"/>
                     <constraint firstItem="rfg-01-mP9" firstAttribute="leading" secondItem="KDo-LT-IrJ" secondAttribute="trailing" constant="8" id="qlV-1a-kEV"/>
                     <constraint firstItem="ov5-ok-XjJ" firstAttribute="leading" secondItem="sVp-qc-9ha" secondAttribute="trailing" constant="8" id="vnt-tt-WBJ"/>
+                    <constraint firstItem="RaQ-Ne-iLX" firstAttribute="leading" secondItem="KDo-LT-IrJ" secondAttribute="leading" id="x8e-xF-3tl"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ov5-ok-XjJ" secondAttribute="trailing" constant="8" id="xZg-1G-81w"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="retweetIconImageView" destination="M0d-HI-hrk" id="f5k-kT-AEe"/>
                 <outlet property="retweetLabel" destination="RaQ-Ne-iLX" id="pzT-ze-jSs"/>
                 <outlet property="twitterVerifiedIcon" destination="rfg-01-mP9" id="Z4z-MD-evu"/>
                 <outlet property="userFullName" destination="KDo-LT-IrJ" id="ssE-p2-YVz"/>
@@ -88,6 +98,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="retweet_icon" width="256" height="256"/>
         <image name="twitter_verified_icon" width="158" height="158"/>
     </resources>
 </document>

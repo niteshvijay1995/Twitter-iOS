@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *userProfileImageTopRetweetLabelContraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *userProfileImageTopMarginConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *userFullNameLabelTopMarginContraint;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetIconImageView;
 
 
 - (void)configureCellUsingTweet:(NSDictionary *)tweet;

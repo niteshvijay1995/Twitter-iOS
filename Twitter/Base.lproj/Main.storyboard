@@ -79,11 +79,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserDetailCell" rowHeight="160" id="p0J-4h-hpx" customClass="CustomUserDetailCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UserDetailCell" rowHeight="160" id="p0J-4h-hpx" customClass="CustomUserDetailCell">
                                 <rect key="frame" x="0.0" y="28" width="375" height="160"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p0J-4h-hpx" id="lhn-7R-Eyz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="159.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="159.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jtp-l0-zP5">
@@ -104,13 +104,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPe-RN-9bK">
-                                            <rect key="frame" x="76" y="35.5" width="291" height="0.0"/>
+                                            <rect key="frame" x="76" y="35.5" width="258" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="This is desccription of user." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zou-hW-N1S">
-                                            <rect key="frame" x="76" y="37.5" width="291" height="109.5"/>
+                                            <rect key="frame" x="76" y="37.5" width="258" height="109.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -145,7 +145,7 @@
                                     <outlet property="userFullName" destination="eat-Ve-r10" id="FW0-AM-M2G"/>
                                     <outlet property="userHandle" destination="nPe-RN-9bK" id="WAL-pF-gYY"/>
                                     <outlet property="userProfileImage" destination="jtp-l0-zP5" id="QXm-Sj-SRU"/>
-                                    <segue destination="8mJ-Ym-ona" kind="show" identifier="showUserDetail" action="showDetailViewController:sender:" id="fMn-se-eZU"/>
+                                    <segue destination="8mJ-Ym-ona" kind="push" identifier="showUserDetail" id="fMn-se-eZU"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -173,6 +173,7 @@
                             <outlet property="delegate" destination="8mJ-Ym-ona" id="Rso-fx-Xie"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="gff-rk-kj7"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CX2-Nu-fQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

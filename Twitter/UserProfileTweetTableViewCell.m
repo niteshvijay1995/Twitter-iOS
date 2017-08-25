@@ -55,6 +55,9 @@
     NSDictionary *user;
     user = [tweet valueForKeyPath:TWITTER_TWEET_USER];
     self.retweetLabel.text = [[user valueForKeyPath:TWITTER_USER_FULL_NAME] stringByAppendingString:@" retweeted"];
+    
+    self.retweetIconImageView.image = [UIImage imageNamed:@"retweet_icon"];
+    
     self.userFullNameTopRetweetLabelContraint.priority = 750;
     self.userFullNameLabelTopMarginContraint.priority = 250;
     
@@ -122,6 +125,7 @@
         user = [tweet valueForKeyPath:TWITTER_TWEET_USER];
         self.userTweetText.text = [tweet valueForKeyPath:TWITTER_TWEET_TEXT];
         self.retweetLabel.text = @"";
+        self.retweetIconImageView.image = nil;
     }
     if ([TwitterUser isVerifiedUser:user]) {
         self.twitterVerifiedIcon.hidden = NO;
