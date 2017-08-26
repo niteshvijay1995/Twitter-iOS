@@ -10,7 +10,7 @@
 #import "TwitterFetcher.h"
 
 @interface CustomUserDetailCell()
-
+@property (strong, nonatomic) NSURL *profileImageUrl;
 
 @end
 
@@ -45,7 +45,9 @@
         NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
         UIImage *image = [[UIImage alloc] initWithData:imageData];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.userProfileImage.image = image;
+            if ([profileImageUrl isEqual:self.profileImageUrl]) {
+                self.userProfileImage.image = image;
+            }
         });
     });
 }
@@ -57,11 +59,11 @@
     else {
         self.twitterVerifiedIcon.hidden = YES;
     }
-    
     self.userFullName.text = [user valueForKey:TWITTER_USER_FULL_NAME];
     self.userHandle.text = [self getUserHandleOfUser:user];
     self.userDescription.text = [user valueForKey:TWITTER_USER_DESCRIPTION];
-    [self configureProfileImageFromUrl:[NSURL URLWithString: [user valueForKey:TWITTER_USER_PROFILE_IMAGE]]];
+    self.profileImageUrl = [NSURL URLWithString: [user valueForKey:TWITTER_USER_PROFILE_IMAGE]];
+    [self configureProfileImageFromUrl:self.profileImageUrl];
 }
 
 
