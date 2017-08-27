@@ -7,6 +7,7 @@
 //
 
 #import "UserProfileTweetTableViewCell.h"
+#import <TwitterKit/TwitterKit.h>
 #import "TwitterFetcher.h"
 #import "TwitterUser.h"
 
@@ -14,6 +15,8 @@
 @property (strong, nonatomic) UIImageView *userProfileImageView;
 @property (strong, nonatomic) UILabel *userFullNameLabel;
 @property (strong, nonatomic) UILabel *tweetTextLabel;
+@property (strong, nonatomic) NSURL *profileImageUrl;
+
 @end
 
 @implementation UserProfileTweetTableViewCell
@@ -39,7 +42,9 @@
         NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
         UIImage *image = [[UIImage alloc] initWithData:imageData];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.userProfileImage.image = image;
+            if ([profileImageUrl isEqual:self.profileImageUrl]) {
+                self.userProfileImage.image = image;
+            }
         });
     });
 }
@@ -133,7 +138,15 @@
     else {
         self.twitterVerifiedIcon.hidden = YES;
     }
-    
+    if ([[tweet valueForKeyPath:@"retweeted"]boolValue]) {
+        [self.retweetButton setImage:[UIImage imageNamed:@"retweeted_icon"] forState:UIControlStateNormal];
+        [self.retweetButton setEnabled:NO];
+    }
+    else {
+        [self.retweetButton setImage:[UIImage imageNamed:@"retweet_icon"] forState:UIControlStateNormal];
+        [self.retweetButton setEnabled:YES];
+    }
+    [self setNeedsLayout];
     //TO-DO Explore programatically creating auto layout contraints
     
     //[self addToCellProfileImageOfUser:user];
@@ -141,8 +154,31 @@
     //[self addToCellTweetLabel:tweet];
     
     self.userFullName.text = [user valueForKeyPath:TWITTER_USER_FULL_NAME];
-    [self configureProfileImageFromUrl:[NSURL URLWithString: [user valueForKey:TWITTER_USER_PROFILE_IMAGE]]];
-
+    self.profileImageUrl = [NSURL URLWithString:[user valueForKey:TWITTER_USER_PROFILE_IMAGE]];
+    [self configureProfileImageFromUrl:self.profileImageUrl];
+    self.retweetButton.restorationIdentifier = [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_ID] ];
+    
 }
 
+- (IBAction)retweet:(UIButton *)sender {
+    NSString *userID = [Twitter sharedInstance].sessionStore.session.userID;
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
+    NSDictionary *params = @{@"id" : sender.restorationIdentifier};
+    NSError *clientError;
+    
+    NSURLRequest *request = [client URLRequestWithMethod:@"POST" URL:[RETWEET_ENDPOINT stringByAppendingString:[sender.restorationIdentifier stringByAppendingString:@".json"]] parameters:params error:&clientError];
+    
+    if (request) {
+        [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (data) {
+                NSLog(@"Done");
+                [self.retweetButton setImage:[UIImage imageNamed:@"retweeted_icon"] forState:UIControlStateNormal];
+                [self.retweetButton setEnabled:NO];
+            }
+            else {
+                NSLog(@"Error: %@", connectionError);
+            }
+        }];
+    }
+}
 @end

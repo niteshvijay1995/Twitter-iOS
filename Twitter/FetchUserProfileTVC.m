@@ -11,7 +11,7 @@
 #import "TwitterFetcher.h"
 
 #define userTimelineEndPoint @"https://api.twitter.com/1.1/statuses/user_timeline.json"
-#define COUNT_OF_TWEETS_TO_RETRIEVE @"20"
+#define COUNT_OF_TWEETS_TO_RETRIEVE @"40"
 
 @interface FetchUserProfileTVC ()
 @end
@@ -30,7 +30,8 @@
 }
 
 - (void)fetchUserProfileTweets {
-    TWTRAPIClient *client = [[TWTRAPIClient alloc] init];
+    NSString *userID = [Twitter sharedInstance].sessionStore.session.userID;
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
     NSDictionary *params = @{@"id" : self.userID , @"count" : COUNT_OF_TWEETS_TO_RETRIEVE};
     NSError *clientError;
     

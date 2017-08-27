@@ -26,8 +26,12 @@
 #define TWITTER_RETWEET_TEXT @"retweeted_status.text"
 #define TWITTER_TWEET_RETWEET_STATUS @"retweeted_status"
 #define TWITTER_TWEET_URLS @"entities.urls"
+#define TWITTER_TWEET_ID @"id"
+#define TWITTER_TWEET_CREATED_AT @"created_at"
 
 #define TWITTER_ATTACHEMENT_URL @"url"
+
+#define RETWEET_ENDPOINT @"https://api.twitter.com/1.1/statuses/retweet/"
 
 @interface TwitterFetcher : NSObject
 
