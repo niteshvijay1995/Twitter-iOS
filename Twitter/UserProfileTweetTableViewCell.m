@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UILabel *userFullNameLabel;
 @property (strong, nonatomic) UILabel *tweetTextLabel;
 @property (strong, nonatomic) NSURL *profileImageUrl;
+@property (weak, nonatomic) IBOutlet UILabel *tweetTimeLabel;
 
 @end
 
@@ -119,6 +120,14 @@
 }
 */
 
+- (void)addToCellTime:(NSString *)time {
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"EEEE MMM dd HH:mm:ss Z yyyy"];
+    NSDate *tweetDate = [dateFormatter dateFromString:time];
+    [dateFormatter setDateFormat:@"dd MMM YY"];
+    self.tweetTimeLabel.text = [dateFormatter stringFromDate:tweetDate];
+}
+
 - (void)configureCellUsingTweet:(NSDictionary *)tweet {
     NSDictionary *user;
     if ([self isRetweetTweet:tweet]) {
@@ -157,7 +166,7 @@
     self.profileImageUrl = [NSURL URLWithString:[user valueForKey:TWITTER_USER_PROFILE_IMAGE]];
     [self configureProfileImageFromUrl:self.profileImageUrl];
     self.retweetButton.restorationIdentifier = [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_ID] ];
-    
+    [self addToCellTime:[tweet valueForKeyPath:TWITTER_TWEET_CREATED_AT]];
 }
 
 - (IBAction)retweet:(UIButton *)sender {

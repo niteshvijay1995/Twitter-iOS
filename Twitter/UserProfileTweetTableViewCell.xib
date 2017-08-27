@@ -71,8 +71,15 @@
                             <action selector="retweet:" destination="tzD-3E-a5a" eventType="touchUpInside" id="ADe-iy-QGy"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbm-F9-hK0">
+                        <rect key="frame" x="273" y="14" width="28" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="Dbm-F9-hK0" secondAttribute="trailing" constant="14" id="0du-VB-chY"/>
                     <constraint firstItem="sVp-qc-9ha" firstAttribute="leading" secondItem="5JS-8B-ePg" secondAttribute="leadingMargin" constant="4" id="4Y5-8r-BUT"/>
                     <constraint firstItem="RaQ-Ne-iLX" firstAttribute="leading" secondItem="M0d-HI-hrk" secondAttribute="trailing" constant="4" id="DqU-vs-XaS"/>
                     <constraint firstItem="rfg-01-mP9" firstAttribute="centerY" secondItem="KDo-LT-IrJ" secondAttribute="centerY" id="E9j-4x-vqv"/>
@@ -84,6 +91,7 @@
                     <constraint firstItem="KDo-LT-IrJ" firstAttribute="top" secondItem="5JS-8B-ePg" secondAttribute="topMargin" priority="750" constant="4" id="WwJ-OP-bka"/>
                     <constraint firstAttribute="topMargin" secondItem="RaQ-Ne-iLX" secondAttribute="top" id="Zzq-Lj-cHo"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="sVp-qc-9ha" secondAttribute="bottom" constant="4" id="c4k-un-FJc"/>
+                    <constraint firstItem="Dbm-F9-hK0" firstAttribute="centerY" secondItem="KDo-LT-IrJ" secondAttribute="centerY" id="efi-ij-D0y"/>
                     <constraint firstItem="4iy-D5-yfX" firstAttribute="leading" secondItem="5JS-8B-ePg" secondAttribute="leadingMargin" constant="116" id="eqj-s0-As4"/>
                     <constraint firstItem="KDo-LT-IrJ" firstAttribute="top" secondItem="RaQ-Ne-iLX" secondAttribute="bottom" priority="250" constant="4" id="p12-wj-OIG"/>
                     <constraint firstItem="rfg-01-mP9" firstAttribute="leading" secondItem="KDo-LT-IrJ" secondAttribute="trailing" constant="4" id="qlV-1a-kEV"/>
@@ -98,6 +106,7 @@
                 <outlet property="retweetButton" destination="4iy-D5-yfX" id="REY-uF-6P6"/>
                 <outlet property="retweetIconImageView" destination="M0d-HI-hrk" id="f5k-kT-AEe"/>
                 <outlet property="retweetLabel" destination="RaQ-Ne-iLX" id="pzT-ze-jSs"/>
+                <outlet property="tweetTimeLabel" destination="Dbm-F9-hK0" id="JbU-Y2-ybs"/>
                 <outlet property="twitterVerifiedIcon" destination="rfg-01-mP9" id="Z4z-MD-evu"/>
                 <outlet property="userFullName" destination="KDo-LT-IrJ" id="ssE-p2-YVz"/>
                 <outlet property="userFullNameLabelTopMarginContraint" destination="WwJ-OP-bka" id="D1t-9y-GAf"/>
