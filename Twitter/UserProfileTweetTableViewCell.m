@@ -150,11 +150,11 @@
     }
     if ([[tweet valueForKeyPath:@"retweeted"]boolValue]) {
         [self.retweetButton setImage:[UIImage imageNamed:@"retweeted_icon"] forState:UIControlStateNormal];
-        [self.retweetButton setEnabled:NO];
+        self.retweetButton.tag = 1;
     }
     else {
         [self.retweetButton setImage:[UIImage imageNamed:@"retweet_icon"] forState:UIControlStateNormal];
-        [self.retweetButton setEnabled:YES];
+        self.retweetButton.tag = 0;
     }
     [self setNeedsLayout];
     //TO-DO Explore programatically creating auto layout contraints
@@ -177,20 +177,39 @@
     NSDictionary *params = @{@"id" : sender.restorationIdentifier};
     NSError *clientError;
     
-    NSURLRequest *request = [client URLRequestWithMethod:@"POST" URL:[RETWEET_ENDPOINT stringByAppendingString:[sender.restorationIdentifier stringByAppendingString:@".json"]] parameters:params error:&clientError];
-    
-    if (request) {
-        [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            if (data) {
-                NSLog(@"Done");
-                [self.retweetButton setImage:[UIImage imageNamed:@"retweeted_icon"] forState:UIControlStateNormal];
-                [self.retweetButton setEnabled:NO];
-                self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",[self.retweetCountLabel.text intValue] + 1];
-            }
-            else {
-                NSLog(@"Error: %@", connectionError);
-            }
-        }];
+    if (self.retweetButton.tag == 0) {
+        NSURLRequest *request = [client URLRequestWithMethod:@"POST" URL:[RETWEET_ENDPOINT stringByAppendingString:[sender.restorationIdentifier stringByAppendingString:@".json"]] parameters:params error:&clientError];
+        
+        if (request) {
+            [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                if (data) {
+                    NSLog(@"Retweet Done");
+                    [self.retweetButton setImage:[UIImage imageNamed:@"retweeted_icon"] forState:UIControlStateNormal];
+                    self.retweetButton.tag = 1;
+                    self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",[self.retweetCountLabel.text intValue] + 1];
+                }
+                else {
+                    NSLog(@"Error: %@", connectionError);
+                }
+            }];
+        }
+    }
+    else if (self.retweetButton.tag == 1) {
+        NSURLRequest *request = [client URLRequestWithMethod:@"POST" URL:[UNRETWEET_ENDPOINT stringByAppendingString:[sender.restorationIdentifier stringByAppendingString:@".json"]] parameters:params error:&clientError];
+        
+        if (request) {
+            [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                if (data) {
+                    NSLog(@"Unretweet Done");
+                    [self.retweetButton setImage:[UIImage imageNamed:@"retweet_icon"] forState:UIControlStateNormal];
+                    self.retweetButton.tag = 0;
+                    self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",[self.retweetCountLabel.text intValue] - 1];
+                }
+                else {
+                    NSLog(@"Error: %@", connectionError);
+                }
+            }];
+        }
     }
 }
 @end

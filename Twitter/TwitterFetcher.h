@@ -33,6 +33,7 @@
 #define TWITTER_ATTACHEMENT_URL @"url"
 
 #define RETWEET_ENDPOINT @"https://api.twitter.com/1.1/statuses/retweet/"
+#define UNRETWEET_ENDPOINT @"https://api.twitter.com/1.1/statuses/unretweet/"
 
 @interface TwitterFetcher : NSObject
 
