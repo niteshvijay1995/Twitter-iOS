@@ -28,6 +28,7 @@
 #define TWITTER_TWEET_URLS @"entities.urls"
 #define TWITTER_TWEET_ID @"id"
 #define TWITTER_TWEET_CREATED_AT @"created_at"
+#define TWITTER_TWEET_RETWEET_COUNT @"retweet_count"
 
 #define TWITTER_ATTACHEMENT_URL @"url"
 

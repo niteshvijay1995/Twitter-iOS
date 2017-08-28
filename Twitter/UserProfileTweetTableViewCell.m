@@ -17,6 +17,7 @@
 @property (strong, nonatomic) UILabel *tweetTextLabel;
 @property (strong, nonatomic) NSURL *profileImageUrl;
 @property (weak, nonatomic) IBOutlet UILabel *tweetTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
 
 @end
 
@@ -167,6 +168,7 @@
     [self configureProfileImageFromUrl:self.profileImageUrl];
     self.retweetButton.restorationIdentifier = [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_ID] ];
     [self addToCellTime:[tweet valueForKeyPath:TWITTER_TWEET_CREATED_AT]];
+    self.retweetCountLabel.text = [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT]];
 }
 
 - (IBAction)retweet:(UIButton *)sender {
