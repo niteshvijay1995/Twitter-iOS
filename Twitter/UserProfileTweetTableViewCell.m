@@ -51,6 +51,21 @@
     });
 }
 
+- (void)configureRetweetButtonForRetweetStatus:(BOOL)retweetStatus retweetCount:(NSString *)retweetCount {
+    self.retweetCountLabel.text = retweetCount;
+    if (retweetStatus) {
+        [self.retweetButton setImage:[UIImage imageNamed:@"retweeted_icon"] forState:UIControlStateNormal];
+        self.retweetButton.tag = 1;
+        self.retweetCountLabel.textColor = [UIColor greenColor];
+    }
+    else {
+        [self.retweetButton setImage:[UIImage imageNamed:@"retweet_icon"] forState:UIControlStateNormal];
+        self.retweetButton.tag = 0;
+        self.retweetCountLabel.textColor = [UIColor blackColor];
+    }
+    [self setNeedsLayout];
+}
+
 - (BOOL)isRetweetTweet:(NSDictionary *)tweet {
     if ([tweet valueForKey:TWITTER_TWEET_RETWEET_STATUS]) {
         return YES;
@@ -148,15 +163,7 @@
     else {
         self.twitterVerifiedIcon.hidden = YES;
     }
-    if ([[tweet valueForKeyPath:@"retweeted"]boolValue]) {
-        [self.retweetButton setImage:[UIImage imageNamed:@"retweeted_icon"] forState:UIControlStateNormal];
-        self.retweetButton.tag = 1;
-    }
-    else {
-        [self.retweetButton setImage:[UIImage imageNamed:@"retweet_icon"] forState:UIControlStateNormal];
-        self.retweetButton.tag = 0;
-    }
-    [self setNeedsLayout];
+    [self configureRetweetButtonForRetweetStatus:[[tweet valueForKeyPath:@"retweeted"]boolValue] retweetCount:[NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT]]];
     //TO-DO Explore programatically creating auto layout contraints
     
     //[self addToCellProfileImageOfUser:user];
@@ -168,7 +175,6 @@
     [self configureProfileImageFromUrl:self.profileImageUrl];
     self.retweetButton.restorationIdentifier = [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_ID] ];
     [self addToCellTime:[tweet valueForKeyPath:TWITTER_TWEET_CREATED_AT]];
-    self.retweetCountLabel.text = [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT]];
 }
 
 - (IBAction)retweet:(UIButton *)sender {
@@ -184,9 +190,7 @@
             [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                 if (data) {
                     NSLog(@"Retweet Done");
-                    [self.retweetButton setImage:[UIImage imageNamed:@"retweeted_icon"] forState:UIControlStateNormal];
-                    self.retweetButton.tag = 1;
-                    self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",[self.retweetCountLabel.text intValue] + 1];
+                    [self configureRetweetButtonForRetweetStatus:YES retweetCount:[NSString stringWithFormat:@"%d",[self.retweetCountLabel.text intValue] + 1]];
                 }
                 else {
                     NSLog(@"Error: %@", connectionError);
@@ -201,9 +205,7 @@
             [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                 if (data) {
                     NSLog(@"Unretweet Done");
-                    [self.retweetButton setImage:[UIImage imageNamed:@"retweet_icon"] forState:UIControlStateNormal];
-                    self.retweetButton.tag = 0;
-                    self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",[self.retweetCountLabel.text intValue] - 1];
+                    [self configureRetweetButtonForRetweetStatus:NO retweetCount:[NSString stringWithFormat:@"%d",[self.retweetCountLabel.text intValue] - 1]];
                 }
                 else {
                     NSLog(@"Error: %@", connectionError);
