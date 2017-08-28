@@ -61,7 +61,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4iy-D5-yfX">
-                        <rect key="frame" x="124" y="64.5" width="18" height="20"/>
+                        <rect key="frame" x="124" y="65" width="18" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="8rA-of-UVU"/>
                             <constraint firstAttribute="width" constant="18" id="p79-Dy-y6s"/>
