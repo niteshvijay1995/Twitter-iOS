@@ -185,6 +185,7 @@
                 NSLog(@"Done");
                 [self.retweetButton setImage:[UIImage imageNamed:@"retweeted_icon"] forState:UIControlStateNormal];
                 [self.retweetButton setEnabled:NO];
+                self.retweetCountLabel.text = [NSString stringWithFormat:@"%d",[self.retweetCountLabel.text intValue] + 1];
             }
             else {
                 NSLog(@"Error: %@", connectionError);
