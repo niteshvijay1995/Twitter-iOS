@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeScreenCollectionViewController : UICollectionViewController
-
+@property (strong, nonatomic) NSMutableArray *tweetList;
 @end

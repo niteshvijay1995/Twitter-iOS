@@ -31,8 +31,8 @@
         <!--Home-->
         <scene sceneID="WXw-FM-KsJ">
             <objects>
-                <collectionViewController id="8Vv-oL-Q8F" customClass="HomeScreenCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="s2v-q3-Nhe">
+                <collectionViewController id="8Vv-oL-Q8F" customClass="HomeScreenTweetFetcherCVC" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="s2v-q3-Nhe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,11 +40,11 @@
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jQq-0X-Oy7">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="4" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -57,7 +57,6 @@
                             <outlet property="delegate" destination="8Vv-oL-Q8F" id="l3d-61-EH0"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Home" image="home_icon" id="WUq-ua-lCI"/>
                     <navigationItem key="navigationItem" title="Home" id="FzC-dW-5bN">
                         <barButtonItem key="leftBarButtonItem" image="logout_icon" id="7Ny-hh-ddN">
                             <connections>
@@ -68,7 +67,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2B-Zj-jjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2895" y="-153"/>
+            <point key="canvasLocation" x="3832.8000000000002" y="-153.37331334332833"/>
         </scene>
         <!--Following-->
         <scene sceneID="znE-fE-JS1">
@@ -209,7 +208,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8Vv-oL-Q8F" kind="relationship" relationship="viewControllers" id="xhI-Wi-siG"/>
+                        <segue destination="ljY-Mr-bem" kind="relationship" relationship="viewControllers" id="xhI-Wi-siG"/>
                         <segue destination="4Kw-lM-CsA" kind="relationship" relationship="viewControllers" id="doy-cb-cQ9"/>
                     </connections>
                 </tabBarController>
@@ -235,6 +234,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FKc-OR-sLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2893.5999999999999" y="541.97901049475263"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="IVD-MY-Xlv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ljY-Mr-bem" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="home_icon" id="WUq-ua-lCI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6vf-t0-A7s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8Vv-oL-Q8F" kind="relationship" relationship="rootViewController" id="3Rx-1R-XaY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3sM-CV-hX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2893.5999999999999" y="-153.37331334332833"/>
         </scene>
     </scenes>
     <resources>

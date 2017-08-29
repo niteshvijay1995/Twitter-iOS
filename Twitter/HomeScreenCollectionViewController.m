@@ -9,25 +9,44 @@
 #import "HomeScreenCollectionViewController.h"
 #import <TwitterKit/TwitterKit.h>
 #import "NavigationHelper.h"
+#import "TweetCollectionViewCell.h"
 
 @interface HomeScreenCollectionViewController ()
-
+@property (strong, nonatomic) TweetCollectionViewCell  *staticTweetCell;
+@property (strong, nonatomic) NSCache *cellSizeCache;
 @end
 
 @implementation HomeScreenCollectionViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+- (NSMutableArray *)tweetList {
+    if (!_tweetList) {
+        _tweetList = [[NSMutableArray alloc] init];
+    }
+    return _tweetList;
+}
+
+- (TweetCollectionViewCell *)staticTweetCell {
+    if (!_staticTweetCell) {
+        _staticTweetCell = (TweetCollectionViewCell *)[[[NSBundle mainBundle] loadNibNamed:@"TweetCell" owner:self options:nil] firstObject];
+    }
+    return _staticTweetCell;
+}
+
+- (NSCache *)cellSizeCache {
+    if(!_cellSizeCache) {
+        _cellSizeCache = [[NSCache alloc] init];
+    }
+    return _cellSizeCache;
+}
+
+static NSString * const reuseIdentifier = @"TweetCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [self.collectionView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:NULL] forCellWithReuseIdentifier:reuseIdentifier];
     
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
+    ((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1,1);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,21 +67,18 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+    return [self.tweetList count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
-    
+    TweetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    NSDictionary *tweet = self.tweetList[indexPath.row];
+    [cell addContentFromTweet:tweet];
     return cell;
 }
 
@@ -96,6 +112,22 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 }
 */
+/*
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize cellSizeObj;
+   // if ((cellSizeObj = (NSValue *)[self.cellSizeCache objectForKey:indexPath])) {
+     //   return [cellSizeObj CGSizeValue];
+    //}
+    [self.staticTweetCell setNeedsLayout];
+    [self.staticTweetCell layoutIfNeeded];
+    CGSize constraintSize = CGSizeMake(collectionView.bounds.size.width-10,CGFLOAT_MAX);
+    cellSizeObj = [self.staticTweetCell  systemLayoutSizeFittingSize:constraintSize];
+    //[self.cellSizeCache setObject:cellSizeObj forKey:indexPath];
+    return CGSizeMake(collectionView.bounds.size.width-10, cellSizeObj.height);
+}
+*/
+
 - (IBAction)logout:(UIBarButtonItem *)sender {
     TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
     NSString *userID = store.session.userID;

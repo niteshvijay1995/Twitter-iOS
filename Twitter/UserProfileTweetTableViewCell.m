@@ -164,8 +164,8 @@
         self.twitterVerifiedIcon.hidden = YES;
     }
     [self configureRetweetButtonForRetweetStatus:[[tweet valueForKeyPath:@"retweeted"]boolValue] retweetCount:[NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT]]];
-    //TO-DO Explore programatically creating auto layout contraints
     
+    //TO-DO Explore programatically creating auto layout contraints
     //[self addToCellProfileImageOfUser:user];
     //[self addToCellFullNameLabel:user];
     //[self addToCellTweetLabel:tweet];

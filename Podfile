@@ -12,4 +12,5 @@ target 'Twitter' do
     # Pods for testing
   end
   pod 'TwitterKit'
+  pod 'PureLayout'
 end
