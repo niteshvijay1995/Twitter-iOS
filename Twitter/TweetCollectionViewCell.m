@@ -9,6 +9,7 @@
 #import "TweetCollectionViewCell.h"
 #import "PureLayout.h"
 #import "TwitterFetcher.h"
+#import "TwitterUser.h"
 
 @interface TweetCollectionViewCell()
 @property (strong, nonatomic) UIImageView *profileImageView;
@@ -16,12 +17,14 @@
 @property (strong, nonatomic) UILabel *tweetLabel;
 @property (strong, nonatomic) NSOperationQueue *imageDownloaderQueue;
 @property (strong, nonatomic) NSURL *profileImageUrl;
+@property (strong, nonatomic) UIImageView *verifiedUserIcon;
 @end
 
 @implementation TweetCollectionViewCell
 
 static int LEFT_RIGHT_CELL_INSET = 4;
 static float PROFILE_IMAGE_SCALE_FACTOR = 0.12;
+static float VERIFIED_ICON_SCALE_FACTOR = 0.04;
 static int OPERATION_QUEUE_MAX_CONCURRENT_OPERATION_COUNT = 3;
 static float CELL_BORDER_WIDTH = 1.0;
 
@@ -41,16 +44,23 @@ static float CELL_BORDER_WIDTH = 1.0;
     [self addProfileImageView];
     [self addFullNameLabel];
     [self addTweetLabel];
+    [self addVerifiedUserIcon];
     
 }
 
-- (void)addContentFromTweet:(NSDictionary *)tweet
+- (void)configureCellFromTweet:(NSDictionary *)tweet
 {
     NSDictionary *user = [tweet valueForKeyPath:TWITTER_TWEET_USER];
     self.profileImageUrl = [NSURL URLWithString:[user valueForKey:TWITTER_USER_PROFILE_IMAGE]];
     [self addProfileImageFromUrl:self.profileImageUrl];
     [self addFullNameLabelWithFullName:[user valueForKeyPath:TWITTER_USER_FULL_NAME]];
     [self addTweetLabelWithTweet:[tweet valueForKeyPath:TWITTER_TWEET_TEXT]];
+    if ([TwitterUser isVerifiedUser:user]) {
+        self.verifiedUserIcon.hidden = NO;
+    }
+    else {
+        self.verifiedUserIcon.hidden = YES;
+    }
 }
 
 - (CGFloat)screenWidth {
@@ -129,6 +139,22 @@ static float CELL_BORDER_WIDTH = 1.0;
     self.tweetLabel.text = @"Tweet";
     [self.tweetLabel setFont:[UIFont systemFontOfSize:15]];
     [self.tweetLabel sizeToFit];
+}
+
+- (void)addVerifiedUserIcon {
+    self.verifiedUserIcon = [[UIImageView alloc] init];
+    
+    self.verifiedUserIcon.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.tweetCellView addSubview:self.verifiedUserIcon];
+    
+    CGFloat size = VERIFIED_ICON_SCALE_FACTOR*[self screenWidth];
+    [self.verifiedUserIcon autoSetDimensionsToSize:CGSizeMake(size,size)];
+    
+    [self.verifiedUserIcon autoConstrainAttribute:ALAttributeLeading toAttribute:ALAttributeTrailing ofView:self.fullNameLabel withOffset:5];
+    [self.verifiedUserIcon autoConstrainAttribute:ALAttributeHorizontal toAttribute:ALAttributeHorizontal ofView:self.fullNameLabel withOffset:0];
+    [self.verifiedUserIcon layoutIfNeeded];
+    self.verifiedUserIcon.image = [UIImage imageNamed:@"twitter_verified_icon"];
+    self.verifiedUserIcon.clipsToBounds = YES;
 }
 
 @end

@@ -12,6 +12,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tweetCellViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet UIView *tweetCellView;
 
-- (void)addContentFromTweet:(NSDictionary *)tweet;
+- (void)configureCellFromTweet:(NSDictionary *)tweet;
 
 @end
