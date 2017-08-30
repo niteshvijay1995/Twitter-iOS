@@ -10,6 +10,7 @@
 #import "PureLayout.h"
 #import "TwitterFetcher.h"
 #import "TwitterUser.h"
+#import "ProfileImageCache.h"
 
 @interface TweetCollectionViewCell()
 @property (strong, nonatomic) UIImageView *profileImageView;
@@ -50,19 +51,6 @@ static float CELL_BORDER_WIDTH = 1.0;
     
 }
 
-- (NSMutableAttributedString *)getAttributedStringForTweet:(NSDictionary *)tweet {
-    NSMutableAttributedString *tweetString;
-    tweetString = [[NSMutableAttributedString alloc]initWithString:[tweet valueForKeyPath:TWITTER_TWEET_TEXT]];
-    NSArray *urls = [tweet valueForKeyPath:TWITTER_TWEET_URLS];
-    for (id url in urls) {
-        NSArray *indices = [url valueForKeyPath:@"indices"];
-        NSRange range = NSMakeRange([indices[0] integerValue] , [indices[1] integerValue]-[indices[0] integerValue]);
-        [tweetString replaceCharactersInRange:range withString:@""];
-        return tweetString;
-    }
-    return tweetString;
-}
-
 - (void)configureCellFromTweet:(NSDictionary *)tweet
 {
     NSDictionary *user = [tweet valueForKeyPath:TWITTER_TWEET_USER];
@@ -83,16 +71,23 @@ static float CELL_BORDER_WIDTH = 1.0;
 }
 
 - (void)addProfileImageFromUrl:(NSURL *)profileImageUrl {
-    self.profileImageView.image = [UIImage imageNamed:@"default_profile_normal"];
-    [self.imageDownloaderQueue addOperationWithBlock:^{
-        NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            if ([profileImageUrl isEqual:self.profileImageUrl]) {
-                self.profileImageView.image = image;
-            }
+    UIImage *profileImage = [[ProfileImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
+    if (profileImage) {
+        self.profileImageView.image = profileImage;
+    }
+    else {
+        self.profileImageView.image = [UIImage imageNamed:@"default_profile_normal"];
+        [self.imageDownloaderQueue addOperationWithBlock:^{
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
+            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [[ProfileImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
+                if ([profileImageUrl isEqual:self.profileImageUrl]) {
+                    self.profileImageView.image = image;
+                }
+            }];
         }];
-    }];
+    }
 }
 
 - (void)addFullNameLabelWithFullName:(NSString *)fullName {

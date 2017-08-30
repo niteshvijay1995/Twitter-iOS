@@ -35,6 +35,8 @@
 #define RETWEET_ENDPOINT @"https://api.twitter.com/1.1/statuses/retweet/"
 #define UNRETWEET_ENDPOINT @"https://api.twitter.com/1.1/statuses/unretweet/"
 
+#define twitterBlueColor [UIColor colorWithRed:0.29 green:0.64 blue:1 alpha:1]
+
 @interface TwitterFetcher : NSObject
 
 @end

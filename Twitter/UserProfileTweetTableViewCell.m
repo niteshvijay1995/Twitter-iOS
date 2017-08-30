@@ -10,6 +10,7 @@
 #import <TwitterKit/TwitterKit.h>
 #import "TwitterFetcher.h"
 #import "TwitterUser.h"
+#import "ProfileImageCache.h"
 
 @interface UserProfileTweetTableViewCell()
 @property (strong, nonatomic) UIImageView *userProfileImageView;
@@ -38,17 +39,25 @@
 - (void)configureProfileImageFromUrl:(NSURL *)profileImageUrl {
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.height/2;
     self.userProfileImage.clipsToBounds = YES;
-    self.userProfileImage.image = [UIImage imageNamed:@"default_profile_normal"];
-    dispatch_queue_t imageFetchQ = dispatch_queue_create("profile image fetcher", NULL);
-    dispatch_async(imageFetchQ, ^{
-        NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([profileImageUrl isEqual:self.profileImageUrl]) {
-                self.userProfileImage.image = image;
-            }
+    
+    UIImage *profileImage = [[ProfileImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
+    if (profileImage) {
+        self.userProfileImage.image = profileImage;
+    }
+    else {
+        self.userProfileImage.image = [UIImage imageNamed:@"default_profile_normal"];
+        dispatch_queue_t imageFetchQ = dispatch_queue_create("profile image fetcher", NULL);
+        dispatch_async(imageFetchQ, ^{
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
+            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[ProfileImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
+                if ([profileImageUrl isEqual:self.profileImageUrl]) {
+                    self.userProfileImage.image = image;
+                }
+            });
         });
-    });
+    }
 }
 
 - (void)configureRetweetButtonForRetweetStatus:(BOOL)retweetStatus retweetCount:(NSString *)retweetCount {

@@ -8,6 +8,7 @@
 
 #import "CustomUserDetailCell.h"
 #import "TwitterFetcher.h"
+#import "ProfileImageCache.h"
 
 @interface CustomUserDetailCell()
 @property (strong, nonatomic) NSURL *profileImageUrl;
@@ -39,17 +40,26 @@
 - (void)configureProfileImageFromUrl:(NSURL *)profileImageUrl {
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.height/2;
     self.userProfileImage.clipsToBounds = YES;
-    self.userProfileImage.image = [UIImage imageNamed:@"default_profile_normal"];
-    dispatch_queue_t imageFetchQ = dispatch_queue_create("profile image fetcher", NULL);
-    dispatch_async(imageFetchQ, ^{
-        NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([profileImageUrl isEqual:self.profileImageUrl]) {
-                self.userProfileImage.image = image;
-            }
+    
+    UIImage *profileImage = [[ProfileImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
+    
+    if (profileImage) {
+        self.userProfileImage.image = profileImage;
+    }
+    else {
+        self.userProfileImage.image = [UIImage imageNamed:@"default_profile_normal"];
+        dispatch_queue_t imageFetchQ = dispatch_queue_create("profile image fetcher", NULL);
+        dispatch_async(imageFetchQ, ^{
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
+            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            [[ProfileImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([profileImageUrl isEqual:self.profileImageUrl]) {
+                    self.userProfileImage.image = image;
+                }
+            });
         });
-    });
+    }
 }
 
 - (void)configureCellUsingUser:(NSDictionary *)user {
