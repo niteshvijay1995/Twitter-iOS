@@ -30,6 +30,9 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
     // Dispose of any resources that can be recreated.
 }
 
+- (void)refreshHomeScreen {
+    [self fetchTweets];
+}
 
 - (void)fetchTweets {
     TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
@@ -51,8 +54,11 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
                     NSError *jsonError;
                     NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
                     //NSLog(@"%@", json);
+                    self.tweetList = [[NSMutableArray alloc] init];
                     [self.tweetList addObjectsFromArray:json];
+                    [self.refreshControl endRefreshing];
                     [self.collectionView reloadData];
+                    
                 }
                 else {
                     NSLog(@"Error: %@", connectionError);

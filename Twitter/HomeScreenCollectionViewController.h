@@ -10,4 +10,5 @@
 
 @interface HomeScreenCollectionViewController : UICollectionViewController
 @property (strong, nonatomic) NSMutableArray *tweetList;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
