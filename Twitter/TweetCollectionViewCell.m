@@ -24,7 +24,7 @@
 
 static int LEFT_RIGHT_CELL_INSET = 4;
 static float PROFILE_IMAGE_SCALE_FACTOR = 0.12;
-static float VERIFIED_ICON_SCALE_FACTOR = 0.04;
+static float VERIFIED_ICON_SCALE_FACTOR = 0.03;
 static int OPERATION_QUEUE_MAX_CONCURRENT_OPERATION_COUNT = 3;
 static float CELL_BORDER_WIDTH = 1.0;
 
@@ -35,8 +35,10 @@ static float CELL_BORDER_WIDTH = 1.0;
     
     self.tweetCellViewWidthConstraint.constant = [self screenWidth] - (2*LEFT_RIGHT_CELL_INSET);
     
-    self.tweetCellView.layer.borderColor = [UIColor grayColor].CGColor;
-    self.tweetCellView.layer.borderWidth = CELL_BORDER_WIDTH;
+    self.layer.borderColor = [UIColor grayColor].CGColor;
+    self.layer.borderWidth = CELL_BORDER_WIDTH;
+    
+    self.layer.cornerRadius = 5;
     
     self.imageDownloaderQueue = [[NSOperationQueue alloc] init];
     self.imageDownloaderQueue.maxConcurrentOperationCount = OPERATION_QUEUE_MAX_CONCURRENT_OPERATION_COUNT;
@@ -48,13 +50,26 @@ static float CELL_BORDER_WIDTH = 1.0;
     
 }
 
+- (NSMutableAttributedString *)getAttributedStringForTweet:(NSDictionary *)tweet {
+    NSMutableAttributedString *tweetString;
+    tweetString = [[NSMutableAttributedString alloc]initWithString:[tweet valueForKeyPath:TWITTER_TWEET_TEXT]];
+    NSArray *urls = [tweet valueForKeyPath:TWITTER_TWEET_URLS];
+    for (id url in urls) {
+        NSArray *indices = [url valueForKeyPath:@"indices"];
+        NSRange range = NSMakeRange([indices[0] integerValue] , [indices[1] integerValue]-[indices[0] integerValue]);
+        [tweetString replaceCharactersInRange:range withString:@""];
+        return tweetString;
+    }
+    return tweetString;
+}
+
 - (void)configureCellFromTweet:(NSDictionary *)tweet
 {
     NSDictionary *user = [tweet valueForKeyPath:TWITTER_TWEET_USER];
     self.profileImageUrl = [NSURL URLWithString:[user valueForKey:TWITTER_USER_PROFILE_IMAGE]];
     [self addProfileImageFromUrl:self.profileImageUrl];
     [self addFullNameLabelWithFullName:[user valueForKeyPath:TWITTER_USER_FULL_NAME]];
-    [self addTweetLabelWithTweet:[tweet valueForKeyPath:TWITTER_TWEET_TEXT]];
+    [self addTweetLabelWithTweet:tweet];
     if ([TwitterUser isVerifiedUser:user]) {
         self.verifiedUserIcon.hidden = NO;
     }
@@ -84,8 +99,8 @@ static float CELL_BORDER_WIDTH = 1.0;
     self.fullNameLabel.text = fullName;
 }
 
-- (void)addTweetLabelWithTweet:(NSString *)tweet {
-    self.tweetLabel.text = tweet;
+- (void)addTweetLabelWithTweet:(NSDictionary *)tweet {
+    self.tweetLabel.attributedText = [self getAttributedStringForTweet:tweet];
 }
 
 - (void)addProfileImageView {

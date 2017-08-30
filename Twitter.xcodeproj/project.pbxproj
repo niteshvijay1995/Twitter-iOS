@@ -30,6 +30,7 @@
 		0A8A89191F540A4A004A6606 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8A89181F540A4A004A6606 /* TweetCell.xib */; };
 		0A8A891C1F540E44004A6606 /* TweetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8A891B1F540E44004A6606 /* TweetCollectionViewCell.m */; };
 		0A8A891F1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8A891E1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.m */; };
+		0A8A89241F5691A6004A6606 /* ProfileImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8A89231F5691A6004A6606 /* ProfileImageDownloader.m */; };
 		65CEC2F4FF20E4E6400C7382 /* libPods-TwitterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E023468DAFF4BCB4D9525D8D /* libPods-TwitterTests.a */; };
 		7F2B6538DAA3E3776144586C /* libPods-Twitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,8 @@
 		0A8A891B1F540E44004A6606 /* TweetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetCollectionViewCell.m; sourceTree = "<group>"; };
 		0A8A891D1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenTweetFetcherCVC.h; sourceTree = "<group>"; };
 		0A8A891E1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenTweetFetcherCVC.m; sourceTree = "<group>"; };
+		0A8A89221F5691A6004A6606 /* ProfileImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileImageDownloader.h; sourceTree = "<group>"; };
+		0A8A89231F5691A6004A6606 /* ProfileImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileImageDownloader.m; sourceTree = "<group>"; };
 		39802BB1F61BC44163C792E2 /* Pods-TwitterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Twitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF9EA335EEB058E5DD31D3F /* Pods-TwitterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 		0A2869671F4D75B400F3135A /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				0A8A89211F56917C004A6606 /* ProfileImageDownloader */,
 				0A429DC81F53FB64005C856A /* Home */,
 				0A1D43381F4EAC8F00D6DECD /* TwitterFetcher */,
 				0A1D43371F4EAC4400D6DECD /* Login */,
@@ -235,6 +239,15 @@
 				0A8A891B1F540E44004A6606 /* TweetCollectionViewCell.m */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		0A8A89211F56917C004A6606 /* ProfileImageDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				0A8A89221F5691A6004A6606 /* ProfileImageDownloader.h */,
+				0A8A89231F5691A6004A6606 /* ProfileImageDownloader.m */,
+			);
+			name = ProfileImageDownloader;
 			sourceTree = "<group>";
 		};
 		400FFDD1A36DA577FDC983C2 /* Frameworks */ = {
@@ -471,6 +484,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A8A89241F5691A6004A6606 /* ProfileImageDownloader.m in Sources */,
 				0A1D43441F4F557D00D6DECD /* UserProfileTweetTableViewCell.m in Sources */,
 				0A8A891C1F540E44004A6606 /* TweetCollectionViewCell.m in Sources */,
 				0A28698F1F4D780900F3135A /* LoginViewController.m in Sources */,
