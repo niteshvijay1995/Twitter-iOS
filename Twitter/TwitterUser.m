@@ -19,4 +19,12 @@
     return [@"@" stringByAppendingString:[user valueForKey:TWITTER_USER_SCREEN_NAME]];
 }
 
++ (NSURL *)getProfileImageUrlForUser:(NSDictionary *)user {
+    return [NSURL URLWithString:[user valueForKey:TWITTER_USER_PROFILE_IMAGE]];
+}
+
++ (NSString *)getFullNameForUser:(NSDictionary *)user {
+    return [user valueForKeyPath:TWITTER_USER_FULL_NAME];
+}
+
 @end

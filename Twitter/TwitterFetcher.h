@@ -21,11 +21,14 @@
 
 //Keys in Tweet Dictionary
 #define TWITTER_TWEET_USER @"user"
+#define TWITTER_RETWEET @"retweeted_status"
 #define TWITTER_RETWEET_USER @"retweeted_status.user"
 #define TWITTER_TWEET_TEXT @"text"
 #define TWITTER_RETWEET_TEXT @"retweeted_status.text"
 #define TWITTER_TWEET_RETWEET_STATUS @"retweeted_status"
+#define TWITTER_TWEET_RETWEET_USER @"retweeted_status.user"
 #define TWITTER_TWEET_URLS @"entities.urls"
+#define TWITTER_TWEET_USER_MENTIONS @"entities.user_mentions"
 #define TWITTER_TWEET_ID @"id"
 #define TWITTER_TWEET_CREATED_AT @"created_at"
 #define TWITTER_TWEET_RETWEET_COUNT @"retweet_count"

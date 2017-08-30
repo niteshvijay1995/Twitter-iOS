@@ -12,5 +12,6 @@
 
 + (BOOL)isVerifiedUser:(NSDictionary *)user;
 + (NSString *)getUserHandleOfUser:(NSDictionary *)user;
-
++ (NSURL *)getProfileImageUrlForUser:(NSDictionary *)user;
++ (NSString *)getFullNameForUser:(NSDictionary *)user;
 @end
