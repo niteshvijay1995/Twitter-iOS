@@ -1,5 +1,5 @@
 //
-//  ProfileImageCache.m
+//  ImageCache.m
 //  Twitter
 //
 //  Created by nitesh.vi on 30/08/17.
@@ -8,20 +8,20 @@
 
 //  Designed on the principle Singleton Design Pattern
 
-#import "ProfileImageCache.h"
+#import "ImageCache.h"
 
-static ProfileImageCache *sharedInstance;
+static ImageCache *sharedInstance;
 
-@interface ProfileImageCache()
+@interface ImageCache()
 @property (strong, nonatomic) NSCache *imageCache;
 @end
 
-@implementation ProfileImageCache
+@implementation ImageCache
 
-+ (ProfileImageCache *)sharedInstance {
++ (ImageCache *)sharedInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[ProfileImageCache alloc] init];
+        sharedInstance = [[ImageCache alloc] init];
     });
     return sharedInstance;
 }

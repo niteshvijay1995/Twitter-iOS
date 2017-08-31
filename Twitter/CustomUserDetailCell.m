@@ -8,7 +8,7 @@
 
 #import "CustomUserDetailCell.h"
 #import "TwitterFetcher.h"
-#import "ProfileImageCache.h"
+#import "ImageCache.h"
 
 @interface CustomUserDetailCell()
 @property (strong, nonatomic) NSURL *profileImageUrl;
@@ -41,7 +41,7 @@
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.height/2;
     self.userProfileImage.clipsToBounds = YES;
     
-    UIImage *profileImage = [[ProfileImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
+    UIImage *profileImage = [[ImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
     
     if (profileImage) {
         self.userProfileImage.image = profileImage;
@@ -52,7 +52,7 @@
         dispatch_async(imageFetchQ, ^{
             NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
             UIImage *image = [[UIImage alloc] initWithData:imageData];
-            [[ProfileImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
+            [[ImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([profileImageUrl isEqual:self.profileImageUrl]) {
                     self.userProfileImage.image = image;

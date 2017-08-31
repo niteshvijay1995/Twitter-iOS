@@ -10,7 +10,7 @@
 #import "PureLayout.h"
 #import "TwitterFetcher.h"
 #import "TwitterUser.h"
-#import "ProfileImageCache.h"
+#import "ImageCache.h"
 #import "TwitterTweet.h"
 #import "TwitterUser.h"
 
@@ -178,7 +178,7 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
 }
 
 - (void)addProfileImageFromUrl:(NSURL *)profileImageUrl {
-    UIImage *profileImage = [[ProfileImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
+    UIImage *profileImage = [[ImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
     if (profileImage) {
         self.profileImageView.image = profileImage;
     }
@@ -188,7 +188,7 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
             NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
             UIImage *image = [[UIImage alloc] initWithData:imageData];
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [[ProfileImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
+                [[ImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
                 if ([profileImageUrl isEqual:self.profileImageUrl]) {
                     self.profileImageView.image = image;
                 }

@@ -10,7 +10,7 @@
 #import <TwitterKit/TwitterKit.h>
 #import "TwitterFetcher.h"
 #import "TwitterUser.h"
-#import "ProfileImageCache.h"
+#import "ImageCache.h"
 
 @interface UserProfileTweetTableViewCell()
 @property (strong, nonatomic) UIImageView *userProfileImageView;
@@ -40,7 +40,7 @@
     self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.height/2;
     self.userProfileImage.clipsToBounds = YES;
     
-    UIImage *profileImage = [[ProfileImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
+    UIImage *profileImage = [[ImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
     if (profileImage) {
         self.userProfileImage.image = profileImage;
     }
@@ -51,7 +51,7 @@
             NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
             UIImage *image = [[UIImage alloc] initWithData:imageData];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[ProfileImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
+                [[ImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
                 if ([profileImageUrl isEqual:self.profileImageUrl]) {
                     self.userProfileImage.image = image;
                 }
