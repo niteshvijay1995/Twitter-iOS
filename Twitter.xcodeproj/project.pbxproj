@@ -15,7 +15,6 @@
 		0A1D43471F4F598B00D6DECD /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D43461F4F598B00D6DECD /* TwitterUser.m */; };
 		0A28696A1F4D75B400F3135A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2869691F4D75B400F3135A /* main.m */; };
 		0A28696D1F4D75B400F3135A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28696C1F4D75B400F3135A /* AppDelegate.m */; };
-		0A2869701F4D75B400F3135A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28696F1F4D75B400F3135A /* ViewController.m */; };
 		0A2869731F4D75B400F3135A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2869711F4D75B400F3135A /* Main.storyboard */; };
 		0A2869781F4D75B400F3135A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2869761F4D75B400F3135A /* LaunchScreen.storyboard */; };
 		0A2869831F4D75B400F3135A /* TwitterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2869821F4D75B400F3135A /* TwitterTests.m */; };
@@ -62,8 +61,6 @@
 		0A2869691F4D75B400F3135A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A28696B1F4D75B400F3135A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0A28696C1F4D75B400F3135A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0A28696E1F4D75B400F3135A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0A28696F1F4D75B400F3135A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0A2869721F4D75B400F3135A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A2869771F4D75B400F3135A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A2869791F4D75B400F3135A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -202,8 +199,6 @@
 				0A1D43371F4EAC4400D6DECD /* Login */,
 				0A1D43351F4EAC1400D6DECD /* FollowingList */,
 				0A1D43391F4ECD3700D6DECD /* UserProfile */,
-				0A28696E1F4D75B400F3135A /* ViewController.h */,
-				0A28696F1F4D75B400F3135A /* ViewController.m */,
 				0A2869711F4D75B400F3135A /* Main.storyboard */,
 				0A2869761F4D75B400F3135A /* LaunchScreen.storyboard */,
 				0A2869791F4D75B400F3135A /* Info.plist */,
@@ -498,7 +493,6 @@
 				0A1D433C1F4ECD6100D6DECD /* UserProfileTableViewController.m in Sources */,
 				0A8A891F1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.m in Sources */,
 				0A2869951F4D7D6D00F3135A /* HomeScreenCollectionViewController.m in Sources */,
-				0A2869701F4D75B400F3135A /* ViewController.m in Sources */,
 				0A28696D1F4D75B400F3135A /* AppDelegate.m in Sources */,
 				0A28696A1F4D75B400F3135A /* main.m in Sources */,
 				0A8A89271F5692CE004A6606 /* ImageCache.m in Sources */,
