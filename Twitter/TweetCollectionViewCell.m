@@ -22,17 +22,20 @@
 @property (strong, nonatomic) NSURL *profileImageUrl;
 @property (strong, nonatomic) UIImageView *verifiedUserIcon;
 @property (strong, nonatomic) UILabel *retweetLabel;
+@property (strong, nonatomic) UIImageView *mediaImageView;
 @property (strong, nonatomic) NSLayoutConstraint *profileImage_TopMarginConstraint;
 @property (strong, nonatomic) NSLayoutConstraint *profileImage_RetweetLabelContraint;
+@property (strong, nonatomic) NSLayoutConstraint *mediaImageHeightConstraint;
 @end
 
 @implementation TweetCollectionViewCell
 
 static int LEFT_RIGHT_CELL_INSET = 4;
-static float PROFILE_IMAGE_SCALE_FACTOR = 0.12;
+static float PROFILE_IMAGE_SCALE_FACTOR = 0.14;
 static float VERIFIED_ICON_SCALE_FACTOR = 0.03;
 static int OPERATION_QUEUE_MAX_CONCURRENT_OPERATION_COUNT = 3;
 static float CELL_BORDER_WIDTH = 1.0;
+static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height/Width
 
 - (NSLayoutConstraint *)profileImage_TopMarginConstraint {
     if (!_profileImage_TopMarginConstraint) {
@@ -56,6 +59,13 @@ static float CELL_BORDER_WIDTH = 1.0;
     return _profileImage_RetweetLabelContraint;
 }
 
+- (NSLayoutConstraint *)mediaImageHeightConstraint {
+    if (!_mediaImageHeightConstraint) {
+        _mediaImageHeightConstraint = [self.mediaImageView autoMatchDimension:ALDimensionHeight toDimension:ALDimensionWidth ofView:self.mediaImageView withMultiplier:MEDIA_IMAGE_ASPECT_RATIO relation:NSLayoutRelationEqual];
+    }
+    return _mediaImageHeightConstraint;
+}
+
 - (void) awakeFromNib {
     [super awakeFromNib];
     
@@ -76,6 +86,7 @@ static float CELL_BORDER_WIDTH = 1.0;
     [self addTweetLabel];
     [self addVerifiedUserIcon];
     [self addRetweetLabel];
+    [self addMediaImageView];
     
 }
 
@@ -99,13 +110,18 @@ static float CELL_BORDER_WIDTH = 1.0;
     
     [self configureRetweetLabelConstraintsForTweet:tweet];
     
-    
     if ([TwitterUser isVerifiedUser:user]) {
         self.verifiedUserIcon.hidden = NO;
     }
     else {
         self.verifiedUserIcon.hidden = YES;
     }
+    self.mediaImageView.image = nil;
+    [self.mediaImageView removeConstraint:self.mediaImageHeightConstraint];
+    if ([TwitterTweet isMediaAssociatedWithTweet:tweet]) {
+        [self addMediaImageFromTweet:tweet];
+    }
+    
 }
 
 - (void)configureRetweetLabelConstraintsForTweet:(NSDictionary *)tweet {
@@ -132,7 +148,7 @@ static float CELL_BORDER_WIDTH = 1.0;
         [tweetString addAttributes:@{NSForegroundColorAttributeName : twitterBlueColor} range:range];
     }
     
-    NSArray *urls = [tweet valueForKeyPath:TWITTER_TWEET_URLS];
+    NSArray *urls = [tweet valueForKeyPath:TWITTER_TWEET_MEDIA];
     for (id url in urls) {
         NSArray *indices = [url valueForKeyPath:@"indices"];
         NSRange range = NSMakeRange([indices[0] integerValue] , [indices[1] integerValue]-[indices[0] integerValue]);
@@ -144,6 +160,17 @@ static float CELL_BORDER_WIDTH = 1.0;
 
 - (CGFloat)screenWidth {
     return  [UIScreen mainScreen].bounds.size.width;
+}
+
+- (void)addMediaImageFromTweet:(NSDictionary *)tweet {
+    [self.mediaImageView addConstraint:self.mediaImageHeightConstraint];
+    [self.imageDownloaderQueue addOperationWithBlock:^{
+        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [TwitterTweet getMediaImageUrlFromTweet:tweet]];
+        UIImage *image = [[UIImage alloc] initWithData:imageData];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            self.mediaImageView.image = image;
+        }];
+    }];
 }
 
 - (void)addRetweetLabelTextUsingUser:(NSDictionary *)user {
@@ -230,23 +257,6 @@ static float CELL_BORDER_WIDTH = 1.0;
     [self.fullNameLabel sizeToFit];
 }
 
-- (void)addTweetLabel {
-    self.tweetLabel = [[UILabel alloc] init];
-    
-    self.tweetLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.tweetCellView addSubview:self.tweetLabel];
-    
-    [self.tweetLabel autoConstrainAttribute:ALAttributeLeading toAttribute:ALAttributeLeading ofView:self.fullNameLabel withOffset:0 relation:NSLayoutRelationEqual];
-    [self.tweetLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBottom ofView:self.fullNameLabel withOffset:2 relation:NSLayoutRelationEqual];
-    [self.tweetLabel autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:self.tweetCellView withOffset:-4 relation:NSLayoutRelationEqual];
-    [self.tweetLabel autoConstrainAttribute:ALAttributeTrailing toAttribute:ALAttributeMarginTrailing ofView:self.tweetCellView withOffset:4];
-    
-    self.tweetLabel.numberOfLines = 0;
-    self.tweetLabel.text = @"Tweet";
-    [self.tweetLabel setFont:[UIFont systemFontOfSize:15]];
-    [self.tweetLabel sizeToFit];
-}
-
 - (void)addVerifiedUserIcon {
     self.verifiedUserIcon = [[UIImageView alloc] init];
     
@@ -262,5 +272,40 @@ static float CELL_BORDER_WIDTH = 1.0;
     self.verifiedUserIcon.image = [UIImage imageNamed:@"twitter_verified_icon"];
     self.verifiedUserIcon.clipsToBounds = YES;
 }
+
+- (void)addTweetLabel {
+    self.tweetLabel = [[UILabel alloc] init];
+    
+    self.tweetLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.tweetCellView addSubview:self.tweetLabel];
+    
+    [self.tweetLabel autoConstrainAttribute:ALAttributeLeading toAttribute:ALAttributeLeading ofView:self.fullNameLabel withOffset:0 relation:NSLayoutRelationEqual];
+    [self.tweetLabel autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBottom ofView:self.fullNameLabel withOffset:2 relation:NSLayoutRelationEqual];
+    //[self.tweetLabel autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:self.tweetCellView withOffset:-4 relation:NSLayoutRelationEqual];
+    [self.tweetLabel autoConstrainAttribute:ALAttributeTrailing toAttribute:ALAttributeMarginTrailing ofView:self.tweetCellView withOffset:4];
+    
+    self.tweetLabel.numberOfLines = 0;
+    self.tweetLabel.text = @"Tweet";
+    [self.tweetLabel setFont:[UIFont systemFontOfSize:15]];
+    [self.tweetLabel sizeToFit];
+}
+
+- (void)addMediaImageView {
+    self.mediaImageView = [[UIImageView alloc] init];
+    
+    self.mediaImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.tweetCellView addSubview:self.mediaImageView];
+    
+    
+    [self.mediaImageView layoutIfNeeded];
+    [self.mediaImageView autoConstrainAttribute:ALAttributeLeading toAttribute:ALAttributeLeading ofView:self.tweetLabel withOffset:0 relation:NSLayoutRelationEqual];
+    [self.mediaImageView autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBottom ofView:self.tweetLabel withOffset:4 relation:NSLayoutRelationEqual];
+    [self.mediaImageView autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:self.tweetCellView withOffset:-2 relation:NSLayoutRelationEqual];
+    [self.mediaImageView autoConstrainAttribute:ALAttributeTrailing toAttribute:ALAttributeMarginTrailing ofView:self.tweetCellView withOffset:-5];
+    //[self.mediaImageView addConstraint:self.mediaImageHeightConstraint];
+    self.mediaImageView.layer.cornerRadius = 5;
+    self.mediaImageView.clipsToBounds = YES;
+}
+
 
 @end

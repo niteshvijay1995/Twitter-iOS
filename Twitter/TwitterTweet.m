@@ -26,4 +26,17 @@
     return [tweet valueForKeyPath:TWITTER_TWEET_RETWEET_USER];
 }
 
++ (BOOL)isMediaAssociatedWithTweet:(NSDictionary *)tweet {
+    if ([tweet valueForKeyPath:TWITTER_TWEET_MEDIA]) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
++ (NSURL *)getMediaImageUrlFromTweet:(NSDictionary *)tweet {
+    NSArray *medias = [tweet valueForKeyPath:TWITTER_TWEET_MEDIA];
+    return [NSURL URLWithString:[medias.firstObject valueForKeyPath:TWITTER_TWEET_MEDIA_URL]];
+}
 @end

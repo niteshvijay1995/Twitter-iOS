@@ -235,8 +235,8 @@
 		0A429DC81F53FB64005C856A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				0A2869941F4D7D6D00F3135A /* HomeScreenCollectionViewController.m */,
 				0A2869931F4D7D6D00F3135A /* HomeScreenCollectionViewController.h */,
+				0A2869941F4D7D6D00F3135A /* HomeScreenCollectionViewController.m */,
 				0A8A891D1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.h */,
 				0A8A891E1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.m */,
 				0A8A89181F540A4A004A6606 /* TweetCell.xib */,

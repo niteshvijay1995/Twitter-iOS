@@ -12,4 +12,6 @@
 + (BOOL)isRetweetTweet:(NSDictionary *)tweet;
 + (NSDictionary *)getUserFromTweet:(NSDictionary *)tweet;
 + (NSDictionary *)getRetweetUserFromTweet:(NSDictionary *)tweet;
++ (BOOL)isMediaAssociatedWithTweet:(NSDictionary *)tweet;
++ (NSURL *)getMediaImageUrlFromTweet:(NSDictionary *)tweet;
 @end
