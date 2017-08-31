@@ -13,6 +13,7 @@
 #import "ImageCache.h"
 #import "TwitterTweet.h"
 #import "TwitterUser.h"
+#import "TweetOptionsFooterBarView.h"
 
 @interface TweetCollectionViewCell()
 @property (strong, nonatomic) UIImageView *profileImageView;
@@ -23,6 +24,8 @@
 @property (strong, nonatomic) UIImageView *verifiedUserIcon;
 @property (strong, nonatomic) UILabel *retweetLabel;
 @property (strong, nonatomic) UIImageView *mediaImageView;
+@property (strong, nonatomic) NSURL *mediaImageUrl;
+@property (strong, nonatomic) TweetOptionsFooterBarView *footerView;
 @property (strong, nonatomic) NSLayoutConstraint *profileImage_TopMarginConstraint;
 @property (strong, nonatomic) NSLayoutConstraint *profileImage_RetweetLabelContraint;
 @property (strong, nonatomic) NSLayoutConstraint *mediaImageHeightConstraint;
@@ -31,7 +34,7 @@
 @implementation TweetCollectionViewCell
 
 static int LEFT_RIGHT_CELL_INSET = 4;
-static float PROFILE_IMAGE_SCALE_FACTOR = 0.14;
+static float PROFILE_IMAGE_SCALE_FACTOR = 0.13;
 static float VERIFIED_ICON_SCALE_FACTOR = 0.03;
 static int OPERATION_QUEUE_MAX_CONCURRENT_OPERATION_COUNT = 3;
 static float CELL_BORDER_WIDTH = 1.0;
@@ -87,8 +90,10 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     [self addVerifiedUserIcon];
     [self addRetweetLabel];
     [self addMediaImageView];
+    [self addFooterView];
     
 }
+
 
 - (void)configureCellFromTweet:(NSDictionary *)tweet
 {
@@ -118,9 +123,11 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     }
     self.mediaImageView.image = nil;
     [self.mediaImageView removeConstraint:self.mediaImageHeightConstraint];
+    self.mediaImageUrl = [TwitterTweet getMediaImageUrlFromTweet:tweet];
     if ([TwitterTweet isMediaAssociatedWithTweet:tweet]) {
-        [self addMediaImageFromTweet:tweet];
+        [self addMediaImageFromTweet:self.mediaImageUrl];
     }
+    [self addDataToFooterForTweet:tweet];
     
 }
 
@@ -162,15 +169,24 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     return  [UIScreen mainScreen].bounds.size.width;
 }
 
-- (void)addMediaImageFromTweet:(NSDictionary *)tweet {
+- (void)addMediaImageFromTweet:(NSURL *)mediaImageUrl {
     [self.mediaImageView addConstraint:self.mediaImageHeightConstraint];
-    [self.imageDownloaderQueue addOperationWithBlock:^{
-        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [TwitterTweet getMediaImageUrlFromTweet:tweet]];
-        UIImage *image = [[UIImage alloc] initWithData:imageData];
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            self.mediaImageView.image = image;
+    UIImage *mediaImage = [[ImageCache sharedInstance] getCachedImageForKey:mediaImageUrl.absoluteString];
+    if (mediaImage) {
+        self.mediaImageView.image = mediaImage;
+    }
+    else {
+        [self.imageDownloaderQueue addOperationWithBlock:^{
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL:mediaImageUrl];
+            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [[ImageCache sharedInstance] cacheImage:image forKey:mediaImageUrl.absoluteString];
+                if ([self.mediaImageUrl.absoluteString isEqualToString:mediaImageUrl.absoluteString]) {
+                    self.mediaImageView.image = image;
+                }
+            }];
         }];
-    }];
+    }
 }
 
 - (void)addRetweetLabelTextUsingUser:(NSDictionary *)user {
@@ -195,6 +211,12 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
             }];
         }];
     }
+}
+
+- (void)addDataToFooterForTweet:(NSDictionary *)tweet {
+    self.footerView.likeCountLabel.text = [TwitterTweet getFavoritesCountForTweet:tweet];
+    self.footerView.retweetCountLabel.text = [TwitterTweet getRetweetsCountForTweet:tweet];
+    self.footerView.commentCountLabel.text = [TwitterTweet getCommentsCountForTweet:tweet];
 }
 
 - (void)addFullNameLabelWithFullName:(NSString *)fullName {
@@ -227,7 +249,7 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     self.profileImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tweetCellView addSubview:self.profileImageView];
     
-    CGFloat size = PROFILE_IMAGE_SCALE_FACTOR*[self screenWidth];
+    CGFloat size = MIN(PROFILE_IMAGE_SCALE_FACTOR*[self screenWidth], 50) ;
     
     [self.profileImageView autoSetDimensionsToSize:CGSizeMake(size,size)];
     
@@ -263,7 +285,7 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     self.verifiedUserIcon.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tweetCellView addSubview:self.verifiedUserIcon];
     
-    CGFloat size = VERIFIED_ICON_SCALE_FACTOR*[self screenWidth];
+    CGFloat size = MIN(VERIFIED_ICON_SCALE_FACTOR*[self screenWidth], 12);
     [self.verifiedUserIcon autoSetDimensionsToSize:CGSizeMake(size,size)];
     
     [self.verifiedUserIcon autoConstrainAttribute:ALAttributeLeading toAttribute:ALAttributeTrailing ofView:self.fullNameLabel withOffset:5];
@@ -300,12 +322,24 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     [self.mediaImageView layoutIfNeeded];
     [self.mediaImageView autoConstrainAttribute:ALAttributeLeading toAttribute:ALAttributeLeading ofView:self.tweetLabel withOffset:0 relation:NSLayoutRelationEqual];
     [self.mediaImageView autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBottom ofView:self.tweetLabel withOffset:4 relation:NSLayoutRelationEqual];
-    [self.mediaImageView autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:self.tweetCellView withOffset:-2 relation:NSLayoutRelationEqual];
+    //[self.mediaImageView autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:self.tweetCellView withOffset:-2 relation:NSLayoutRelationEqual];
     [self.mediaImageView autoConstrainAttribute:ALAttributeTrailing toAttribute:ALAttributeMarginTrailing ofView:self.tweetCellView withOffset:-5];
     //[self.mediaImageView addConstraint:self.mediaImageHeightConstraint];
     self.mediaImageView.layer.cornerRadius = 5;
     self.mediaImageView.clipsToBounds = YES;
 }
 
+- (void)addFooterView {
+    self.footerView = [[NSBundle mainBundle] loadNibNamed:@"TweetOptionsFooterBar" owner:self options:nil].firstObject;
+    self.footerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.tweetCellView addSubview:self.footerView];
+    
+    CGFloat width = PROFILE_IMAGE_SCALE_FACTOR*[self screenWidth];
+    
+    [self.footerView autoSetDimensionsToSize:CGSizeMake(width, 33)];
+    [self.footerView autoConstrainAttribute:ALAttributeLeading toAttribute:ALAttributeLeading ofView:self.tweetLabel withOffset:0 relation:NSLayoutRelationEqual];
+    [self.footerView autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:self.tweetCellView withOffset:-2 relation:NSLayoutRelationEqual];
+    [self.footerView autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBottom ofView:self.mediaImageView withOffset:2];
+}
 
 @end

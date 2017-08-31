@@ -14,4 +14,7 @@
 + (NSDictionary *)getRetweetUserFromTweet:(NSDictionary *)tweet;
 + (BOOL)isMediaAssociatedWithTweet:(NSDictionary *)tweet;
 + (NSURL *)getMediaImageUrlFromTweet:(NSDictionary *)tweet;
++ (NSString *)getFavoritesCountForTweet:(NSDictionary *)tweet;
++ (NSString *)getRetweetsCountForTweet:(NSDictionary *)tweet;
++ (NSString *)getCommentsCountForTweet:(NSDictionary *)tweet;
 @end

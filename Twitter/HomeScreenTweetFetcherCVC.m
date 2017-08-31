@@ -58,7 +58,6 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
                     [self.tweetList addObjectsFromArray:json];
                     [self.refreshControl endRefreshing];
                     [self.collectionView reloadData];
-                    
                 }
                 else {
                     NSLog(@"Error: %@", connectionError);

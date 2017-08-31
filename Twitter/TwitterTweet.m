@@ -39,4 +39,16 @@
     NSArray *medias = [tweet valueForKeyPath:TWITTER_TWEET_MEDIA];
     return [NSURL URLWithString:[medias.firstObject valueForKeyPath:TWITTER_TWEET_MEDIA_URL]];
 }
+
++ (NSString *)getFavoritesCountForTweet:(NSDictionary *)tweet {
+    return [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT]];
+}
+
++ (NSString *)getRetweetsCountForTweet:(NSDictionary *)tweet {
+    return [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT]];
+}
+
++ (NSString *)getCommentsCountForTweet:(NSDictionary *)tweet {
+    return [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_COMMENT_COUNT]];
+}
 @end

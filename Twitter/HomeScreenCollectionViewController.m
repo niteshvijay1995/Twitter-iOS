@@ -108,7 +108,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
 /*
 // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
+	return YES;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
@@ -117,23 +117,14 @@ static NSString * const reuseIdentifier = @"TweetCell";
 
 - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
 	
-}
-*/
-/*
+}*/
+
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSizeObj;
-   // if ((cellSizeObj = (NSValue *)[self.cellSizeCache objectForKey:indexPath])) {
-     //   return [cellSizeObj CGSizeValue];
-    //}
-    [self.staticTweetCell setNeedsLayout];
-    [self.staticTweetCell layoutIfNeeded];
-    CGSize constraintSize = CGSizeMake(collectionView.bounds.size.width-10,CGFLOAT_MAX);
-    cellSizeObj = [self.staticTweetCell  systemLayoutSizeFittingSize:constraintSize];
-    //[self.cellSizeCache setObject:cellSizeObj forKey:indexPath];
-    return CGSizeMake(collectionView.bounds.size.width-10, cellSizeObj.height);
+    return CGSizeMake(collectionView.bounds.size.width-10, 1);
 }
-*/
+
 
 - (IBAction)logout:(UIBarButtonItem *)sender {
     TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];

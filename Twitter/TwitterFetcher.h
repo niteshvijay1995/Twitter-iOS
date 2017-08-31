@@ -34,6 +34,9 @@
 #define TWITTER_TWEET_RETWEET_COUNT @"retweet_count"
 #define TWITTER_TWEET_MEDIA @"entities.media"
 #define TWITTER_TWEET_MEDIA_URL @"media_url_https"
+#define TWITTER_TWEET_FAVORITE_COUNT @"favorite_count"
+#define TWITTER_TWEET_RETWEET_COUNT @"retweet_count"
+#define TWITTER_TWEET_COMMENT_COUNT @"listed_count"
 
 #define TWITTER_ATTACHEMENT_URL @"url"
 
