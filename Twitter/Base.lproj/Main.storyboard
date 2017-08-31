@@ -32,7 +32,7 @@
         <scene sceneID="WXw-FM-KsJ">
             <objects>
                 <collectionViewController id="8Vv-oL-Q8F" customClass="HomeScreenTweetFetcherCVC" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="s2v-q3-Nhe">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="s2v-q3-Nhe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -178,28 +178,10 @@
             </objects>
             <point key="canvasLocation" x="4657" y="542"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="aQj-tz-3qu">
-            <objects>
-                <navigationController storyboardIdentifier="HomeScreen" automaticallyAdjustsScrollViewInsets="NO" id="oVe-W0-7X0" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kCs-LX-7W5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ox2-CO-Y9C" kind="relationship" relationship="rootViewController" id="mU4-3w-ezG"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yMD-x9-rVt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1031" y="92"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FfW-lb-QqZ">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ox2-CO-Y9C" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeScreen" automaticallyAdjustsScrollViewInsets="NO" id="ox2-CO-Y9C" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="vO7-51-eEJ"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="z97-VC-3XU">

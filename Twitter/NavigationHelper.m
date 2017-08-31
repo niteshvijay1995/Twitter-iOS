@@ -16,7 +16,7 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreen"];
+    UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreen"];
     appDelegate.window.rootViewController = viewController;
     [appDelegate.window makeKeyAndVisible];
 }
@@ -25,7 +25,7 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginScreen"];
+    UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginScreen"];
     appDelegate.window.rootViewController = viewController;
     [appDelegate.window makeKeyAndVisible];
 }
