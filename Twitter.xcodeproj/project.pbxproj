@@ -55,7 +55,7 @@
 		0A1D433E1F4ECE5200D6DECD /* FetchUserProfileTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchUserProfileTVC.m; sourceTree = "<group>"; };
 		0A1D43401F4F551500D6DECD /* UserProfileTweetTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileTweetTableViewCell.xib; sourceTree = "<group>"; };
 		0A1D43421F4F557D00D6DECD /* UserProfileTweetTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileTweetTableViewCell.h; sourceTree = "<group>"; };
-		0A1D43431F4F557D00D6DECD /* UserProfileTweetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileTweetTableViewCell.m; sourceTree = "<group>"; };
+		0A1D43431F4F557D00D6DECD /* UserProfileTweetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UserProfileTweetTableViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0A1D43451F4F598B00D6DECD /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUser.h; sourceTree = "<group>"; };
 		0A1D43461F4F598B00D6DECD /* TwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterUser.m; sourceTree = "<group>"; };
 		0A2869651F4D75B400F3135A /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,7 +86,7 @@
 		0A429DC61F53ED94005C856A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A8A89181F540A4A004A6606 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
 		0A8A891A1F540E44004A6606 /* TweetCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetCollectionViewCell.h; sourceTree = "<group>"; };
-		0A8A891B1F540E44004A6606 /* TweetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetCollectionViewCell.m; sourceTree = "<group>"; };
+		0A8A891B1F540E44004A6606 /* TweetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TweetCollectionViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0A8A891D1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenTweetFetcherCVC.h; sourceTree = "<group>"; };
 		0A8A891E1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenTweetFetcherCVC.m; sourceTree = "<group>"; };
 		0A8A89251F5692CE004A6606 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ImageCache.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -330,6 +330,7 @@
 				TargetAttributes = {
 					0A2869641F4D75B400F3135A = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = TJN748C4T5;
 						ProvisioningStyle = Automatic;
 					};
 					0A28697D1F4D75B400F3135A = {
@@ -645,7 +646,9 @@
 			baseConfigurationReference = F3907BB2D387115952DF8730 /* Pods-Twitter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TJN748C4T5;
 				INFOPLIST_FILE = Twitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.flock.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -657,7 +660,9 @@
 			baseConfigurationReference = B09A0450307149871EBCA9D9 /* Pods-Twitter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TJN748C4T5;
 				INFOPLIST_FILE = Twitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.flock.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
