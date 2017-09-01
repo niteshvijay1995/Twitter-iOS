@@ -79,7 +79,7 @@
     }
 }
 
-+ (void)unlikeTweetWithId:tweetId {
++ (void)unlikeTweetWithId:(NSString *)tweetId {
     NSString *userID = [Twitter sharedInstance].sessionStore.session.userID;
     TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
     NSDictionary *params = @{@"id" : tweetId};
@@ -115,7 +115,7 @@
     }
 }
 
-+ (void)unretweetTweetWithId:tweetId {
++ (void)unretweetTweetWithId:(NSString *)tweetId {
     NSString *userID = [Twitter sharedInstance].sessionStore.session.userID;
     TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
     NSDictionary *params = @{@"id" : tweetId};

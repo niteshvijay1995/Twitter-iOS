@@ -234,6 +234,7 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
         self.footerView.retweetButton.tag = 1;
         self.footerView.retweetIconImageView.image = [UIImage imageNamed:@"retweeted_icon"];
         self.footerView.retweetCountLabel.textColor = [UIColor greenColor];
+        self.footerView.retweetIconImageView.transform = CGAffineTransformMakeRotation((180.0 * M_PI) / 180.0);
     }
     else {
         self.footerView.retweetButton.tag = 0;
