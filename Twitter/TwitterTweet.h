@@ -16,5 +16,11 @@
 + (NSURL *)getMediaImageUrlFromTweet:(NSDictionary *)tweet;
 + (NSString *)getFavoritesCountForTweet:(NSDictionary *)tweet;
 + (NSString *)getRetweetsCountForTweet:(NSDictionary *)tweet;
-+ (NSString *)getCommentsCountForTweet:(NSDictionary *)tweet;
++ (NSString *)getTweetIDForTweet:(NSDictionary *)tweet;
++ (BOOL)isFavoritedTweet:(NSDictionary *)tweet;
++ (BOOL)isRetweetedTweet:(NSDictionary *)tweet;
++ (void)likeTweetWithId:tweetId;
++ (void)unlikeTweetWithId:tweetId;
++ (void)retweetTweetWithId:tweetId;
++ (void)unretweetTweetWithId:tweetId;
 @end

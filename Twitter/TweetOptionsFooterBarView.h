@@ -10,7 +10,9 @@
 
 @interface TweetOptionsFooterBarView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *likeIconImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetIconImageView;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @end

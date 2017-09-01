@@ -36,12 +36,16 @@
 #define TWITTER_TWEET_MEDIA_URL @"media_url_https"
 #define TWITTER_TWEET_FAVORITE_COUNT @"favorite_count"
 #define TWITTER_TWEET_RETWEET_COUNT @"retweet_count"
-#define TWITTER_TWEET_COMMENT_COUNT @"listed_count"
+#define TWITTER_TWEET_FAVORITED_FLAG @"favorited"
+#define TWITTER_TWEET_RETWEETED_FLAG @"retweeted"
 
 #define TWITTER_ATTACHEMENT_URL @"url"
 
 #define RETWEET_ENDPOINT @"https://api.twitter.com/1.1/statuses/retweet/"
 #define UNRETWEET_ENDPOINT @"https://api.twitter.com/1.1/statuses/unretweet/"
+
+#define LIKE_ENDPOINT @"https://api.twitter.com/1.1/favorites/create.json"
+#define UNLIKE_ENDPOINT @"https://api.twitter.com/1.1/favorites/destroy.json"
 
 #define twitterBlueColor [UIColor colorWithRed:0.29 green:0.64 blue:1 alpha:1]
 

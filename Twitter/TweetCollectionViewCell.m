@@ -216,7 +216,30 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
 - (void)addDataToFooterForTweet:(NSDictionary *)tweet {
     self.footerView.likeCountLabel.text = [TwitterTweet getFavoritesCountForTweet:tweet];
     self.footerView.retweetCountLabel.text = [TwitterTweet getRetweetsCountForTweet:tweet];
-    self.footerView.commentCountLabel.text = [TwitterTweet getCommentsCountForTweet:tweet];
+    
+    self.footerView.likeButton.restorationIdentifier = [TwitterTweet getTweetIDForTweet:tweet];
+    self.footerView.retweetButton.restorationIdentifier = [TwitterTweet getTweetIDForTweet:tweet];
+    
+    if([TwitterTweet isFavoritedTweet:tweet]){
+        self.footerView.likeButton.tag = 1;
+        self.footerView.likeIconImageView.image = [UIImage imageNamed:@"liked_icon"];
+        self.footerView.likeCountLabel.textColor = [UIColor redColor];
+    }
+    else {
+        self.footerView.likeButton.tag = 0;
+        self.footerView.likeIconImageView.image = [UIImage imageNamed:@"like_icon"];
+        self.footerView.likeCountLabel.textColor = [UIColor blackColor];
+    }
+    if([TwitterTweet isRetweetedTweet:tweet]){
+        self.footerView.retweetButton.tag = 1;
+        self.footerView.retweetIconImageView.image = [UIImage imageNamed:@"retweeted_icon"];
+        self.footerView.retweetCountLabel.textColor = [UIColor greenColor];
+    }
+    else {
+        self.footerView.retweetButton.tag = 0;
+        self.footerView.retweetIconImageView.image = [UIImage imageNamed:@"retweet_icon"];
+        self.footerView.retweetCountLabel.textColor = [UIColor blackColor];
+    }
 }
 
 - (void)addFullNameLabelWithFullName:(NSString *)fullName {
@@ -334,12 +357,12 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     self.footerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tweetCellView addSubview:self.footerView];
     
-    CGFloat width = PROFILE_IMAGE_SCALE_FACTOR*[self screenWidth];
+    CGFloat width = [self screenWidth]-10;
     
-    [self.footerView autoSetDimensionsToSize:CGSizeMake(width, 33)];
+    [self.footerView autoSetDimensionsToSize:CGSizeMake(width, 20)];
     [self.footerView autoConstrainAttribute:ALAttributeLeading toAttribute:ALAttributeLeading ofView:self.tweetLabel withOffset:0 relation:NSLayoutRelationEqual];
     [self.footerView autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:self.tweetCellView withOffset:-2 relation:NSLayoutRelationEqual];
-    [self.footerView autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBottom ofView:self.mediaImageView withOffset:2];
+    [self.footerView autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBottom ofView:self.mediaImageView withOffset:4];
 }
 
 @end
