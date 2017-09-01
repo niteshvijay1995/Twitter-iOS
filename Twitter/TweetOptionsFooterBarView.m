@@ -66,16 +66,24 @@ static float HALF_PERCENT = 0.5;
     if (sender.tag == 0) {
         [TwitterTweet retweetTweetWithId:sender.restorationIdentifier];
         sender.tag = 1;
-        self.retweetIconImageView.image = [UIImage imageNamed:@"retweeted_icon"];
-        self.retweetCountLabel.text = [NSString stringWithFormat:@"%lld",[self.retweetCountLabel.text longLongValue] + 1];
-        self.retweetCountLabel.textColor = [UIColor greenColor];
+        [UIView animateWithDuration:0.2f animations:^{
+            self.retweetIconImageView.transform = CGAffineTransformMakeRotation((180.0 * M_PI) / 180.0);
+        }completion:^(BOOL finished) {
+            self.retweetIconImageView.image = [UIImage imageNamed:@"retweeted_icon"];
+            self.retweetCountLabel.text = [NSString stringWithFormat:@"%lld",[self.retweetCountLabel.text longLongValue] + 1];
+            self.retweetCountLabel.textColor = [UIColor greenColor];
+        }];
     }
     else {
         [TwitterTweet unretweetTweetWithId:sender.restorationIdentifier];
         sender.tag = 0;
-        self.retweetIconImageView.image = [UIImage imageNamed:@"retweet_icon"];
-        self.retweetCountLabel.text = [NSString stringWithFormat:@"%lld",[self.retweetCountLabel.text longLongValue] - 1];
-        self.retweetCountLabel.textColor = [UIColor blackColor];
+        [UIView animateWithDuration:0.2f animations:^{
+            self.retweetIconImageView.transform = CGAffineTransformMakeRotation((180.0 * M_PI) * 180.0);
+        }completion:^(BOOL finished) {
+            self.retweetIconImageView.image = [UIImage imageNamed:@"retweet_icon"];
+            self.retweetCountLabel.text = [NSString stringWithFormat:@"%lld",[self.retweetCountLabel.text longLongValue] - 1];
+            self.retweetCountLabel.textColor = [UIColor blackColor];
+        }];
     }
 }
 
