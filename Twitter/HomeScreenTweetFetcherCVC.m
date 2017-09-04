@@ -56,7 +56,6 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
     if (request) {
         dispatch_queue_t fetchHomeScreenTweetQ = dispatch_queue_create("Home Screen Tweet Fetcher", NULL);
         dispatch_async(fetchHomeScreenTweetQ, ^{
-            fetchStatus = YES;
             [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                 if (data) {
                     NSError *jsonError;
@@ -69,7 +68,6 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
                 else {
                     NSLog(@"Error: %@", connectionError);
                 }
-                fetchStatus = NO;
             }];
         });
     }
@@ -91,8 +89,8 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
     NSURLRequest *request = [client URLRequestWithMethod:@"GET" URL:homeTimelineEndPoint parameters:params error:&clientError];
     
     if (request) {
-        dispatch_queue_t fetchFollowingListQ = dispatch_queue_create("Following List Fetcher", NULL);
-        dispatch_async(fetchFollowingListQ, ^{
+        dispatch_queue_t fetchHomeScreenTweetQ = dispatch_queue_create("Home Screen Tweet Fetcher", NULL);
+        dispatch_async(fetchHomeScreenTweetQ, ^{
             [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                 if (data) {
                     NSError *jsonError;
