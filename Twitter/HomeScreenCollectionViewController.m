@@ -84,7 +84,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TweetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    NSDictionary *tweet = self.tweetList[indexPath.row];
+    NSDictionary *tweet = self.tweetList[indexPath.item];
     [cell configureCellFromTweet:tweet];
     return cell;
 }
