@@ -47,7 +47,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:NULL] forCellWithReuseIdentifier:reuseIdentifier];
     
-    ((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize;
+    ((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1, 1);
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor = twitterBlueColor;

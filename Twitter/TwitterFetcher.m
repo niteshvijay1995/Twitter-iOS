@@ -10,4 +10,15 @@
 
 @implementation TwitterFetcher
 
+static BOOL fetchTweetWaitingFlag = NO;
+
++ (BOOL)getFetchTweetWaitingFlag {
+    return fetchTweetWaitingFlag;
+}
+
++ (void)setFetchTweetWaitingFlagTo:(BOOL)value {
+    fetchTweetWaitingFlag = value;
+}
 @end
+
+
