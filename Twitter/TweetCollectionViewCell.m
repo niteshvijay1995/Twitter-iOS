@@ -358,12 +358,11 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     self.footerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tweetCellView addSubview:self.footerView];
     
-    CGFloat width = [self screenWidth]-10;
-    
-    [self.footerView autoSetDimensionsToSize:CGSizeMake(width, 20)];
-    [self.footerView autoConstrainAttribute:ALAttributeLeading toAttribute:ALAttributeLeading ofView:self.tweetLabel withOffset:0 relation:NSLayoutRelationEqual];
-    [self.footerView autoConstrainAttribute:ALAttributeBottom toAttribute:ALAttributeMarginBottom ofView:self.tweetCellView withOffset:-2 relation:NSLayoutRelationEqual];
-    [self.footerView autoConstrainAttribute:ALAttributeTop toAttribute:ALAttributeBottom ofView:self.mediaImageView withOffset:4];
+    [self.footerView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.tweetLabel];
+    [self.footerView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.tweetLabel];
+    [self.footerView autoSetDimension:ALDimensionHeight toSize:20];
+    [self.footerView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.tweetCellView withOffset:-8];
+    [self.footerView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.mediaImageView withOffset:4];
 }
 
 @end
