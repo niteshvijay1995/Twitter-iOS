@@ -133,4 +133,8 @@
     }
 }
 
++ (NSString *)getCreatedAtForTweet:(NSDictionary *)tweet {
+    return [tweet valueForKeyPath:TWITTER_TWEET_CREATED_AT];
+}
+
 @end

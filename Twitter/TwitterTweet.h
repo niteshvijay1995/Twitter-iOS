@@ -23,4 +23,5 @@
 + (void)unlikeTweetWithId:tweetId;
 + (void)retweetTweetWithId:tweetId;
 + (void)unretweetTweetWithId:tweetId;
++ (NSString *)getCreatedAtForTweet:(NSDictionary *)tweet;
 @end
