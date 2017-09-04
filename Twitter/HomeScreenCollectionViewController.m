@@ -119,13 +119,6 @@ static NSString * const reuseIdentifier = @"TweetCell";
 	
 }*/
 
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(collectionView.bounds.size.width-10, 1);
-}
-
-
 - (IBAction)logout:(UIBarButtonItem *)sender {
     TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
     NSString *userID = store.session.userID;
