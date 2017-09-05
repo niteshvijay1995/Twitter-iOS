@@ -10,8 +10,10 @@
 #import <TwitterKit/TwitterKit.h>
 #import "TwitterFetcher.h"
 #import "TwitterTweet.h"
+#import "TwitterUser.h"
 
 @interface HomeScreenTweetFetcherCVC ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *profileButton;
 
 @end
 
@@ -22,8 +24,49 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setProfileImage];
     [self fetchTweets];
     // Do any additional setup after loading the view.
+}
+
+- (void)setProfileImage {
+    TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
+    NSString *userID = store.session.userID;
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
+    NSDictionary *params = @{@"user_id":userID};
+    NSError *clientError;
+    
+    NSURLRequest *request = [client URLRequestWithMethod:@"GET" URL:usersEndPoint parameters:params error:&clientError];
+    
+    if (request) {
+        dispatch_queue_t fetchUserInfoQ = dispatch_queue_create("User Info Fetcher", NULL);
+        dispatch_async(fetchUserInfoQ, ^{
+            [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                if (data) {
+                    NSError *jsonError;
+                    NSDictionary *userInfo = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+                    NSURL *profileImageUrl = [TwitterUser getProfileImageUrlForUser:userInfo];
+                    NSData * imageData = [[NSData alloc] initWithContentsOfURL:profileImageUrl];
+                    UIImage *profileImage = [UIImage imageWithData:imageData];
+                    profileImage = [profileImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                    UIButton *imageButton = [[UIButton alloc] init];
+                    imageButton.frame = CGRectMake(0, 0,32, 32);
+                    [imageButton setImage:profileImage forState:UIControlStateNormal];
+                    imageButton.layer.masksToBounds = YES;
+                    imageButton.clipsToBounds = YES;
+                    imageButton.layer.cornerRadius = 0.5 * imageButton.bounds.size.height;
+                    self.profileButton.customView = imageButton;
+                }
+                else {
+                    NSLog(@"Error: %@", connectionError);
+                }
+            }];
+        });
+    }
+    else {
+        NSLog(@"Error: %@", clientError);
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

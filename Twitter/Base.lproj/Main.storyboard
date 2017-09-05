@@ -57,13 +57,19 @@
                             <outlet property="delegate" destination="8Vv-oL-Q8F" id="l3d-61-EH0"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Home" id="FzC-dW-5bN">
-                        <barButtonItem key="leftBarButtonItem" image="logout_icon" id="7Ny-hh-ddN">
+                        <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="5pz-6Y-epg"/>
+                        <barButtonItem key="rightBarButtonItem" image="logout_icon" id="7Ny-hh-ddN">
                             <connections>
                                 <action selector="logout:" destination="8Vv-oL-Q8F" id="gIE-Zi-WBw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="profileButton" destination="5pz-6Y-epg" id="BnG-yP-fZZ"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2B-Zj-jjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -228,6 +234,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2v9-F1-mL5">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="8Vv-oL-Q8F" kind="relationship" relationship="rootViewController" id="3Rx-1R-XaY"/>
                     </connections>
