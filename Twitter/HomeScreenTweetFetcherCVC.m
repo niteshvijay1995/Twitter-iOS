@@ -161,7 +161,7 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
     
     TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
     
-    NSString *max_id = [NSString stringWithFormat:@"%d",[[TwitterTweet getTweetIDForTweet:[self.tweetList lastObject]] intValue] - 1];
+    NSString *max_id = [NSString stringWithFormat:@"%lld",[[TwitterTweet getTweetIDForTweet:[self.tweetList lastObject]] longLongValue] - 1];
     NSDictionary *params = @{@"count":maxTweetCountToFetch, @"max_id":max_id};
     
     NSError *clientError;
@@ -178,7 +178,6 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
                     //NSLog(@"%@", json);
                     [self.tweetList addObjectsFromArray:json];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.refreshControl endRefreshing];
                         [self.collectionView reloadData];
                         [TwitterFetcher setFetchTweetWaitingFlagTo:NO];
                     });
@@ -197,10 +196,15 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    int scrollDiffValue = scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y;
-    if (scrollDiffValue <= 5.0 && ![TwitterFetcher getFetchTweetWaitingFlag]) {
-        [TwitterFetcher setFetchTweetWaitingFlagTo:YES];
-        [self fetchMoreData];
+    @synchronized(self) {
+        int scrollDiffValue = scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y;
+        NSLog(@"%d",[TwitterFetcher getFetchTweetWaitingFlag]);
+        NSLog(@"%d",scrollDiffValue);
+        if (scrollDiffValue <= 5.0 && ![TwitterFetcher getFetchTweetWaitingFlag] && [self.tweetList count]!=0) {
+            NSLog(@"Fetching more data");
+            [TwitterFetcher setFetchTweetWaitingFlagTo:YES];
+            [self fetchMoreData];
+        }
     }
 }
 

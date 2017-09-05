@@ -59,7 +59,7 @@
                     </collectionView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Home" id="FzC-dW-5bN">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="5pz-6Y-epg"/>
+                        <barButtonItem key="leftBarButtonItem" title="&lt;" style="plain" id="5pz-6Y-epg"/>
                         <barButtonItem key="rightBarButtonItem" image="logout_icon" id="7Ny-hh-ddN">
                             <connections>
                                 <action selector="logout:" destination="8Vv-oL-Q8F" id="gIE-Zi-WBw"/>
