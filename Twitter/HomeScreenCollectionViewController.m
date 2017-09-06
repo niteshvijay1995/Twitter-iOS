@@ -11,6 +11,7 @@
 #import "NavigationHelper.h"
 #import "TweetCollectionViewCell.h"
 #import "TwitterFetcher.h"
+#import "NewTweetView.h"
 
 @interface HomeScreenCollectionViewController ()
 @property (strong, nonatomic) TweetCollectionViewCell  *staticTweetCell;
@@ -118,6 +119,10 @@ static NSString * const reuseIdentifier = @"TweetCell";
 - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
 	
 }*/
+- (IBAction)composeTweet:(id)sender {
+    NewTweetView *newTweetViewController = [[NewTweetView alloc] init];
+    [self presentViewController:newTweetViewController animated:YES completion:nil];
+}
 
 - (IBAction)logout:(UIBarButtonItem *)sender {
     TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];

@@ -33,6 +33,8 @@
 		0A8A89271F5692CE004A6606 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8A89261F5692CE004A6606 /* ImageCache.m */; };
 		0A8A892A1F56BC14004A6606 /* TwitterTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8A89291F56BC14004A6606 /* TwitterTweet.m */; };
 		0A8A892E1F57FDCE004A6606 /* TweetOptionsFooterBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8A892D1F57FDCE004A6606 /* TweetOptionsFooterBar.xib */; };
+		0ACBACB01F5EEE550034518E /* NewTweetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ACBACAF1F5EEE550034518E /* NewTweetView.xib */; };
+		0ACBACB31F5EF1F50034518E /* NewTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACB21F5EF1F50034518E /* NewTweetView.m */; };
 		65CEC2F4FF20E4E6400C7382 /* libPods-TwitterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E023468DAFF4BCB4D9525D8D /* libPods-TwitterTests.a */; };
 		7F2B6538DAA3E3776144586C /* libPods-Twitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */; };
 /* End PBXBuildFile section */
@@ -95,6 +97,9 @@
 		0A8A89281F56BC14004A6606 /* TwitterTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterTweet.h; sourceTree = "<group>"; };
 		0A8A89291F56BC14004A6606 /* TwitterTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterTweet.m; sourceTree = "<group>"; };
 		0A8A892D1F57FDCE004A6606 /* TweetOptionsFooterBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetOptionsFooterBar.xib; sourceTree = "<group>"; };
+		0ACBACAF1F5EEE550034518E /* NewTweetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewTweetView.xib; sourceTree = "<group>"; };
+		0ACBACB11F5EF1F50034518E /* NewTweetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTweetView.h; sourceTree = "<group>"; };
+		0ACBACB21F5EF1F50034518E /* NewTweetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTweetView.m; sourceTree = "<group>"; };
 		39802BB1F61BC44163C792E2 /* Pods-TwitterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Twitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF9EA335EEB058E5DD31D3F /* Pods-TwitterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -198,6 +203,7 @@
 		0A2869671F4D75B400F3135A /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				0ACBACAE1F5EEE3D0034518E /* NewTweet */,
 				0A8A89211F56917C004A6606 /* ProfileImageCache */,
 				0A429DC81F53FB64005C856A /* Home */,
 				0A1D43381F4EAC8F00D6DECD /* TwitterFetcher */,
@@ -256,6 +262,16 @@
 				0A8A89261F5692CE004A6606 /* ImageCache.m */,
 			);
 			name = ProfileImageCache;
+			sourceTree = "<group>";
+		};
+		0ACBACAE1F5EEE3D0034518E /* NewTweet */ = {
+			isa = PBXGroup;
+			children = (
+				0ACBACAF1F5EEE550034518E /* NewTweetView.xib */,
+				0ACBACB11F5EF1F50034518E /* NewTweetView.h */,
+				0ACBACB21F5EF1F50034518E /* NewTweetView.m */,
+			);
+			name = NewTweet;
 			sourceTree = "<group>";
 		};
 		400FFDD1A36DA577FDC983C2 /* Frameworks */ = {
@@ -374,6 +390,7 @@
 				0A2869731F4D75B400F3135A /* Main.storyboard in Resources */,
 				0A429DC71F53ED94005C856A /* Assets.xcassets in Resources */,
 				0A8A89191F540A4A004A6606 /* TweetCell.xib in Resources */,
+				0ACBACB01F5EEE550034518E /* NewTweetView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +524,7 @@
 				0A28696A1F4D75B400F3135A /* main.m in Sources */,
 				0A8A89271F5692CE004A6606 /* ImageCache.m in Sources */,
 				0A1D43471F4F598B00D6DECD /* TwitterUser.m in Sources */,
+				0ACBACB31F5EF1F50034518E /* NewTweetView.m in Sources */,
 				0A1D433F1F4ECE5200D6DECD /* FetchUserProfileTVC.m in Sources */,
 				0A2869921F4D78CC00F3135A /* NavigationHelper.m in Sources */,
 				0A28699E1F4D8F9500F3135A /* FetchFollowingListTVC.m in Sources */,

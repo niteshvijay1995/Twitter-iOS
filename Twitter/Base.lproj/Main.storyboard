@@ -59,10 +59,10 @@
                     </collectionView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Home" id="FzC-dW-5bN">
-                        <barButtonItem key="leftBarButtonItem" title="&lt;" style="plain" id="5pz-6Y-epg"/>
-                        <barButtonItem key="rightBarButtonItem" image="logout_icon" id="7Ny-hh-ddN">
+                        <barButtonItem key="leftBarButtonItem" title="." style="plain" id="5pz-6Y-epg"/>
+                        <barButtonItem key="rightBarButtonItem" image="quill" id="7Ny-hh-ddN">
                             <connections>
-                                <action selector="logout:" destination="8Vv-oL-Q8F" id="gIE-Zi-WBw"/>
+                                <action selector="composeTweet:" destination="8Vv-oL-Q8F" id="ZiW-fw-DqA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -250,7 +250,7 @@
     <resources>
         <image name="following_icon" width="25" height="25"/>
         <image name="home_icon" width="25" height="25"/>
-        <image name="logout_icon" width="25" height="25"/>
+        <image name="quill" width="24" height="24"/>
         <image name="twitter_verified_icon" width="158" height="158"/>
     </resources>
 </document>
