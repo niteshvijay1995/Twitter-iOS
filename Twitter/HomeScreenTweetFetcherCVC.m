@@ -110,12 +110,14 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
                 }
                 else {
                     NSLog(@"Error: %@", connectionError);
+                    [self.refreshControl endRefreshing];
                 }
             }];
         });
     }
     else {
         NSLog(@"Error: %@", clientError);
+        [self.refreshControl endRefreshing];
     }
 }
 
@@ -146,12 +148,14 @@ static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/h
                 }
                 else {
                     NSLog(@"Error: %@", connectionError);
+                    [self.refreshControl endRefreshing];
                 }
             }];
         });
     }
     else {
         NSLog(@"Error: %@", clientError);
+        [self.refreshControl endRefreshing];
     }
 }
 
