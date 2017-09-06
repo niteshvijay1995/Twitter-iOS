@@ -49,6 +49,8 @@
 
 #define usersEndPoint @"https://api.twitter.com/1.1/users/show.json"
 
+#define STATUS_UPDATE_ENDPOINT @"https://api.twitter.com/1.1/statuses/update.json"
+
 #define twitterBlueColor [UIColor colorWithRed:0.29 green:0.64 blue:1 alpha:1]
 
 @interface TwitterFetcher : NSObject

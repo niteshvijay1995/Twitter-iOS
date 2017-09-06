@@ -7,6 +7,8 @@
 //
 
 #import "NewTweetView.h"
+#import "TwitterFetcher.h"
+#import <TwitterKit/TwitterKit.h>
 
 @interface NewTweetView() <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerBarBottomConstraint;
@@ -74,6 +76,29 @@ static int MAX_TWEET_LENGTH = 140;
 }
 
 - (IBAction)tweetButtonPressed:(id)sender {
+    NSString *status = self.tweetTextView.text;
+    NSString *userID = [Twitter sharedInstance].sessionStore.session.userID;
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
+    NSDictionary *params = @{@"status" : status};
+    NSError *clientError;
+    NSURLRequest *request = [client URLRequestWithMethod:@"POST" URL:STATUS_UPDATE_ENDPOINT parameters:params error:&clientError];
+    if (request) {
+        [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (data) {
+                NSLog(@"Status update Done");
+                [self close:nil];
+            }
+            else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection"
+                                                                message:@"You must be connected to the internet"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                NSLog(@"Error: %@", connectionError);
+            }
+        }];
+    }
 }
 
 - (IBAction)close:(id)sender {

@@ -32,7 +32,7 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Deq-wy-apq">
                     <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                     <subviews>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyL-B8-LN8">
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyL-B8-LN8">
                             <rect key="frame" x="277" y="15" width="74" height="30"/>
                             <color key="backgroundColor" red="0.31366890668869019" green="0.65183615684509277" blue="0.99959903955459595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -74,14 +74,14 @@
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GLq-fM-C6f">
-                    <rect key="frame" x="8" y="80" width="359" height="474"/>
+                    <rect key="frame" x="8" y="76" width="359" height="478"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PgJ-YR-zuY">
-                    <rect key="frame" x="321" y="40" width="30" height="36"/>
+                    <rect key="frame" x="321" y="30" width="30" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="SSM-Uj-Gj9"/>
                     </constraints>
@@ -92,7 +92,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's happening?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ro-Ld-8qG">
-                    <rect key="frame" x="13" y="90" width="177" height="21"/>
+                    <rect key="frame" x="13" y="86" width="177" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="177" id="QpY-KW-Ngh"/>
                         <constraint firstAttribute="height" constant="21" id="oVt-aL-Pwx"/>
@@ -118,11 +118,11 @@
                 <constraint firstItem="GLq-fM-C6f" firstAttribute="leading" secondItem="8pI-fY-cAJ" secondAttribute="leadingMargin" id="Ay3-Aa-Yvg"/>
                 <constraint firstItem="0aY-tn-JV4" firstAttribute="top" secondItem="8pI-fY-cAJ" secondAttribute="top" constant="30" id="J28-2D-k1F"/>
                 <constraint firstAttribute="trailing" secondItem="Deq-wy-apq" secondAttribute="trailing" id="Pgj-q6-Azz"/>
-                <constraint firstItem="GLq-fM-C6f" firstAttribute="top" secondItem="PgJ-YR-zuY" secondAttribute="bottom" constant="4" id="V75-OO-NLo"/>
+                <constraint firstItem="GLq-fM-C6f" firstAttribute="top" secondItem="PgJ-YR-zuY" secondAttribute="bottom" constant="10" id="V75-OO-NLo"/>
                 <constraint firstItem="Deq-wy-apq" firstAttribute="leading" secondItem="8pI-fY-cAJ" secondAttribute="leading" id="hcb-lT-BBj"/>
                 <constraint firstItem="0aY-tn-JV4" firstAttribute="leading" secondItem="8pI-fY-cAJ" secondAttribute="leading" constant="25" id="mhV-vk-jvz"/>
                 <constraint firstItem="GLq-fM-C6f" firstAttribute="top" secondItem="0ro-Ld-8qG" secondAttribute="bottom" constant="-31" id="nOr-Fe-ofJ"/>
-                <constraint firstItem="PgJ-YR-zuY" firstAttribute="top" secondItem="8pI-fY-cAJ" secondAttribute="top" constant="40" id="pwN-KR-csv"/>
+                <constraint firstItem="PgJ-YR-zuY" firstAttribute="top" secondItem="8pI-fY-cAJ" secondAttribute="top" constant="30" id="pwN-KR-csv"/>
                 <constraint firstItem="Deq-wy-apq" firstAttribute="top" secondItem="GLq-fM-C6f" secondAttribute="bottom" constant="53" id="rk5-GX-GdA"/>
             </constraints>
             <point key="canvasLocation" x="148.5" y="150.5"/>
