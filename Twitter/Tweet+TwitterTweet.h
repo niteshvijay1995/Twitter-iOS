@@ -7,6 +7,7 @@
 //
 
 #import "Tweet+CoreDataClass.h"
+#import "Tweet+CoreDataProperties.h"
 
 @interface Tweet (TwitterTweet)
 

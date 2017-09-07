@@ -35,10 +35,10 @@
 		0A8A892E1F57FDCE004A6606 /* TweetOptionsFooterBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8A892D1F57FDCE004A6606 /* TweetOptionsFooterBar.xib */; };
 		0ACBACB01F5EEE550034518E /* NewTweetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ACBACAF1F5EEE550034518E /* NewTweetView.xib */; };
 		0ACBACB31F5EF1F50034518E /* NewTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACB21F5EF1F50034518E /* NewTweetView.m */; };
-		0ACBACB71F601AC70034518E /* Twitter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACB51F601AC70034518E /* Twitter.xcdatamodeld */; };
-		0ACBACC81F601DC80034518E /* Tweet+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACC51F601DC80034518E /* Tweet+CoreDataClass.m */; };
-		0ACBACC91F601DC80034518E /* Tweet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACC71F601DC80034518E /* Tweet+CoreDataProperties.m */; };
-		0ACBACCC1F601E8D0034518E /* Tweet+TwitterTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACCB1F601E8D0034518E /* Tweet+TwitterTweet.m */; };
+		12125EC21F61512A0083DA0B /* Tweet+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 12125EBF1F61512A0083DA0B /* Tweet+CoreDataClass.m */; };
+		12125EC31F61512A0083DA0B /* Tweet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 12125EC11F61512A0083DA0B /* Tweet+CoreDataProperties.m */; };
+		12125EC61F6151390083DA0B /* Tweet+TwitterTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 12125EC51F6151390083DA0B /* Tweet+TwitterTweet.m */; };
+		12125EC91F6151800083DA0B /* Twitter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12125EC71F6151800083DA0B /* Twitter.xcdatamodeld */; };
 		65CEC2F4FF20E4E6400C7382 /* libPods-TwitterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E023468DAFF4BCB4D9525D8D /* libPods-TwitterTests.a */; };
 		7F2B6538DAA3E3776144586C /* libPods-Twitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */; };
 /* End PBXBuildFile section */
@@ -104,13 +104,13 @@
 		0ACBACAF1F5EEE550034518E /* NewTweetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewTweetView.xib; sourceTree = "<group>"; };
 		0ACBACB11F5EF1F50034518E /* NewTweetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTweetView.h; sourceTree = "<group>"; };
 		0ACBACB21F5EF1F50034518E /* NewTweetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTweetView.m; sourceTree = "<group>"; };
-		0ACBACB61F601AC70034518E /* Twitter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Twitter.xcdatamodel; sourceTree = "<group>"; };
-		0ACBACC41F601DC80034518E /* Tweet+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tweet+CoreDataClass.h"; sourceTree = "<group>"; };
-		0ACBACC51F601DC80034518E /* Tweet+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+CoreDataClass.m"; sourceTree = "<group>"; };
-		0ACBACC61F601DC80034518E /* Tweet+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tweet+CoreDataProperties.h"; sourceTree = "<group>"; };
-		0ACBACC71F601DC80034518E /* Tweet+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+CoreDataProperties.m"; sourceTree = "<group>"; };
-		0ACBACCA1F601E8D0034518E /* Tweet+TwitterTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tweet+TwitterTweet.h"; sourceTree = "<group>"; };
-		0ACBACCB1F601E8D0034518E /* Tweet+TwitterTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+TwitterTweet.m"; sourceTree = "<group>"; };
+		12125EBE1F61512A0083DA0B /* Tweet+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tweet+CoreDataClass.h"; sourceTree = "<group>"; };
+		12125EBF1F61512A0083DA0B /* Tweet+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+CoreDataClass.m"; sourceTree = "<group>"; };
+		12125EC01F61512A0083DA0B /* Tweet+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tweet+CoreDataProperties.h"; sourceTree = "<group>"; };
+		12125EC11F61512A0083DA0B /* Tweet+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+CoreDataProperties.m"; sourceTree = "<group>"; };
+		12125EC41F6151390083DA0B /* Tweet+TwitterTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tweet+TwitterTweet.h"; sourceTree = "<group>"; };
+		12125EC51F6151390083DA0B /* Tweet+TwitterTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+TwitterTweet.m"; sourceTree = "<group>"; };
+		12125EC81F6151800083DA0B /* Twitter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Twitter.xcdatamodel; sourceTree = "<group>"; };
 		39802BB1F61BC44163C792E2 /* Pods-TwitterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Twitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF9EA335EEB058E5DD31D3F /* Pods-TwitterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 		0A2869671F4D75B400F3135A /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
-				0ACBACB41F601A5B0034518E /* Model */,
+				12125EBD1F61510C0083DA0B /* Model */,
 				0ACBACAE1F5EEE3D0034518E /* NewTweet */,
 				0A8A89211F56917C004A6606 /* ProfileImageCache */,
 				0A429DC81F53FB64005C856A /* Home */,
@@ -286,16 +286,16 @@
 			name = NewTweet;
 			sourceTree = "<group>";
 		};
-		0ACBACB41F601A5B0034518E /* Model */ = {
+		12125EBD1F61510C0083DA0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0ACBACC41F601DC80034518E /* Tweet+CoreDataClass.h */,
-				0ACBACC51F601DC80034518E /* Tweet+CoreDataClass.m */,
-				0ACBACC61F601DC80034518E /* Tweet+CoreDataProperties.h */,
-				0ACBACC71F601DC80034518E /* Tweet+CoreDataProperties.m */,
-				0ACBACB51F601AC70034518E /* Twitter.xcdatamodeld */,
-				0ACBACCA1F601E8D0034518E /* Tweet+TwitterTweet.h */,
-				0ACBACCB1F601E8D0034518E /* Tweet+TwitterTweet.m */,
+				12125EC71F6151800083DA0B /* Twitter.xcdatamodeld */,
+				12125EC41F6151390083DA0B /* Tweet+TwitterTweet.h */,
+				12125EC51F6151390083DA0B /* Tweet+TwitterTweet.m */,
+				12125EBE1F61512A0083DA0B /* Tweet+CoreDataClass.h */,
+				12125EBF1F61512A0083DA0B /* Tweet+CoreDataClass.m */,
+				12125EC01F61512A0083DA0B /* Tweet+CoreDataProperties.h */,
+				12125EC11F61512A0083DA0B /* Tweet+CoreDataProperties.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -445,7 +445,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		3DC9C28DB7006C10F5FEAE7C /* [CP] Copy Pods Resources */ = {
@@ -527,7 +527,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -542,22 +542,22 @@
 				0A28698F1F4D780900F3135A /* LoginViewController.m in Sources */,
 				0A8A892A1F56BC14004A6606 /* TwitterTweet.m in Sources */,
 				0A32CF5A1F58425700FF4A0F /* TweetOptionsFooterBarView.m in Sources */,
-				0ACBACC81F601DC80034518E /* Tweet+CoreDataClass.m in Sources */,
 				0A1D43341F4EA83D00D6DECD /* TwitterFetcher.m in Sources */,
 				0A1D433C1F4ECD6100D6DECD /* UserProfileTableViewController.m in Sources */,
 				0A8A891F1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.m in Sources */,
 				0A2869951F4D7D6D00F3135A /* HomeScreenCollectionViewController.m in Sources */,
+				12125EC61F6151390083DA0B /* Tweet+TwitterTweet.m in Sources */,
 				0A28696D1F4D75B400F3135A /* AppDelegate.m in Sources */,
 				0A28696A1F4D75B400F3135A /* main.m in Sources */,
 				0A8A89271F5692CE004A6606 /* ImageCache.m in Sources */,
 				0A1D43471F4F598B00D6DECD /* TwitterUser.m in Sources */,
+				12125EC91F6151800083DA0B /* Twitter.xcdatamodeld in Sources */,
+				12125EC21F61512A0083DA0B /* Tweet+CoreDataClass.m in Sources */,
 				0ACBACB31F5EF1F50034518E /* NewTweetView.m in Sources */,
 				0A1D433F1F4ECE5200D6DECD /* FetchUserProfileTVC.m in Sources */,
-				0ACBACB71F601AC70034518E /* Twitter.xcdatamodeld in Sources */,
 				0A2869921F4D78CC00F3135A /* NavigationHelper.m in Sources */,
+				12125EC31F61512A0083DA0B /* Tweet+CoreDataProperties.m in Sources */,
 				0A28699E1F4D8F9500F3135A /* FetchFollowingListTVC.m in Sources */,
-				0ACBACC91F601DC80034518E /* Tweet+CoreDataProperties.m in Sources */,
-				0ACBACCC1F601E8D0034518E /* Tweet+TwitterTweet.m in Sources */,
 				0A2869981F4D87BD00F3135A /* FollowingTableViewController.m in Sources */,
 				0A2869A41F4DA5DA00F3135A /* CustomUserDetailCell.m in Sources */,
 			);
@@ -780,12 +780,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		0ACBACB51F601AC70034518E /* Twitter.xcdatamodeld */ = {
+		12125EC71F6151800083DA0B /* Twitter.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				0ACBACB61F601AC70034518E /* Twitter.xcdatamodel */,
+				12125EC81F6151800083DA0B /* Twitter.xcdatamodel */,
 			);
-			currentVersion = 0ACBACB61F601AC70034518E /* Twitter.xcdatamodel */;
+			currentVersion = 12125EC81F6151800083DA0B /* Twitter.xcdatamodel */;
 			path = Twitter.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
