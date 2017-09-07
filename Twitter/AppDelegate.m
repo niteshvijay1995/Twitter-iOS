@@ -48,11 +48,26 @@ static NSString *SUCCESSFULLY_LOGGED_IN_VIEW_CONTROLLER_IDENTIFIER = @"";
     return YES;
 }
 
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [self startTwitterFetch];
+    completionHandler(UIBackgroundFetchResultNoData);
+}
+
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler {
+    self.twitterDownloadBackgroudURLSessionCompletionHandler = completionHandler;
+}
+
 - (void)setTweetDatabaseContext:(NSManagedObjectContext *)tweetDatabaseContext {
     _tweetDatabaseContext = tweetDatabaseContext;
     
+    [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(startTwitterFetch:) userInfo:nil repeats:YES];
+    
     NSDictionary *userInfo = self.tweetDatabaseContext ? @{ TweetDatabaseAvailabilityContext : self.tweetDatabaseContext } : nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:TweetDatabaseAvailabilityNotification object:self userInfo:userInfo];
+}
+
+- (void)startTwitterFetch:(NSTimer *)timer {
+    [self startTwitterFetch];
 }
 
 - (void)navigateToSuccessfullyLoggedinView {
@@ -137,6 +152,20 @@ expectedTotalBytes:(int64_t)expectedTotalBytes {
  totalBytesWritten:(int64_t)totalBytesWritten
 totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
     
+}
+
+- (void)twitterDownloadTasksMightBeComplete {
+    if (self.twitterDownloadBackgroudURLSessionCompletionHandler) {
+        [self.twitterDownloadSession getTasksWithCompletionHandler:^(NSArray<NSURLSessionDataTask *> * _Nonnull dataTasks, NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks) {
+            if (![downloadTasks count]) {
+                void (^completionHandler)() = self.twitterDownloadBackgroudURLSessionCompletionHandler;
+                self.twitterDownloadBackgroudURLSessionCompletionHandler = nil;
+                if (completionHandler) {
+                    completionHandler();
+                }
+            }
+        }];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
