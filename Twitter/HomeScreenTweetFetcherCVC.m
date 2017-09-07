@@ -20,7 +20,6 @@
 @implementation HomeScreenTweetFetcherCVC
 
 static NSString *maxTweetCountToFetch = @"40";
-static NSString *homeTimelineEndPoint = @"https://api.twitter.com/1.1/statuses/home_timeline.json";
 
 - (void)viewDidLoad {
     [super viewDidLoad];

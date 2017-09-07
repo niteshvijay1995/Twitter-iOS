@@ -2,7 +2,7 @@
 //  Tweet+CoreDataProperties.m
 //  Twitter
 //
-//  Created by nitesh.vi on 06/09/17.
+//  Created by nitesh.vi on 07/09/17.
 //  Copyright © 2017 TNET. All rights reserved.
 //
 
@@ -14,18 +14,18 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Tweet"];
 }
 
-@dynamic id;
-@dynamic text;
-@dynamic favorited;
-@dynamic retweeted;
-@dynamic isRetweet;
-@dynamic profileImageUrl;
-@dynamic userFullName;
-@dynamic retweetedBy;
-@dynamic isVerifiedUser;
-@dynamic isMediaAttached;
-@dynamic mediaUrl;
 @dynamic favoriteCount;
+@dynamic favorited;
+@dynamic id;
+@dynamic isMediaAttached;
+@dynamic isRetweet;
+@dynamic isVerifiedUser;
+@dynamic mediaUrl;
+@dynamic profileImageUrl;
 @dynamic retweetCount;
+@dynamic retweeted;
+@dynamic retweetedBy;
+@dynamic text;
+@dynamic userFullName;
 
 @end

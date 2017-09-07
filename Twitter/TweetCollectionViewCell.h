@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tweet+TwitterTweetParser.h"
 
 @interface TweetCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tweetCellViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet UIView *tweetCellView;
 
 - (void)configureCellFromTweet:(NSDictionary *)tweet;
+- (void)configureCellFromCoreDataTweet:(Tweet *)tweet;
 
 @end

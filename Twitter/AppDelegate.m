@@ -9,10 +9,24 @@
 #import "AppDelegate.h"
 #import <TwitterKit/TwitterKit.h>
 #import "NavigationHelper.h"
+#import "AppDelegate+MOC.h"
+#import "Tweet+TwitterTweetParser.h"
+#import "TwitterFetcher.h"
+#import "TweetDatabaseAvailability.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <NSURLSessionDownloadDelegate>
+
+@property (copy, nonatomic) void (^twitterDownloadBackgroudURLSessionCompletionHandler)();
+@property (strong, nonatomic) NSURLSession *twitterDownloadSession;
+@property (strong, nonatomic) NSTimer *twitterForegroundFetchTimer;
+@property (strong, nonatomic) NSManagedObjectContext *tweetDatabaseContext;
 
 @end
+
+#define TWITTER_FETCH @"Twitter Just Uploaded Fetch"
+
+#define FOREGROUND_TWITTER_FETCH_INTERVAL (20)
+
 
 @implementation AppDelegate
 
@@ -27,9 +41,18 @@ static NSString *SUCCESSFULLY_LOGGED_IN_VIEW_CONTROLLER_IDENTIFIER = @"";
     TWTRSession *lastSession = store.session;
     if (lastSession) {
         NSLog(@"User already logged in");
-        [self navigateToSuccessfullyLoggedinView];
+        self.tweetDatabaseContext = [self createMainQueueManagedObjectContext];
+        [self startTwitterFetch];
+        //[self navigateToSuccessfullyLoggedinView];
     }
     return YES;
+}
+
+- (void)setTweetDatabaseContext:(NSManagedObjectContext *)tweetDatabaseContext {
+    _tweetDatabaseContext = tweetDatabaseContext;
+    
+    NSDictionary *userInfo = self.tweetDatabaseContext ? @{ TweetDatabaseAvailabilityContext : self.tweetDatabaseContext } : nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:TweetDatabaseAvailabilityNotification object:self userInfo:userInfo];
 }
 
 - (void)navigateToSuccessfullyLoggedinView {
@@ -41,6 +64,80 @@ static NSString *SUCCESSFULLY_LOGGED_IN_VIEW_CONTROLLER_IDENTIFIER = @"";
     [appDelegate.window makeKeyAndVisible];
 }
 
+- (void)startTwitterFetch {
+    [self.twitterDownloadSession getTasksWithCompletionHandler:^(NSArray<NSURLSessionDataTask *> * _Nonnull dataTasks, NSArray<NSURLSessionUploadTask *> * _Nonnull uploadTasks, NSArray<NSURLSessionDownloadTask *> * _Nonnull downloadTasks) {
+        if (![downloadTasks count]) {
+            TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
+            NSString *userID = store.session.userID;
+            
+            TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
+            
+            //NSString *since_id = [TwitterTweet getTweetIDForTweet:[self.tweetList firstObject]];
+            NSDictionary *params = @{@"count":@"40"};
+            
+            NSError *clientError;
+            
+            NSURLRequest *request = [client URLRequestWithMethod:@"GET" URL:homeTimelineEndPoint parameters:params error:&clientError];
+            NSURLSessionDownloadTask *task = [self.twitterDownloadSession downloadTaskWithRequest:request];
+            task.taskDescription = TWITTER_FETCH;
+            [task resume];
+        } else {
+            for (NSURLSessionDownloadTask *task in downloadTasks) [task resume];
+        }
+    }];
+}
+
+- (NSURLSession *)twitterDownloadSession {
+    if (!_twitterDownloadSession) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            NSURLSessionConfiguration *urlSessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:TWITTER_FETCH];
+            urlSessionConfig.allowsCellularAccess = NO;
+            _twitterDownloadSession = [NSURLSession sessionWithConfiguration:urlSessionConfig delegate:self delegateQueue:nil];
+        });
+    }
+    return _twitterDownloadSession;
+}
+
+- (NSArray *)tweetsAtURL:(NSURL *)url {
+    NSData *twitterJSONData = [NSData dataWithContentsOfURL:url];
+    NSArray *tweets = [NSJSONSerialization JSONObjectWithData:twitterJSONData options:0 error:NULL];
+    return tweets;
+}
+
+- (void)URLSession:(NSURLSession *)session
+      downloadTask:(nonnull NSURLSessionDownloadTask *)downloadTask
+didFinishDownloadingToURL:(nonnull NSURL *)location {
+    if ([downloadTask.taskDescription isEqualToString:TWITTER_FETCH]) {
+        NSManagedObjectContext *context = self.tweetDatabaseContext;
+        if (context) {
+            if (location) {
+                NSArray *tweets = [self tweetsAtURL:location];
+                [context performBlock:^{
+                    [Tweet laodTweetsFromTweetArray:tweets intoManagedObjectContext:context];
+                    [context save:NULL];
+            }];
+            }
+        } else {
+            //[self twitterDownloadTasksMightBeComplete];
+        }
+    }
+}
+
+- (void)URLSession:(NSURLSession *)session
+      downloadTask:(nonnull NSURLSessionDownloadTask *)downloadTask
+ didResumeAtOffset:(int64_t)fileOffset
+expectedTotalBytes:(int64_t)expectedTotalBytes {
+    
+}
+
+- (void)URLSession:(NSURLSession *)session
+      downloadTask:(nonnull NSURLSessionDownloadTask *)downloadTask
+      didWriteData:(int64_t)bytesWritten
+ totalBytesWritten:(int64_t)totalBytesWritten
+totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
+    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

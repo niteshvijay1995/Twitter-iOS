@@ -14,6 +14,7 @@
 #import "TwitterTweet.h"
 #import "TwitterUser.h"
 #import "TweetOptionsFooterBarView.h"
+#import "Tweet+CoreDataProperties.h"
 
 @interface TweetCollectionViewCell()
 @property (strong, nonatomic) UIImageView *profileImageView;
@@ -129,6 +130,71 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     }
     [self addDataToFooterForTweet:tweet];
     
+}
+
+- (void)configureCellFromCoreDataTweet:(Tweet *)tweet {
+    self.tweetLabel.attributedText = tweet.text;
+    if (tweet.isRetweet) {
+        self.retweetLabel.text = tweet.retweetedBy;
+    }
+    self.profileImageUrl = [NSURL URLWithString:tweet.profileImageUrl];
+    [self addProfileImageFromUrl:self.profileImageUrl];
+    
+    self.fullNameLabel.text = tweet.userFullName;
+    
+    if (tweet.isRetweet)  {
+        self.retweetLabel.hidden = NO;
+        self.profileImage_RetweetLabelContraint.priority = UILayoutPriorityDefaultHigh;
+        self.profileImage_TopMarginConstraint.priority = UILayoutPriorityDefaultLow;
+    }
+    else {
+        self.retweetLabel.hidden = YES;
+        self.profileImage_RetweetLabelContraint.priority = UILayoutPriorityDefaultLow;
+        self.profileImage_TopMarginConstraint.priority = UILayoutPriorityDefaultHigh;
+    }
+    
+    if (tweet.isVerifiedUser) {
+        self.verifiedUserIcon.hidden = NO;
+    }
+    else {
+        self.verifiedUserIcon.hidden = YES;
+    }
+    
+    self.mediaImageView.image = nil;
+    [self.mediaImageView removeConstraint:self.mediaImageHeightConstraint];
+    
+    if (tweet.isMediaAttached) {
+        self.mediaImageUrl = [NSURL URLWithString:tweet.mediaUrl];
+        [self addMediaImageFromTweet:self.mediaImageUrl];
+    }
+    
+    self.footerView.likeCountLabel.text = [NSString stringWithFormat:@"%lld",tweet.favoriteCount];
+    self.footerView.retweetCountLabel.text = [NSString stringWithFormat:@"%lld",tweet.retweetCount];
+    
+    self.footerView.likeButton.restorationIdentifier = tweet.id;
+    self.footerView.retweetButton.restorationIdentifier = tweet.id;
+    
+    if(tweet.favorited){
+        self.footerView.likeButton.tag = 1;
+        self.footerView.likeIconImageView.image = [UIImage imageNamed:@"liked_icon"];
+        self.footerView.likeCountLabel.textColor = [UIColor redColor];
+    }
+    else {
+        self.footerView.likeButton.tag = 0;
+        self.footerView.likeIconImageView.image = [UIImage imageNamed:@"like_icon"];
+        self.footerView.likeCountLabel.textColor = [UIColor blackColor];
+    }
+    if(tweet.retweeted){
+        self.footerView.retweetButton.tag = 1;
+        self.footerView.retweetIconImageView.image = [UIImage imageNamed:@"retweeted_icon"];
+        self.footerView.retweetCountLabel.textColor = [UIColor greenColor];
+        self.footerView.retweetIconImageView.transform = CGAffineTransformMakeRotation((180.0 * M_PI) / 180.0);
+    }
+    else {
+        self.footerView.retweetButton.tag = 0;
+        self.footerView.retweetIconImageView.image = [UIImage imageNamed:@"retweet_icon"];
+        self.footerView.retweetCountLabel.textColor = [UIColor blackColor];
+    }
 }
 
 - (void)configureRetweetLabelConstraintsForTweet:(NSDictionary *)tweet {

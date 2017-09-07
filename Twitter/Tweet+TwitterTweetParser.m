@@ -1,17 +1,17 @@
 //
-//  Tweet+TwitterTweet.m
+//  Tweet+TwitterTweetParser.m
 //  Twitter
 //
 //  Created by nitesh.vi on 06/09/17.
 //  Copyright © 2017 TNET. All rights reserved.
 //
 
-#import "Tweet+TwitterTweet.h"
+#import "Tweet+TwitterTweetParser.h"
 #import "TwitterTweet.h"
 #import "TwitterFetcher.h"
 #import <UIKit/UIKit.h>
 
-@implementation Tweet (TwitterTweet)
+@implementation Tweet (TwitterTweetParser)
 
 + (Tweet *)tweetWithTweetDictionary:(NSDictionary *)tweetDictionary inManagedObjectContext:(NSManagedObjectContext *)context {
     Tweet *tweet = nil;
@@ -21,7 +21,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"id = %@",id];
     
     NSError *error;
-    NSArray *matches = (NSArray *)[context executeRequest:request error:&error];
+    NSArray *matches = [context executeFetchRequest:request error:&error];
     
     if (!matches || error || [matches count] > 1) {
         // handle error
@@ -29,34 +29,36 @@
         tweet = [matches firstObject];
     } else {
         tweet = [NSEntityDescription insertNewObjectForEntityForName:@"Tweet" inManagedObjectContext:context];
-        tweet.id = [NSString stringWithFormat:@"%@",[tweet valueForKeyPath:TWITTER_TWEET_ID]];
+        tweet.id = [NSString stringWithFormat:@"%@",[tweetDictionary valueForKeyPath:TWITTER_TWEET_ID]];
         tweet.text = [self getAttributedStringForTweet:tweetDictionary];
-        tweet.favorited = [[tweet valueForKeyPath:TWITTER_TWEET_FAVORITED_FLAG] boolValue];
-        tweet.retweeted = [[tweet valueForKeyPath:TWITTER_TWEET_RETWEETED_FLAG] boolValue];
-        tweet.isRetweet = [tweet valueForKey:TWITTER_TWEET_RETWEET_STATUS]?YES:NO;
-        NSDictionary *user = [tweet valueForKeyPath:TWITTER_TWEET_USER];
+        tweet.favorited = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITED_FLAG] boolValue];
+        tweet.retweeted = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEETED_FLAG] boolValue];
+        tweet.isRetweet = [tweetDictionary valueForKey:TWITTER_TWEET_RETWEET_STATUS]?YES:NO;
+        NSDictionary *user = [tweetDictionary valueForKeyPath:TWITTER_TWEET_USER];
         if (tweet.isRetweet) {
             tweet.retweetedBy = [user valueForKeyPath:TWITTER_USER_FULL_NAME];
-            user = [tweet valueForKeyPath:TWITTER_TWEET_RETWEET_USER];
+            user = [tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEET_USER];
         }
         tweet.profileImageUrl = [user valueForKey:TWITTER_USER_PROFILE_IMAGE];
         tweet.userFullName = [user valueForKeyPath:TWITTER_USER_FULL_NAME];
         tweet.isVerifiedUser = [[NSString stringWithFormat:@"%@", [user valueForKey:TWITTER_USER_VERIFIED_FLAG]] isEqualToString:@"1"];
-        tweet.isMediaAttached = [[tweet valueForKeyPath:TWITTER_TWEET_MEDIA] boolValue];
+        tweet.isMediaAttached = [tweetDictionary valueForKeyPath:TWITTER_TWEET_MEDIA] ? YES : NO ;
         if (tweet.isMediaAttached) {
-            NSArray *medias = [tweet valueForKeyPath:TWITTER_TWEET_MEDIA];
+            NSArray *medias = [tweetDictionary valueForKeyPath:TWITTER_TWEET_MEDIA];
             tweet.mediaUrl = [medias.firstObject valueForKeyPath:TWITTER_TWEET_MEDIA_URL];
         }
-        tweet.favoriteCount = (long long)[tweet valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT];
-        tweet.retweetCount = (long long)[tweet valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT];
+        tweet.favoriteCount = (int)[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT];
+        tweet.retweetCount = (int)[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT];
     }
-    
-    
     return tweet;
 }
 
+
+// OPTIMIZE-ME
 + (void)laodTweetsFromTweetArray:(NSArray *)tweets intoManagedObjectContext:(NSManagedObjectContext *)context {
-    
+    for (NSDictionary *tweet in tweets) {
+        [self tweetWithTweetDictionary:tweet inManagedObjectContext:context];
+    }
 }
 
 + (NSMutableAttributedString *)getAttributedStringForTweet:(NSDictionary *)tweet {

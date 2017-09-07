@@ -2,7 +2,7 @@
 //  Tweet+CoreDataProperties.h
 //  Twitter
 //
-//  Created by nitesh.vi on 06/09/17.
+//  Created by nitesh.vi on 07/09/17.
 //  Copyright © 2017 TNET. All rights reserved.
 //
 
@@ -15,19 +15,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Tweet *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSString *id;
-@property (nullable, nonatomic, retain) NSAttributedString *text;
-@property (nonatomic) BOOL favorited;
-@property (nonatomic) BOOL retweeted;
-@property (nonatomic) BOOL isRetweet;
-@property (nullable, nonatomic, copy) NSString *profileImageUrl;
-@property (nullable, nonatomic, copy) NSString *userFullName;
-@property (nullable, nonatomic, copy) NSString *retweetedBy;
-@property (nonatomic) BOOL isVerifiedUser;
-@property (nonatomic) BOOL isMediaAttached;
-@property (nullable, nonatomic, copy) NSString *mediaUrl;
 @property (nonatomic) int64_t favoriteCount;
+@property (nonatomic) BOOL favorited;
+@property (nullable, nonatomic, copy) NSString *id;
+@property (nonatomic) BOOL isMediaAttached;
+@property (nonatomic) BOOL isRetweet;
+@property (nonatomic) BOOL isVerifiedUser;
+@property (nullable, nonatomic, copy) NSString *mediaUrl;
+@property (nullable, nonatomic, copy) NSString *profileImageUrl;
 @property (nonatomic) int64_t retweetCount;
+@property (nonatomic) BOOL retweeted;
+@property (nullable, nonatomic, copy) NSString *retweetedBy;
+@property (nullable, nonatomic, retain) NSObject *text;
+@property (nullable, nonatomic, copy) NSString *userFullName;
 
 @end
 
