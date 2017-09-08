@@ -47,8 +47,8 @@
             NSArray *medias = [tweetDictionary valueForKeyPath:TWITTER_TWEET_MEDIA];
             tweet.mediaUrl = [medias.firstObject valueForKeyPath:TWITTER_TWEET_MEDIA_URL];
         }
-        tweet.favoriteCount = (int)[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT];
-        tweet.retweetCount = (int)[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT];
+        tweet.favoriteCount = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT] intValue];
+        tweet.retweetCount = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT] intValue];
     }
     return tweet;
 }
