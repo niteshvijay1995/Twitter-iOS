@@ -10,6 +10,13 @@
 #import "Tweet+CoreDataClass.h"
 #import "TweetCollectionViewCell.h"
 #import "TweetDatabaseAvailability.h"
+#import <TwitterKit/TwitterKit.h>
+#import "TwitterFetcher.h"
+#import "TwitterTweet.h"
+#import "TwitterUser.h"
+#import "CoreDataController.h"
+
+#define maxTweetCountToFetch @"50"
 
 @implementation TweetsCDHSCVC
 
@@ -17,9 +24,10 @@
     [super awakeFromNib];
 
     ((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1, 1);
-    [[NSNotificationCenter defaultCenter] addObserverForName:TweetDatabaseAvailabilityNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        self.managedObjectContext = note.userInfo[TweetDatabaseAvailabilityContext];
-    }];
+    self.managedObjectContext = [CoreDataController sharedInstance].managedObjectContext;
+    
+    [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(startHomeTimelineFetch:) userInfo:nil repeats:YES];
+    //[self startHomeTimelineFetch];
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
@@ -43,5 +51,45 @@ static NSString * const reuseIdentifier = @"TweetCell";
     
     return cell;
 }
+
+- (void)startHomeTimelineFetch:(NSTimer *)timer {
+    [self startHomeTimelineFetch];
+}
+
+- (void)startHomeTimelineFetch {
+    TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
+    NSString *userID = store.session.userID;
+
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
+    
+    NSDictionary *params = @{@"count":maxTweetCountToFetch};
+    
+    NSError *clientError;
+    
+    NSURLRequest *request = [client URLRequestWithMethod:@"GET" URL:homeTimelineEndPoint parameters:params error:&clientError];
+    
+    if (request) {
+        [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (data) {
+                NSManagedObjectContext *context = [CoreDataController sharedInstance].managedObjectContext;
+                if (context) {
+                    NSError *jsonError;
+                    NSArray *tweets = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+                    [context performBlock:^{
+                        [Tweet laodTweetsFromTweetArray:tweets intoManagedObjectContext:context];
+                        [context save:NULL];
+                    }];
+                }
+            }
+            else {
+                NSLog(@"Error: %@", connectionError);
+            }
+        }];
+    }
+    else {
+        NSLog(@"Error: %@", clientError);
+    }
+}
+
 
 @end
