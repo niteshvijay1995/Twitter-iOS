@@ -27,6 +27,11 @@
         // handle error
     } else if ([matches count]){
         tweet = [matches firstObject];
+        tweet.favorited = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITED_FLAG] boolValue];
+        tweet.retweeted = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEETED_FLAG] boolValue];
+        tweet.favoriteCount = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT] intValue];
+        tweet.retweetCount = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT] intValue];
+        [context save:NULL];
     } else {
         tweet = [NSEntityDescription insertNewObjectForEntityForName:@"Tweet" inManagedObjectContext:context];
         tweet.id = [NSString stringWithFormat:@"%@",[tweetDictionary valueForKeyPath:TWITTER_TWEET_ID]];
