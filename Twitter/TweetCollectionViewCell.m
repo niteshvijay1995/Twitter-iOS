@@ -135,7 +135,7 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
 - (void)configureCellFromCoreDataTweet:(Tweet *)tweet {
     self.tweetLabel.attributedText = tweet.text;
     if (tweet.isRetweet) {
-        self.retweetLabel.text = tweet.retweetedBy;
+        self.retweetLabel.text = [tweet.retweetedBy stringByAppendingString:@" retweeted"];
     }
     self.profileImageUrl = [NSURL URLWithString:tweet.profileImageUrl];
     [self addProfileImageFromUrl:self.profileImageUrl];
@@ -162,9 +162,8 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     
     self.mediaImageView.image = nil;
     [self.mediaImageView removeConstraint:self.mediaImageHeightConstraint];
-    
+    self.mediaImageUrl = [NSURL URLWithString:tweet.mediaUrl];
     if (tweet.isMediaAttached) {
-        self.mediaImageUrl = [NSURL URLWithString:tweet.mediaUrl];
         [self addMediaImageFromTweet:self.mediaImageUrl];
     }
     
@@ -245,8 +244,8 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
         [self.imageDownloaderQueue addOperationWithBlock:^{
             NSData * imageData = [[NSData alloc] initWithContentsOfURL:mediaImageUrl];
             UIImage *image = [[UIImage alloc] initWithData:imageData];
+            [[ImageCache sharedInstance] cacheImage:image forKey:mediaImageUrl.absoluteString];
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [[ImageCache sharedInstance] cacheImage:image forKey:mediaImageUrl.absoluteString];
                 if ([self.mediaImageUrl.absoluteString isEqualToString:mediaImageUrl.absoluteString]) {
                     self.mediaImageView.image = image;
                 }
