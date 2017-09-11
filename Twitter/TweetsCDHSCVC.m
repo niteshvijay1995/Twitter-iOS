@@ -48,13 +48,14 @@
     NSURLRequest *request = [client URLRequestWithMethod:@"GET" URL:usersEndPoint parameters:params error:&clientError];
     
     if (request) {
-        dispatch_queue_t fetchUserInfoQ = dispatch_queue_create("User Info Fetcher", NULL);
-        dispatch_async(fetchUserInfoQ, ^{
-            [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                if (data) {
-                    NSError *jsonError;
-                    NSDictionary *userInfo = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-                    NSURL *profileImageUrl = [TwitterUser getProfileImageUrlForUser:userInfo];
+        [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (data) {
+                NSError *jsonError;
+                NSDictionary *userInfo = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+                NSURL *profileImageUrl = [TwitterUser getProfileImageUrlForUser:userInfo];
+                ;
+                dispatch_queue_t imageDownloaderQ = dispatch_queue_create("ImageDownloader", NULL);
+                dispatch_async(imageDownloaderQ, ^{
                     NSData * imageData = [[NSData alloc] initWithContentsOfURL:profileImageUrl];
                     UIImage *profileImage = [UIImage imageWithData:imageData];
                     profileImage = [profileImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -64,13 +65,15 @@
                     imageButton.layer.masksToBounds = YES;
                     imageButton.clipsToBounds = YES;
                     imageButton.layer.cornerRadius = 0.5 * imageButton.bounds.size.height;
-                    self.profileImageButton.customView = imageButton;
-                }
-                else {
-                    NSLog(@"Error: %@", connectionError);
-                }
-            }];
-        });
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.profileImageButton.customView = imageButton;
+                    });
+                });
+            }
+            else {
+                NSLog(@"Error: %@", connectionError);
+            }
+        }];
     }
     else {
         NSLog(@"Error: %@", clientError);
@@ -82,6 +85,7 @@
     _managedObjectContext = managedObjectContext;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tweet"];
+    request.fetchLimit = 30;
     request.predicate = nil;
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO selector:@selector(localizedStandardCompare:)]];
     
