@@ -10,13 +10,13 @@
 #import "NewTweetView.h"
 #import "Tweet+CoreDataProperties.h"
 #import "TweetCollectionViewCell.h"
+#import "TwitterFetcher.h"
 
 @interface CoreDataHomeScreenCollectionViewController () <UICollectionViewDelegate>
 
 @property (strong, nonatomic) NSBlockOperation *blockOperation;
 @property BOOL shouldReloadCollectionView;
 @property (strong, nonatomic) NSCache *cellSizeCache;       // cell size for a tweet(id)
-
 @end
 
 @implementation CoreDataHomeScreenCollectionViewController
@@ -36,7 +36,11 @@ static NSString * const reuseIdentifier = @"TweetCell";
     [self.collectionView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:NULL] forCellWithReuseIdentifier:reuseIdentifier];
     //((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1, 1);
     
-    // Do any additional setup after loading the view.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.tintColor = twitterBlueColor;
+    [self.refreshControl addTarget:self action:@selector(refreshHomeScreen) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshControl];
+    self.collectionView.alwaysBounceVertical = YES;
 }
 
 - (void)didReceiveMemoryWarning {

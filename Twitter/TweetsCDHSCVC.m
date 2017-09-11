@@ -106,6 +106,12 @@ static NSString * const reuseIdentifier = @"TweetCell";
     [self startHomeTimelineFetch];
 }
 
+- (void)refreshHomeScreen {
+    if (!self.refreshControl.refreshing) {
+        [self startHomeTimelineFetch];
+    }
+}
+
 - (void)startHomeTimelineFetch {
     NSLog(@"Fetching Tweets");
     TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
@@ -130,15 +136,18 @@ static NSString * const reuseIdentifier = @"TweetCell";
                         [Tweet laodTweetsFromTweetArray:tweets intoManagedObjectContext:context];
                         [context save:NULL];
                     }];
+                    [self.refreshControl endRefreshing];
                 }
             }
             else {
                 NSLog(@"Error: %@", connectionError);
+                [self.refreshControl endRefreshing];
             }
         }];
     }
     else {
         NSLog(@"Error: %@", clientError);
+        [self.refreshControl endRefreshing];
     }
 }
 
