@@ -16,7 +16,7 @@
 #import "TwitterUser.h"
 #import "CoreDataController.h"
 
-#define maxTweetCountToFetch @"50"
+#define maxTweetCountToFetch @"200"
 
 @interface TweetsCDHSCVC()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *profileImageButton;
