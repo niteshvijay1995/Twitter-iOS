@@ -7,8 +7,9 @@
 //
 
 #import "CoreDataHomeScreenCollectionViewController.h"
+#import "NewTweetView.h"
 
-@interface CoreDataHomeScreenCollectionViewController ()
+@interface CoreDataHomeScreenCollectionViewController () <UICollectionViewDelegate>
 
 @property (strong, nonatomic) NSBlockOperation *blockOperation;
 @property BOOL shouldReloadCollectionView;
@@ -25,6 +26,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:NULL] forCellWithReuseIdentifier:reuseIdentifier];
     ((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1, 1);
+    
     // Do any additional setup after loading the view.
 }
 
@@ -51,7 +53,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
     } else {
         if (self.debug) NSLog(@"[%@ %@] no NSFetchedResultsController (yet?)", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     }
-    [self.collectionView reloadData];
+    //[self.collectionView reloadData];
 }
 
 - (void)setFetchedResultsController:(NSFetchedResultsController *)newfrc {
@@ -91,7 +93,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
 
 #pragma mark <UICollectionViewDelegate>
 
-#pragma mark - NSFetchedResultsControllerDelegate
+#pragma mark - <NSFetchedResultsControllerDelegate>
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     self.shouldReloadCollectionView = NO;
@@ -187,6 +189,13 @@ static NSString * const reuseIdentifier = @"TweetCell";
             [self.blockOperation start];
         } completion:nil];
     }
+}
+
+#pragma mark <UICollectionViewDelegateFlowLayout>
+
+- (IBAction)composeTweet:(id)sender {
+    NewTweetView *newTweetViewController = [[NewTweetView alloc] init];
+    [self presentViewController:newTweetViewController animated:YES completion:nil];
 }
 
 @end

@@ -61,9 +61,16 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Home" id="FzC-dW-5bN">
                         <barButtonItem key="leftBarButtonItem" title="." style="plain" id="5pz-6Y-epg"/>
-                        <barButtonItem key="rightBarButtonItem" image="quill" id="7Ny-hh-ddN"/>
+                        <barButtonItem key="rightBarButtonItem" image="quill" id="7Ny-hh-ddN">
+                            <connections>
+                                <action selector="composeTweet:" destination="8Vv-oL-Q8F" id="Zb4-u1-hJg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="profileImageButton" destination="5pz-6Y-epg" id="vTi-Mr-DmZ"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2B-Zj-jjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
