@@ -81,7 +81,7 @@
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     _managedObjectContext = managedObjectContext;
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tweet"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tweet"]
     request.predicate = nil;
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO selector:@selector(localizedStandardCompare:)]];
     
