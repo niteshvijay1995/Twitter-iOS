@@ -213,6 +213,9 @@ static NSString * const reuseIdentifier = @"TweetCell";
             break;
     }
 }
+- (IBAction)tapToDisableKeyboard:(id)sender {
+    [self.view endEditing:YES];
+}
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
