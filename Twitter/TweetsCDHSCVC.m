@@ -28,12 +28,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    ((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1, 1);
     self.debug = YES;
     self.managedObjectContext = [CoreDataController sharedInstance].managedObjectContext;
     
     [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(startHomeTimelineFetch:) userInfo:nil repeats:YES];
-    //[self startHomeTimelineFetch];
+    [self startHomeTimelineFetch];
     
     [self setProfileImage];
 }
@@ -85,7 +84,7 @@
     _managedObjectContext = managedObjectContext;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tweet"];
-    request.fetchLimit = 30;
+    //request.fetchLimit = 30;
     request.predicate = nil;
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO selector:@selector(localizedStandardCompare:)]];
     
@@ -97,11 +96,9 @@ static NSString * const reuseIdentifier = @"TweetCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TweetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    NSLog(@"Configuring cell at indexPath - %@",indexPath);
     Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
     [cell configureCellFromCoreDataTweet:tweet];
-    NSLog(@"Configuration Done");
     return cell;
 }
 

@@ -8,11 +8,14 @@
 
 #import "CoreDataHomeScreenCollectionViewController.h"
 #import "NewTweetView.h"
+#import "Tweet+CoreDataProperties.h"
+#import "TweetCollectionViewCell.h"
 
 @interface CoreDataHomeScreenCollectionViewController () <UICollectionViewDelegate>
 
 @property (strong, nonatomic) NSBlockOperation *blockOperation;
 @property BOOL shouldReloadCollectionView;
+@property (strong, nonatomic) NSCache *cellSizeCache;       // cell size for a tweet(id)
 
 @end
 
@@ -20,12 +23,18 @@
 
 static NSString * const reuseIdentifier = @"TweetCell";
 
+- (NSCache *)cellSizeCache {
+    if (!_cellSizeCache) {
+        _cellSizeCache = [[NSCache alloc] init];
+    }
+    return _cellSizeCache;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:NULL] forCellWithReuseIdentifier:reuseIdentifier];
-    ((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1, 1);
+    //((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1, 1);
     
     // Do any additional setup after loading the view.
 }
@@ -92,6 +101,23 @@ static NSString * const reuseIdentifier = @"TweetCell";
 }
 
 #pragma mark <UICollectionViewDelegate>
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    id size = [self.cellSizeCache objectForKey:tweet.id];
+    if (size) {
+        return [size CGSizeValue];
+    }
+    TweetCollectionViewCell *dummyCell = [[NSBundle mainBundle] loadNibNamed:@"TweetCell" owner:self options:nil].firstObject;
+    [dummyCell configureStaticCellFromCoreDataTweet:tweet];
+    CGSize contraintSize = CGSizeMake(self.collectionView.bounds.size.width - self.collectionView.contentInset.left - self.collectionView.contentInset.right, CGFLOAT_MAX);
+    CGSize resSize = [dummyCell systemLayoutSizeFittingSize:contraintSize];
+    [self.cellSizeCache setObject:[NSValue valueWithCGSize:resSize] forKey:tweet.id];
+    NSLog(@"%f %f",resSize.width, resSize.height);
+    return resSize;
+}
 
 #pragma mark - <NSFetchedResultsControllerDelegate>
 

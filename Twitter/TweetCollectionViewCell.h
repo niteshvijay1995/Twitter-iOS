@@ -15,5 +15,6 @@
 
 - (void)configureCellFromTweet:(NSDictionary *)tweet;
 - (void)configureCellFromCoreDataTweet:(Tweet *)tweet;
+- (void)configureStaticCellFromCoreDataTweet:(Tweet *)tweet;
 
 @end
