@@ -15,6 +15,7 @@
 #import "TwitterUser.h"
 #import "TweetOptionsFooterBarView.h"
 #import "Tweet+CoreDataProperties.h"
+#import "DownloaderQueue.h"
 
 @interface TweetCollectionViewCell()
 @property (strong, nonatomic) UIImageView *profileImageView;
@@ -68,6 +69,13 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
         _mediaImageHeightConstraint = [self.mediaImageView autoMatchDimension:ALDimensionHeight toDimension:ALDimensionWidth ofView:self.mediaImageView withMultiplier:MEDIA_IMAGE_ASPECT_RATIO relation:NSLayoutRelationEqual];
     }
     return _mediaImageHeightConstraint;
+}
+
+- (NSOperationQueue *)imageDownloaderQueue {
+    if (!_imageDownloaderQueue) {
+        _imageDownloaderQueue = [[DownloaderQueue sharedInstance] getImageDownloaderQueue];
+    }
+    return _imageDownloaderQueue;
 }
 
 - (void) awakeFromNib {
