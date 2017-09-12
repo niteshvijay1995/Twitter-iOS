@@ -84,6 +84,7 @@
 		0A2524231F679DD500B62720 /* Me+MeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Me+MeParser.h"; sourceTree = "<group>"; };
 		0A2524241F679DD500B62720 /* Me+MeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Me+MeParser.m"; sourceTree = "<group>"; };
 		0A2524291F67AC6600B62720 /* Twitter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Twitter.xcdatamodel; sourceTree = "<group>"; };
+		0A25242F1F67C18200B62720 /* Notifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		0A2869651F4D75B400F3135A /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2869691F4D75B400F3135A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A28696B1F4D75B400F3135A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -299,6 +300,7 @@
 				0A2869791F4D75B400F3135A /* Info.plist */,
 				0A429DC61F53ED94005C856A /* Assets.xcassets */,
 				0A2869681F4D75B400F3135A /* Supporting Files */,
+				0A25242F1F67C18200B62720 /* Notifications.h */,
 			);
 			path = Twitter;
 			sourceTree = "<group>";
