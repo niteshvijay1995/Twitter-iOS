@@ -9,7 +9,6 @@
 #import "TweetsCDHSCVC.h"
 #import "Tweet+CoreDataClass.h"
 #import "TweetCollectionViewCell.h"
-#import "TweetDatabaseAvailability.h"
 #import <TwitterKit/TwitterKit.h>
 #import "TwitterFetcher.h"
 #import "TwitterTweet.h"

@@ -12,7 +12,6 @@
 #import "AppDelegate+MOC.h"
 #import "Tweet+TwitterTweetParser.h"
 #import "TwitterFetcher.h"
-#import "TweetDatabaseAvailability.h"
 
 @interface AppDelegate ()
 
@@ -31,6 +30,7 @@ static NSString *SUCCESSFULLY_LOGGED_IN_VIEW_CONTROLLER_IDENTIFIER = @"";
     TWTRSession *lastSession = store.session;
     if (lastSession) {
         NSLog(@"User already logged in");
+        
         [self navigateToSuccessfullyLoggedinView];
     }
     return YES;
