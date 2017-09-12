@@ -137,7 +137,6 @@
 		0ACBACD21F612C1E0034518E /* TweetsCDHSCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetsCDHSCVC.m; sourceTree = "<group>"; };
 		0ACBACD51F6132A20034518E /* AppDelegate+MOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+MOC.h"; sourceTree = "<group>"; };
 		0ACBACD61F6132A20034518E /* AppDelegate+MOC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MOC.m"; sourceTree = "<group>"; };
-		0ACBACD81F613BD10034518E /* TweetDatabaseAvailability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetDatabaseAvailability.h; sourceTree = "<group>"; };
 		39802BB1F61BC44163C792E2 /* Pods-TwitterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Twitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF9EA335EEB058E5DD31D3F /* Pods-TwitterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -299,7 +298,6 @@
 				0A2869761F4D75B400F3135A /* LaunchScreen.storyboard */,
 				0A2869791F4D75B400F3135A /* Info.plist */,
 				0A429DC61F53ED94005C856A /* Assets.xcassets */,
-				0ACBACD81F613BD10034518E /* TweetDatabaseAvailability.h */,
 				0A2869681F4D75B400F3135A /* Supporting Files */,
 			);
 			path = Twitter;
