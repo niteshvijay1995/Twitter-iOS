@@ -15,7 +15,7 @@
 + (Me *)meWithUserDictionary:(NSDictionary *)userDictionary inManagedObjectContext:(NSManagedObjectContext *)context {
     Me *me = nil;
     
-    NSString *id = [userDictionary valueForKeyPath:TWITTER_USER_ID];
+    NSString *id = [NSString stringWithFormat:@"%@",[userDictionary valueForKeyPath:TWITTER_USER_ID]];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Me"];
     request.predicate = [NSPredicate predicateWithFormat:@"id = %@",id];
     
@@ -29,6 +29,7 @@
         [context save:NULL];
     } else {
         me = [NSEntityDescription insertNewObjectForEntityForName:@"Me" inManagedObjectContext:context];
+        me.id = id;
         me.profileImageUrl = [userDictionary valueForKeyPath:TWITTER_USER_PROFILE_IMAGE];
         me.fullName = [userDictionary valueForKeyPath:TWITTER_USER_FULL_NAME];
         me.screenName = [userDictionary valueForKeyPath:TWITTER_USER_SCREEN_NAME];

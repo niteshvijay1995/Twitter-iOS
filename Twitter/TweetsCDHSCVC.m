@@ -16,6 +16,9 @@
 #import "CoreDataController.h"
 #import "AppDelegate.h"
 #import "Me+MeParser.h"
+#import "DownloaderQueue.h"
+#import "ImageCache.h"
+#import "Notifications.h"
 
 #define maxTweetCountToFetch @"200"
 
@@ -34,12 +37,51 @@
     
     [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(startHomeTimelineFetch:) userInfo:nil repeats:YES];
     [self startHomeTimelineFetch];
-    
+    [self configureProfileImageButton];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self setProfileImage];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setProfileImage) name:UserProfileAvailabilityNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UserProfileAvailabilityNotification object:nil];
+    [super viewDidDisappear:animated];
+}
+
+- (void)configureProfileImageButton {
+    UIButton *imageButton = [[UIButton alloc] init];
+    imageButton.layer.masksToBounds = YES;
+    imageButton.clipsToBounds = YES;
+    imageButton.frame = CGRectMake(0, 0,32, 32);
+    imageButton.layer.cornerRadius = 0.5 * imageButton.bounds.size.height;
+    self.profileImageButton.customView = imageButton;
 }
 
 - (void)setProfileImage {
     Me *meUser = ((AppDelegate *)[UIApplication sharedApplication].delegate).meUser;
+    if (meUser) {
+        NSOperationQueue *imageDownloaderQueue = [[DownloaderQueue sharedInstance] getImageDownloaderQueue];
+        NSURL *profileImageUrl = [[NSURL alloc] initWithString:meUser.profileImageUrl];
+        UIImage *profileImage = [[ImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
+        if (profileImage) {
+            profileImage = [profileImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            [(UIButton *)self.profileImageButton.customView setImage:profileImage forState:UIControlStateNormal];
+            }
+        else {
+            [imageDownloaderQueue addOperationWithBlock:^{
+                NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
+                UIImage *image = [[UIImage alloc] initWithData:imageData];
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [[ImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
+                    UIImage *profileImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                    [(UIButton *)self.profileImageButton.customView setImage:profileImage forState:UIControlStateNormal];
+                }];
+            }];
+        }
+    }
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
