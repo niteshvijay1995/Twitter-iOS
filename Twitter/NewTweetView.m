@@ -40,6 +40,7 @@ static int MAX_TWEET_LENGTH = 140;
     [self.tweetTextView becomeFirstResponder];
     [self setProfileImage];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setProfileImage) name:UserProfileAvailabilityNotification object:nil];
     self.tweetTextView.delegate = self;
 }
@@ -70,12 +71,17 @@ static int MAX_TWEET_LENGTH = 140;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UserProfileAvailabilityNotification object:nil];
     [super viewWillDisappear:animated];
 }
 
 - (void)keyboardWillShow:(NSNotification *)sender {
     self.footerBarBottomConstraint.constant = [sender.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+}
+
+- (void)keyboardWillHide:(NSNotification *)sender {
+    self.footerBarBottomConstraint.constant = 0;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
