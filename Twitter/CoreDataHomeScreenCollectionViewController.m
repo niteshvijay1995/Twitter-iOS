@@ -16,18 +16,26 @@
 
 @property (strong, nonatomic) NSBlockOperation *blockOperation;
 @property BOOL shouldReloadCollectionView;
-@property (strong, nonatomic) NSCache *cellSizeCache;       // cell size for a tweet(id)
+@property (strong, nonatomic) NSCache *portraitCellSizeCache;       // cell size for a tweet(id)
+@property (strong, nonatomic) NSCache *landscapeCellSizeCache;
 @end
 
 @implementation CoreDataHomeScreenCollectionViewController
 
 static NSString * const reuseIdentifier = @"TweetCell";
 
-- (NSCache *)cellSizeCache {
-    if (!_cellSizeCache) {
-        _cellSizeCache = [[NSCache alloc] init];
+- (NSCache *)portraitCellSizeCache {
+    if (!_portraitCellSizeCache) {
+        _portraitCellSizeCache = [[NSCache alloc] init];
     }
-    return _cellSizeCache;
+    return _portraitCellSizeCache;
+}
+
+- (NSCache *)landscapeCellSizeCache {
+    if (!_landscapeCellSizeCache) {
+        _landscapeCellSizeCache = [[NSCache alloc] init];
+    }
+    return _landscapeCellSizeCache;
 }
 
 - (void)viewDidLoad {
@@ -110,7 +118,13 @@ static NSString * const reuseIdentifier = @"TweetCell";
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    id size = [self.cellSizeCache objectForKey:tweet.id];
+    id size;
+    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
+        size = [self.portraitCellSizeCache objectForKey:tweet.id];
+    }
+    else {
+        size = [self.landscapeCellSizeCache objectForKey:tweet.id];
+    }
     if (size) {
         return [size CGSizeValue];
     }
@@ -118,7 +132,12 @@ static NSString * const reuseIdentifier = @"TweetCell";
     [dummyCell configureStaticCellFromCoreDataTweet:tweet];
     CGSize contraintSize = CGSizeMake(self.collectionView.bounds.size.width - self.collectionView.contentInset.left - self.collectionView.contentInset.right, CGFLOAT_MAX);
     CGSize resSize = [dummyCell systemLayoutSizeFittingSize:contraintSize];
-    [self.cellSizeCache setObject:[NSValue valueWithCGSize:resSize] forKey:tweet.id];
+    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
+        [self.portraitCellSizeCache setObject:[NSValue valueWithCGSize:resSize] forKey:tweet.id];
+    }
+    else {
+        [self.landscapeCellSizeCache setObject:[NSValue valueWithCGSize:resSize] forKey:tweet.id];
+    }
     NSLog(@"%f %f",resSize.width, resSize.height);
     return resSize;
 }
