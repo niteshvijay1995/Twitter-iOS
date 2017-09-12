@@ -6,7 +6,7 @@
 //  Copyright © 2017 TNET. All rights reserved.
 //
 
-#import "Me+CoreDataClass.h"
+#import "Me+CoreDataProperties.h"
 
 @interface Me (MeParser)
 

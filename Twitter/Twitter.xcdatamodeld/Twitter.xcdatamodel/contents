@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="Me" representedClassName="Me" syncable="YES" codeGenerationType="class">
+    <entity name="Me" representedClassName="Me" syncable="YES">
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileImageUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,6 +23,6 @@
     </entity>
     <elements>
         <element name="Tweet" positionX="-54" positionY="-9" width="128" height="240"/>
-        <element name="Me" positionX="171" positionY="90" width="128" height="103"/>
+        <element name="Me" positionX="-36" positionY="81" width="128" height="105"/>
     </elements>
 </model>
