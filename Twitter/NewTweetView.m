@@ -9,6 +9,11 @@
 #import "NewTweetView.h"
 #import "TwitterFetcher.h"
 #import <TwitterKit/TwitterKit.h>
+#import "AppDelegate.h"
+#import "Me+MeParser.h"
+#import "DownloaderQueue.h"
+#import "ImageCache.h"
+#import "Notifications.h"
 
 @interface NewTweetView() <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerBarBottomConstraint;
@@ -31,15 +36,41 @@ static int MAX_TWEET_LENGTH = 140;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.tweetTextView becomeFirstResponder];
-    [super viewWillAppear:animated];
+    [self setProfileImage];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setProfileImage) name:UserProfileAvailabilityNotification object:nil];
     self.tweetTextView.delegate = self;
-    
+}
+
+- (void)setProfileImage {
+    Me *meUser = ((AppDelegate *)[UIApplication sharedApplication].delegate).meUser;
+    if (meUser) {
+        NSOperationQueue *imageDownloaderQueue = [[DownloaderQueue sharedInstance] getImageDownloaderQueue];
+        NSURL *profileImageUrl = [[NSURL alloc] initWithString:meUser.profileImageUrl];
+        UIImage *profileImage = [[ImageCache sharedInstance] getCachedImageForKey:profileImageUrl.absoluteString];
+        if (profileImage) {
+            profileImage = [profileImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            self.profileImageView.image = profileImage;
+        }
+        else {
+            [imageDownloaderQueue addOperationWithBlock:^{
+                NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
+                UIImage *image = [[UIImage alloc] initWithData:imageData];
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [[ImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
+                    UIImage *profileImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                    self.profileImageView.image = profileImage;
+                }];
+            }];
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UserProfileAvailabilityNotification object:nil];
     [super viewWillDisappear:animated];
 }
 
