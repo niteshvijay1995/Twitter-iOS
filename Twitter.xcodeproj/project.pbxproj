@@ -16,7 +16,10 @@
 		0A2524051F615FD000B62720 /* Tweet+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACC51F601DC80034518E /* Tweet+CoreDataClass.m */; };
 		0A25240C1F62AD2F00B62720 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A25240B1F62AD2F00B62720 /* CoreDataController.m */; };
 		0A2524161F6668B900B62720 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2524151F6668B900B62720 /* SearchViewController.m */; };
-		0A25241A1F666D4D00B62720 /* DownloaderQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2524191F666D4D00B62720 /* DownloaderQueue.m */; };
+		0A2524251F679DD500B62720 /* Me+MeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2524241F679DD500B62720 /* Me+MeParser.m */; };
+		0A2524261F67AB6100B62720 /* Me+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A25241C1F679D8F00B62720 /* Me+CoreDataClass.m */; };
+		0A2524271F67AB6600B62720 /* Me+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A25241E1F679D8F00B62720 /* Me+CoreDataProperties.m */; };
+		0A25242A1F67AC6600B62720 /* Twitter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A2524281F67AC6600B62720 /* Twitter.xcdatamodeld */; };
 		0A28696A1F4D75B400F3135A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2869691F4D75B400F3135A /* main.m */; };
 		0A28696D1F4D75B400F3135A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A28696C1F4D75B400F3135A /* AppDelegate.m */; };
 		0A2869731F4D75B400F3135A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2869711F4D75B400F3135A /* Main.storyboard */; };
@@ -37,6 +40,7 @@
 		0A8A89271F5692CE004A6606 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8A89261F5692CE004A6606 /* ImageCache.m */; };
 		0A8A892A1F56BC14004A6606 /* TwitterTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8A89291F56BC14004A6606 /* TwitterTweet.m */; };
 		0A8A892E1F57FDCE004A6606 /* TweetOptionsFooterBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8A892D1F57FDCE004A6606 /* TweetOptionsFooterBar.xib */; };
+		0A98C70C1F67CD7000E3BDD4 /* DownloaderQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A98C70B1F67CD7000E3BDD4 /* DownloaderQueue.m */; };
 		0ACBACB01F5EEE550034518E /* NewTweetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ACBACAF1F5EEE550034518E /* NewTweetView.xib */; };
 		0ACBACB31F5EF1F50034518E /* NewTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACB21F5EF1F50034518E /* NewTweetView.m */; };
 		0ACBACC91F601DC80034518E /* Tweet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACC71F601DC80034518E /* Tweet+CoreDataProperties.m */; };
@@ -74,8 +78,14 @@
 		0A25240B1F62AD2F00B62720 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
 		0A2524141F6668B900B62720 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		0A2524151F6668B900B62720 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		0A2524181F666D4D00B62720 /* DownloaderQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloaderQueue.h; sourceTree = "<group>"; };
-		0A2524191F666D4D00B62720 /* DownloaderQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloaderQueue.m; sourceTree = "<group>"; };
+		0A25241B1F679D8F00B62720 /* Me+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Me+CoreDataClass.h"; sourceTree = "<group>"; };
+		0A25241C1F679D8F00B62720 /* Me+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Me+CoreDataClass.m"; sourceTree = "<group>"; };
+		0A25241D1F679D8F00B62720 /* Me+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Me+CoreDataProperties.h"; sourceTree = "<group>"; };
+		0A25241E1F679D8F00B62720 /* Me+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "Me+CoreDataProperties.m"; sourceTree = "<group>"; };
+		0A2524231F679DD500B62720 /* Me+MeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Me+MeParser.h"; sourceTree = "<group>"; };
+		0A2524241F679DD500B62720 /* Me+MeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Me+MeParser.m"; sourceTree = "<group>"; };
+		0A2524291F67AC6600B62720 /* Twitter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Twitter.xcdatamodel; sourceTree = "<group>"; };
+		0A25242F1F67C18200B62720 /* Notifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		0A2869651F4D75B400F3135A /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2869691F4D75B400F3135A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A28696B1F4D75B400F3135A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -112,6 +122,8 @@
 		0A8A89281F56BC14004A6606 /* TwitterTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterTweet.h; sourceTree = "<group>"; };
 		0A8A89291F56BC14004A6606 /* TwitterTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterTweet.m; sourceTree = "<group>"; };
 		0A8A892D1F57FDCE004A6606 /* TweetOptionsFooterBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetOptionsFooterBar.xib; sourceTree = "<group>"; };
+		0A98C70A1F67CD7000E3BDD4 /* DownloaderQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloaderQueue.h; sourceTree = "<group>"; };
+		0A98C70B1F67CD7000E3BDD4 /* DownloaderQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloaderQueue.m; sourceTree = "<group>"; };
 		0AB3942F1F614E65005F2F44 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0AB394311F614E90005F2F44 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0ACBACAF1F5EEE550034518E /* NewTweetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewTweetView.xib; sourceTree = "<group>"; };
@@ -227,13 +239,30 @@
 			name = Search;
 			sourceTree = "<group>";
 		};
-		0A2524171F666D2800B62720 /* OperationQueue */ = {
+		0A2524211F679D9500B62720 /* Me */ = {
 			isa = PBXGroup;
 			children = (
-				0A2524181F666D4D00B62720 /* DownloaderQueue.h */,
-				0A2524191F666D4D00B62720 /* DownloaderQueue.m */,
+				0A25241B1F679D8F00B62720 /* Me+CoreDataClass.h */,
+				0A25241C1F679D8F00B62720 /* Me+CoreDataClass.m */,
+				0A25241D1F679D8F00B62720 /* Me+CoreDataProperties.h */,
+				0A25241E1F679D8F00B62720 /* Me+CoreDataProperties.m */,
+				0A2524231F679DD500B62720 /* Me+MeParser.h */,
+				0A2524241F679DD500B62720 /* Me+MeParser.m */,
 			);
-			name = OperationQueue;
+			name = Me;
+			sourceTree = "<group>";
+		};
+		0A2524221F679DA800B62720 /* Tweet */ = {
+			isa = PBXGroup;
+			children = (
+				0ACBACC41F601DC80034518E /* Tweet+CoreDataClass.h */,
+				0ACBACC51F601DC80034518E /* Tweet+CoreDataClass.m */,
+				0ACBACC61F601DC80034518E /* Tweet+CoreDataProperties.h */,
+				0ACBACC71F601DC80034518E /* Tweet+CoreDataProperties.m */,
+				0ACBACCA1F601E8D0034518E /* Tweet+TwitterTweetParser.h */,
+				0ACBACCB1F601E8D0034518E /* Tweet+TwitterTweetParser.m */,
+			);
+			name = Tweet;
 			sourceTree = "<group>";
 		};
 		0A28695C1F4D75B400F3135A = {
@@ -259,7 +288,7 @@
 		0A2869671F4D75B400F3135A /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
-				0A2524171F666D2800B62720 /* OperationQueue */,
+				0A98C7091F67CD5900E3BDD4 /* DownloaderQueue */,
 				0A2524091F62AD0300B62720 /* CoreData */,
 				12125EBD1F61510C0083DA0B /* Model */,
 				0ACBACAE1F5EEE3D0034518E /* NewTweet */,
@@ -324,6 +353,15 @@
 				0A8A89261F5692CE004A6606 /* ImageCache.m */,
 			);
 			name = ProfileImageCache;
+			sourceTree = "<group>";
+		};
+		0A98C7091F67CD5900E3BDD4 /* DownloaderQueue */ = {
+			isa = PBXGroup;
+			children = (
+				0A98C70A1F67CD7000E3BDD4 /* DownloaderQueue.h */,
+				0A98C70B1F67CD7000E3BDD4 /* DownloaderQueue.m */,
+			);
+			name = DownloaderQueue;
 			sourceTree = "<group>";
 		};
 		0ACBACAE1F5EEE3D0034518E /* NewTweet */ = {
@@ -606,6 +644,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A98C70C1F67CD7000E3BDD4 /* DownloaderQueue.m in Sources */,
 				0A2524251F679DD500B62720 /* Me+MeParser.m in Sources */,
 				0A2524051F615FD000B62720 /* Tweet+CoreDataClass.m in Sources */,
 				0A1D43441F4F557D00D6DECD /* UserProfileTweetTableViewCell.m in Sources */,
@@ -629,7 +668,6 @@
 				0A25242A1F67AC6600B62720 /* Twitter.xcdatamodeld in Sources */,
 				0A25240C1F62AD2F00B62720 /* CoreDataController.m in Sources */,
 				0ACBACD31F612C1E0034518E /* TweetsCDHSCVC.m in Sources */,
-				0A25241A1F666D4D00B62720 /* DownloaderQueue.m in Sources */,
 				0A2869921F4D78CC00F3135A /* NavigationHelper.m in Sources */,
 				0A28699E1F4D8F9500F3135A /* FetchFollowingListTVC.m in Sources */,
 				0ACBACC91F601DC80034518E /* Tweet+CoreDataProperties.m in Sources */,
