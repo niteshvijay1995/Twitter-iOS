@@ -7,14 +7,16 @@
 //
 
 #import "AppDelegate.h"
-#import <TwitterKit/TwitterKit.h>
 #import "NavigationHelper.h"
 #import "AppDelegate+MOC.h"
 #import "Tweet+TwitterTweetParser.h"
 #import "TwitterFetcher.h"
-#import "TweetDatabaseAvailability.h"
+#import "CoreDataController.h"
+#import "Notifications.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -28,8 +30,8 @@ static NSString *SUCCESSFULLY_LOGGED_IN_VIEW_CONTROLLER_IDENTIFIER = @"";
     // Override point for customization after application launch.
     [[Twitter sharedInstance] startWithConsumerKey:TWITTER_CONSUMER_KEY consumerSecret:TWITTER_CONSUMER_SECRET];
     TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
-    TWTRSession *lastSession = store.session;
-    if (lastSession) {
+    self.lastSession = store.session;
+    if (self.lastSession) {
         NSLog(@"User already logged in");
         [self navigateToSuccessfullyLoggedinView];
     }
@@ -45,34 +47,66 @@ static NSString *SUCCESSFULLY_LOGGED_IN_VIEW_CONTROLLER_IDENTIFIER = @"";
     [appDelegate.window makeKeyAndVisible];
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-}
-
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-}
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     return [[Twitter sharedInstance] application:app openURL:url options:options];
+}
+
+
+#pragma mark - Core Data
+
+- (NSManagedObjectContext *)managedObjectContext {
+    if (!_managedObjectContext) {
+        _managedObjectContext = [CoreDataController sharedInstance].managedObjectContext;
+    }
+    return _managedObjectContext;
+}
+
+- (void)fetchUserProfile {
+    NSString *userID = self.lastSession.userID;
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
+    NSDictionary *params = @{@"user_id":userID};
+    NSError *clientError;
+    
+    NSURLRequest *request = [client URLRequestWithMethod:@"GET" URL:usersEndPoint parameters:params error:&clientError];
+    
+    if (request) {
+        [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (data) {
+                NSError *jsonError;
+                NSDictionary *userInfo = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+                self.meUser = [Me meWithUserDictionary:userInfo inManagedObjectContext:self.managedObjectContext];
+                [self.managedObjectContext save:NULL];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UserProfileAvailabilityNotification object:self];
+            }
+            else {
+                NSLog(@"Error: %@", connectionError);
+            }
+        }];
+    }
+    else {
+        NSLog(@"Error: %@", clientError);
+    }
+}
+
+- (Me *)meUser {
+    if (!_meUser) {
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Me"];
+        if (self.lastSession) {
+            request.predicate = [NSPredicate predicateWithFormat:@"id = %@", self.lastSession.userID];
+            NSError *error;
+            NSArray *matches = [self.managedObjectContext executeFetchRequest:request error:&error];
+            if (!matches || error || [matches count] > 1) {
+                NSLog(@"Error in fetching user profile from core data");
+            }
+            else if ([matches count]){
+                self.meUser = [matches firstObject];
+            }
+            else {
+                [self fetchUserProfile];
+            }
+        }
+    }
+    return _meUser;
 }
 
 @end

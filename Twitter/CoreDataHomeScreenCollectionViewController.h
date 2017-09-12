@@ -16,5 +16,6 @@
 - (void)performFetch;
 
 @property BOOL debug;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end

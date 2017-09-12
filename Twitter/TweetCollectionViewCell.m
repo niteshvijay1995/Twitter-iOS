@@ -106,6 +106,7 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
 
 - (void)configureCellFromTweet:(NSDictionary *)tweet
 {
+    self.tweetCellViewWidthConstraint.constant = [self screenWidth] - (2*LEFT_RIGHT_CELL_INSET);
     NSDictionary *user;
     if ([TwitterTweet isRetweetTweet:tweet]) {
         
@@ -140,7 +141,35 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     
 }
 
+- (void)configureStaticCellFromCoreDataTweet:(Tweet *)tweet {
+    self.tweetCellViewWidthConstraint.constant = [self screenWidth] - (2*LEFT_RIGHT_CELL_INSET);
+    self.tweetLabel.attributedText = tweet.text;
+    if (tweet.isRetweet) {
+        self.retweetLabel.text = [tweet.retweetedBy stringByAppendingString:@" retweeted"];
+    }
+    self.fullNameLabel.text = tweet.userFullName;
+    self.profileImageView.image = [UIImage imageNamed:@"default_profile_normal"];
+    if (tweet.isRetweet)  {
+        self.retweetLabel.hidden = NO;
+        self.profileImage_RetweetLabelContraint.priority = UILayoutPriorityDefaultHigh;
+        self.profileImage_TopMarginConstraint.priority = UILayoutPriorityDefaultLow;
+    }
+    else {
+        self.retweetLabel.hidden = YES;
+        self.profileImage_RetweetLabelContraint.priority = UILayoutPriorityDefaultLow;
+        self.profileImage_TopMarginConstraint.priority = UILayoutPriorityDefaultHigh;
+    }
+    [self.mediaImageView removeConstraint:self.mediaImageHeightConstraint];
+    if (tweet.isMediaAttached) {
+        [self.mediaImageView addConstraint:self.mediaImageHeightConstraint];
+    }
+    else {
+        [self.mediaImageView autoSetDimension:ALDimensionHeight toSize:0];
+    }
+}
+
 - (void)configureCellFromCoreDataTweet:(Tweet *)tweet {
+    self.tweetCellViewWidthConstraint.constant = [self screenWidth] - (2*LEFT_RIGHT_CELL_INSET);
     self.tweetLabel.attributedText = tweet.text;
     if (tweet.isRetweet) {
         self.retweetLabel.text = [tweet.retweetedBy stringByAppendingString:@" retweeted"];

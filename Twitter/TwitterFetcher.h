@@ -18,6 +18,7 @@
 #define TWITTER_USER_DESCRIPTION @"description"
 #define TWITTER_USER_VERIFIED_FLAG @"verified"
 #define TWITTER_USER_PROFILE_IMAGE @"profile_image_url_https"
+#define TWITTER_USER_ID @"id"
 
 //Keys in Tweet Dictionary
 #define TWITTER_TWEET_USER @"user"

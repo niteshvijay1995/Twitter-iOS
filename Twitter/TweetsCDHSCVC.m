@@ -9,14 +9,15 @@
 #import "TweetsCDHSCVC.h"
 #import "Tweet+CoreDataClass.h"
 #import "TweetCollectionViewCell.h"
-#import "TweetDatabaseAvailability.h"
 #import <TwitterKit/TwitterKit.h>
 #import "TwitterFetcher.h"
 #import "TwitterTweet.h"
 #import "TwitterUser.h"
 #import "CoreDataController.h"
+#import "AppDelegate.h"
+#import "Me+MeParser.h"
 
-#define maxTweetCountToFetch @"50"
+#define maxTweetCountToFetch @"200"
 
 @interface TweetsCDHSCVC()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *profileImageButton;
@@ -28,60 +29,24 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    ((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1, 1);
     self.debug = YES;
     self.managedObjectContext = [CoreDataController sharedInstance].managedObjectContext;
     
     [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(startHomeTimelineFetch:) userInfo:nil repeats:YES];
-    //[self startHomeTimelineFetch];
+    [self startHomeTimelineFetch];
     
     [self setProfileImage];
 }
 
 - (void)setProfileImage {
-    TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
-    NSString *userID = store.session.userID;
-    TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
-    NSDictionary *params = @{@"user_id":userID};
-    NSError *clientError;
-    
-    NSURLRequest *request = [client URLRequestWithMethod:@"GET" URL:usersEndPoint parameters:params error:&clientError];
-    
-    if (request) {
-        dispatch_queue_t fetchUserInfoQ = dispatch_queue_create("User Info Fetcher", NULL);
-        dispatch_async(fetchUserInfoQ, ^{
-            [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                if (data) {
-                    NSError *jsonError;
-                    NSDictionary *userInfo = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-                    NSURL *profileImageUrl = [TwitterUser getProfileImageUrlForUser:userInfo];
-                    NSData * imageData = [[NSData alloc] initWithContentsOfURL:profileImageUrl];
-                    UIImage *profileImage = [UIImage imageWithData:imageData];
-                    profileImage = [profileImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-                    UIButton *imageButton = [[UIButton alloc] init];
-                    imageButton.frame = CGRectMake(0, 0,32, 32);
-                    [imageButton setImage:profileImage forState:UIControlStateNormal];
-                    imageButton.layer.masksToBounds = YES;
-                    imageButton.clipsToBounds = YES;
-                    imageButton.layer.cornerRadius = 0.5 * imageButton.bounds.size.height;
-                    self.profileImageButton.customView = imageButton;
-                }
-                else {
-                    NSLog(@"Error: %@", connectionError);
-                }
-            }];
-        });
-    }
-    else {
-        NSLog(@"Error: %@", clientError);
-    }
-    
+    Me *meUser = ((AppDelegate *)[UIApplication sharedApplication].delegate).meUser;
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     _managedObjectContext = managedObjectContext;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tweet"];
+    //request.fetchLimit = 30;
     request.predicate = nil;
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"id" ascending:NO selector:@selector(localizedStandardCompare:)]];
     
@@ -93,16 +58,20 @@ static NSString * const reuseIdentifier = @"TweetCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TweetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    NSLog(@"Configuring cell at indexPath - %@",indexPath);
     Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
     [cell configureCellFromCoreDataTweet:tweet];
-    NSLog(@"Configuration Done");
     return cell;
 }
 
 - (void)startHomeTimelineFetch:(NSTimer *)timer {
     [self startHomeTimelineFetch];
+}
+
+- (void)refreshHomeScreen {
+    if (!self.refreshControl.refreshing) {
+        [self startHomeTimelineFetch];
+    }
 }
 
 - (void)startHomeTimelineFetch {
@@ -129,15 +98,18 @@ static NSString * const reuseIdentifier = @"TweetCell";
                         [Tweet laodTweetsFromTweetArray:tweets intoManagedObjectContext:context];
                         [context save:NULL];
                     }];
+                    [self.refreshControl endRefreshing];
                 }
             }
             else {
                 NSLog(@"Error: %@", connectionError);
+                [self.refreshControl endRefreshing];
             }
         }];
     }
     else {
         NSLog(@"Error: %@", clientError);
+        [self.refreshControl endRefreshing];
     }
 }
 
