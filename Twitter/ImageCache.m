@@ -39,10 +39,9 @@ static ImageCache *sharedInstance;
 
 - (void)cacheImage:(UIImage *)image forKey:(NSString *)key {
     if (image != nil && key != nil) {
-        UIImage *image = [self.imageCache objectForKey:key];
-        if (!image)
+        UIImage *imageFromCache = [self.imageCache objectForKey:key];
+        if (!imageFromCache)
         {
-            UIImage *image = [self.imageCache objectForKey:key];
             [self.imageCache setObject:image forKey:key];
             NSOperationQueue *operationQ = [DownloaderQueue sharedInstance].getImageDownloaderQueue;
             [operationQ addOperationWithBlock:^{
