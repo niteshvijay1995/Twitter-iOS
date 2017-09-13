@@ -110,10 +110,23 @@ static NSString * const reuseIdentifier = @"TweetCell";
     [self.collectionView reloadData];
 }
 
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(nonnull UICollectionViewCell *)cell forItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if (indexPath.item == [self collectionView:self.collectionView numberOfItemsInSection:0] - 1) {
+        NSLog(@"Fetching More Data");
+        [self fetchMoreTweets];
+    }
+}
+
+#pragma mark - Abstract methods
 - (Tweet *)getTweetForIndexPath:(NSIndexPath *)indexPath {
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
     return nil;
+}
+
+- (void)fetchMoreTweets {
+    // Override in subclass to fetch more tweets on reaching end.
+    // setFetchTweetWaitingFlagTo No on completed
 }
 
 @end
