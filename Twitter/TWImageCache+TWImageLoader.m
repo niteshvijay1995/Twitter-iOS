@@ -17,7 +17,7 @@
     NSError *error;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     if (!matches || error || [matches count] > 1) {
-        NSLog(@"Error in TWImageCache");
+        NSLog(@"Error in writing TWImageCache");
         return nil;
     } else if ([matches count]){
         twImage = [matches firstObject];
@@ -25,12 +25,8 @@
         twImage = [NSEntityDescription insertNewObjectForEntityForName:@"TWImageCache" inManagedObjectContext:context];
         twImage.url = url;
     }
+    NSString *imagePath = [self imagePathForUrl:url];
     NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths objectAtIndex:0];
-    NSData *urlData = [url dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *imagePath = [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",[urlData base64EncodedStringWithOptions:0]]];
-    NSLog(@"Image Path - %@",imagePath);
     [imageData writeToFile:imagePath atomically:NO];
     twImage.filePath = imagePath;
     [context save:NULL];
@@ -44,12 +40,23 @@
     NSError *error;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     if (!matches || error || [matches count] > 1) {
-        NSLog(@"Error in TWImageCache");
+        NSLog(@"Error in reading TWImageCache");
     } else if ([matches count]){
         TWImageCache *twImage = [matches firstObject];
         image = [UIImage imageWithContentsOfFile:twImage.filePath];
     }
     return image;
+}
+
++ (NSString *)encodeUrl:(NSString *)url {
+    NSData *urlData = [url dataUsingEncoding:NSUTF8StringEncoding];
+    return [urlData base64EncodedStringWithOptions:0];
+}
+
++ (NSString *)imagePathForUrl:(NSString *)url {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    return [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",[self encodeUrl:url]]];
 }
 
 @end
