@@ -50,11 +50,12 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSLog(@"Text changed - %@",searchText);
-    self.request.fetchLimit = 30;
     NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"userFullName BEGINSWITH[c] %@",searchText];
     NSPredicate *secondNamePredicate = [NSPredicate predicateWithFormat:@"userFullName contains[c] %@",[@" " stringByAppendingString:searchText]];
     self.request.predicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[namePredicate, secondNamePredicate]];
-    
+    if ([searchText isEqualToString:@""]) {
+        self.request.predicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[namePredicate]];
+    }
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest: self.request managedObjectContext:self.tweeteManagedObjectContext sectionNameKeyPath:nil cacheName:nil];
 }
 
