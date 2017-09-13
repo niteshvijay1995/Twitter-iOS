@@ -7,7 +7,7 @@
 //
 
 #import "SearchViewController.h"
-#import "TweetsCDHSCVC.h"
+#import "HomeScreenCDTCVC.h"
 #import "CoreDataController.h"
 #import "TweetCollectionViewCell.h"
 

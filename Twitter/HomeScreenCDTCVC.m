@@ -23,12 +23,12 @@
 
 #define maxTweetCountToFetch @"200"
 
-@interface TweetsCDHSCVC()
+@interface HomeScreenCDTCVC()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *profileImageButton;
 
 @end
 
-@implementation TweetsCDHSCVC
+@implementation HomeScreenCDTCVC
 
 - (void)awakeFromNib {
     [super awakeFromNib];

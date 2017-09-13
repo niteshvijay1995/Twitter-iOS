@@ -32,8 +32,8 @@
         <!--Home-->
         <scene sceneID="WXw-FM-KsJ">
             <objects>
-                <collectionViewController id="8Vv-oL-Q8F" customClass="TweetsCDHSCVC" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="s2v-q3-Nhe">
+                <collectionViewController id="8Vv-oL-Q8F" customClass="HomeScreenCDTCVC" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="s2v-q3-Nhe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
