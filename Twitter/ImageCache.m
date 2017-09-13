@@ -9,6 +9,9 @@
 //  Designed on the principle Singleton Design Pattern
 
 #import "ImageCache.h"
+#import "TWImageCache+TWImageLoader.h"
+#import "CoreDataController.h"
+#import "DownloaderQueue.h"
 
 static ImageCache *sharedInstance;
 
@@ -37,10 +40,22 @@ static ImageCache *sharedInstance;
 - (void)cacheImage:(UIImage *)image forKey:(NSString *)key {
     if (image != nil && key != nil) {
         [self.imageCache setObject:image forKey:key];
+        NSOperationQueue *operationQ = [DownloaderQueue sharedInstance].getImageDownloaderQueue;
+        [operationQ addOperationWithBlock:^{
+            [TWImageCache saveImage:image withUrl:key inManagedObjectContext:[CoreDataController sharedInstance].managedObjectContext];
+        }];
     }
 }
 
 - (UIImage *)getCachedImageForKey:(NSString *)key {
-    return [self.imageCache objectForKey:key];
+    UIImage *image = [self.imageCache objectForKey:key];
+    NSLog(@"%@", key);
+    if (!image) {
+        image = [TWImageCache loadImageFromUrl:key fromManagedObjectContext:[CoreDataController sharedInstance].managedObjectContext];
+        if (image) {
+            [self cacheImage:image forKey:key];
+        }
+    }
+    return image;
 }
 @end
