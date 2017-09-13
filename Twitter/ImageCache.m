@@ -39,17 +39,21 @@ static ImageCache *sharedInstance;
 
 - (void)cacheImage:(UIImage *)image forKey:(NSString *)key {
     if (image != nil && key != nil) {
-        [self.imageCache setObject:image forKey:key];
-        NSOperationQueue *operationQ = [DownloaderQueue sharedInstance].getImageDownloaderQueue;
-        [operationQ addOperationWithBlock:^{
-            [TWImageCache saveImage:image withUrl:key inManagedObjectContext:[CoreDataController sharedInstance].managedObjectContext];
-        }];
+        UIImage *image = [self.imageCache objectForKey:key];
+        if (!image)
+        {
+            UIImage *image = [self.imageCache objectForKey:key];
+            [self.imageCache setObject:image forKey:key];
+            NSOperationQueue *operationQ = [DownloaderQueue sharedInstance].getImageDownloaderQueue;
+            [operationQ addOperationWithBlock:^{
+                [TWImageCache saveImage:image withUrl:key inManagedObjectContext:[CoreDataController sharedInstance].managedObjectContext];
+            }];
+        }
     }
 }
 
 - (UIImage *)getCachedImageForKey:(NSString *)key {
     UIImage *image = [self.imageCache objectForKey:key];
-    NSLog(@"%@", key);
     if (!image) {
         image = [TWImageCache loadImageFromUrl:key fromManagedObjectContext:[CoreDataController sharedInstance].managedObjectContext];
         if (image) {
