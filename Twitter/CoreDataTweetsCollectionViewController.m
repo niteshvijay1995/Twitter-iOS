@@ -15,50 +15,10 @@
 
 @property (strong, nonatomic) NSBlockOperation *blockOperation;
 @property BOOL shouldReloadCollectionView;
-@property (strong, nonatomic) NSCache *portraitCellSizeCache;       // cell size for a tweet(id)
-@property (strong, nonatomic) NSCache *landscapeCellSizeCache;
+
 @end
 
 @implementation CoreDataTweetsCollectionViewController
-
-static NSString * const reuseIdentifier = @"TweetCell";
-
-- (NSCache *)portraitCellSizeCache {
-    if (!_portraitCellSizeCache) {
-        _portraitCellSizeCache = [[NSCache alloc] init];
-    }
-    return _portraitCellSizeCache;
-}
-
-- (NSCache *)landscapeCellSizeCache {
-    if (!_landscapeCellSizeCache) {
-        _landscapeCellSizeCache = [[NSCache alloc] init];
-    }
-    return _landscapeCellSizeCache;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self.collectionView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:NULL] forCellWithReuseIdentifier:reuseIdentifier];
-    //((UICollectionViewFlowLayout *)self.collectionViewLayout).estimatedItemSize = CGSizeMake(1, 1);
-    
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.tintColor = twitterBlueColor;
-    [self.refreshControl addTarget:self action:@selector(startRefresh) forControlEvents:UIControlEventValueChanged];
-    [self.collectionView addSubview:self.refreshControl];
-    self.collectionView.alwaysBounceVertical = YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)startRefresh {
-    [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
-}
 
 #pragma mark - CoreData
 
@@ -99,6 +59,10 @@ static NSString * const reuseIdentifier = @"TweetCell";
     }
 }
 
+- (Tweet *)getTweetForIndexPath:(NSIndexPath *)indexPath {
+    return [self.fetchedResultsController objectAtIndexPath:indexPath];
+}
+
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -114,45 +78,6 @@ static NSString * const reuseIdentifier = @"TweetCell";
         items = [sectionInfo numberOfObjects];
     }
     return items;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TweetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    [cell configureCellFromCoreDataTweet:tweet];
-    return cell;
-}
-
-#pragma mark <UICollectionViewDelegate>
-
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    id size;
-    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
-        size = [self.portraitCellSizeCache objectForKey:tweet.id];
-    }
-    else {
-        size = [self.landscapeCellSizeCache objectForKey:tweet.id];
-    }
-    if (size) {
-        return [size CGSizeValue];
-    }
-    TweetCollectionViewCell *dummyCell = [[NSBundle mainBundle] loadNibNamed:@"TweetCell" owner:self options:nil].firstObject;
-    [dummyCell configureStaticCellFromCoreDataTweet:tweet];
-    CGSize contraintSize = CGSizeMake(self.collectionView.bounds.size.width - self.collectionView.contentInset.left - self.collectionView.contentInset.right, CGFLOAT_MAX);
-    CGSize resSize = [dummyCell systemLayoutSizeFittingSize:contraintSize];
-    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
-        [self.portraitCellSizeCache setObject:[NSValue valueWithCGSize:resSize] forKey:tweet.id];
-    }
-    else {
-        [self.landscapeCellSizeCache setObject:[NSValue valueWithCGSize:resSize] forKey:tweet.id];
-    }
-    NSLog(@"%f %f",resSize.width, resSize.height);
-    return resSize;
 }
 
 #pragma mark - <NSFetchedResultsControllerDelegate>
@@ -251,13 +176,6 @@ static NSString * const reuseIdentifier = @"TweetCell";
             [self.blockOperation start];
         } completion:nil];
     }
-}
-
-#pragma mark <UICollectionViewDelegateFlowLayout>
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView reloadData];
 }
 
 @end

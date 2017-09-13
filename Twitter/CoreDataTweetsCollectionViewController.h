@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "TweetsCollectionViewController.h"
 
-@interface CoreDataTweetsCollectionViewController : UICollectionViewController
+@interface CoreDataTweetsCollectionViewController : TweetsCollectionViewController
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 - (void)performFetch;
 
 @property BOOL debug;
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
