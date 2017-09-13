@@ -1,17 +1,17 @@
+////
+////  AppDelegate+MOC.h
+////  Twitter
+////
+////  Created by nitesh.vi on 07/09/17.
+////  Copyright © 2017 TNET. All rights reserved.
+////
 //
-//  AppDelegate+MOC.h
-//  Twitter
+//#import "AppDelegate.h"
 //
-//  Created by nitesh.vi on 07/09/17.
-//  Copyright © 2017 TNET. All rights reserved.
+//@interface AppDelegate (MOC)
 //
-
-#import "AppDelegate.h"
-
-@interface AppDelegate (MOC)
-
-- (void)saveContext:(NSManagedObjectContext *)managedObjectContext;
-
-- (NSManagedObjectContext *)createMainQueueManagedObjectContext;
-
-@end
+//- (void)saveContext:(NSManagedObjectContext *)managedObjectContext;
+//
+////- (NSManagedObjectContext *)createMainQueueManagedObjectContext;
+//
+//@end

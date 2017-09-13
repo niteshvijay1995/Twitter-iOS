@@ -196,6 +196,18 @@
 			name = TweetsCollectionViewController;
 			sourceTree = "<group>";
 		};
+		0A00469C1F6958320041E226 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				0ACBACD41F6132570034518E /* MOC-Deprecated */,
+				0A2869931F4D7D6D00F3135A /* HomeScreenCollectionViewController.h */,
+				0A2869941F4D7D6D00F3135A /* HomeScreenCollectionViewController.m */,
+				0A8A891D1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.h */,
+				0A8A891E1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.m */,
+			);
+			name = Deprecated;
+			sourceTree = "<group>";
+		};
 		0A1D43351F4EAC1400D6DECD /* FollowingList */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +327,7 @@
 		0A2869671F4D75B400F3135A /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				0A00469C1F6958320041E226 /* Deprecated */,
 				0A0046981F6949C10041E226 /* TweetsCollectionViewController */,
 				0A98C7091F67CD5900E3BDD4 /* DownloaderQueue */,
 				0A2524091F62AD0300B62720 /* CoreData */,
@@ -359,11 +372,10 @@
 		0A429DC81F53FB64005C856A /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				0ACBACD01F602E140034518E /* CoreData */,
-				0A2869931F4D7D6D00F3135A /* HomeScreenCollectionViewController.h */,
-				0A2869941F4D7D6D00F3135A /* HomeScreenCollectionViewController.m */,
-				0A8A891D1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.h */,
-				0A8A891E1F557FC0004A6606 /* HomeScreenTweetFetcherCVC.m */,
+				0ACBACCD1F602E0D0034518E /* CoreDataTweetsCollectionViewController.h */,
+				0ACBACCE1F602E0D0034518E /* CoreDataTweetsCollectionViewController.m */,
+				0ACBACD11F612C1E0034518E /* HomeScreenCDTCVC.h */,
+				0ACBACD21F612C1E0034518E /* HomeScreenCDTCVC.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -409,25 +421,13 @@
 			name = NewTweet;
 			sourceTree = "<group>";
 		};
-		0ACBACD01F602E140034518E /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				0ACBACD41F6132570034518E /* MOC-Depricated */,
-				0ACBACCD1F602E0D0034518E /* CoreDataTweetsCollectionViewController.h */,
-				0ACBACCE1F602E0D0034518E /* CoreDataTweetsCollectionViewController.m */,
-				0ACBACD11F612C1E0034518E /* HomeScreenCDTCVC.h */,
-				0ACBACD21F612C1E0034518E /* HomeScreenCDTCVC.m */,
-			);
-			name = CoreData;
-			sourceTree = "<group>";
-		};
-		0ACBACD41F6132570034518E /* MOC-Depricated */ = {
+		0ACBACD41F6132570034518E /* MOC-Deprecated */ = {
 			isa = PBXGroup;
 			children = (
 				0ACBACD51F6132A20034518E /* AppDelegate+MOC.h */,
 				0ACBACD61F6132A20034518E /* AppDelegate+MOC.m */,
 			);
-			name = "MOC-Depricated";
+			name = "MOC-Deprecated";
 			sourceTree = "<group>";
 		};
 		12125EBD1F61510C0083DA0B /* Model */ = {
