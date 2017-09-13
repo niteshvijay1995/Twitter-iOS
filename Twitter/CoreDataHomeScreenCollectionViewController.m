@@ -7,7 +7,6 @@
 //
 
 #import "CoreDataHomeScreenCollectionViewController.h"
-#import "NewTweetView.h"
 #import "Tweet+CoreDataProperties.h"
 #import "TweetCollectionViewCell.h"
 #import "TwitterFetcher.h"
@@ -46,7 +45,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor = twitterBlueColor;
-    [self.refreshControl addTarget:self action:@selector(refreshHomeScreen) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(startRefresh) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     self.collectionView.alwaysBounceVertical = YES;
 }
@@ -54,6 +53,11 @@ static NSString * const reuseIdentifier = @"TweetCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)startRefresh {
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
 #pragma mark - CoreData
@@ -110,6 +114,15 @@ static NSString * const reuseIdentifier = @"TweetCell";
         items = [sectionInfo numberOfObjects];
     }
     return items;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TweetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+    Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [cell configureCellFromCoreDataTweet:tweet];
+    return cell;
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -242,9 +255,9 @@ static NSString * const reuseIdentifier = @"TweetCell";
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
 
-- (IBAction)composeTweet:(id)sender {
-    NewTweetView *newTweetViewController = [[NewTweetView alloc] init];
-    [self presentViewController:newTweetViewController animated:YES completion:nil];
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView reloadData];
 }
 
 @end

@@ -63,7 +63,7 @@
                         <barButtonItem key="leftBarButtonItem" title="." style="plain" id="5pz-6Y-epg"/>
                         <barButtonItem key="rightBarButtonItem" image="quill" id="7Ny-hh-ddN">
                             <connections>
-                                <action selector="composeTweet:" destination="8Vv-oL-Q8F" id="Zb4-u1-hJg"/>
+                                <action selector="composeTweet:" destination="8Vv-oL-Q8F" id="Wfn-SA-qFD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

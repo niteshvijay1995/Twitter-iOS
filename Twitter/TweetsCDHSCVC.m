@@ -19,6 +19,7 @@
 #import "DownloaderQueue.h"
 #import "ImageCache.h"
 #import "Notifications.h"
+#import "NewTweetView.h"
 
 #define maxTweetCountToFetch @"200"
 
@@ -97,20 +98,11 @@
 
 static NSString * const reuseIdentifier = @"TweetCell";
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TweetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    Tweet *tweet = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-    [cell configureCellFromCoreDataTweet:tweet];
-    return cell;
-}
-
 - (void)startHomeTimelineFetch:(NSTimer *)timer {
     [self startHomeTimelineFetch];
 }
 
-- (void)refreshHomeScreen {
+- (void)startRefresh {
     if (!self.refreshControl.refreshing) {
         [self startHomeTimelineFetch];
     }
@@ -155,9 +147,9 @@ static NSString * const reuseIdentifier = @"TweetCell";
     }
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView reloadData];
+- (IBAction)composeTweet:(id)sender {
+    NewTweetView *newTweetViewController = [[NewTweetView alloc] init];
+    [self presentViewController:newTweetViewController animated:YES completion:nil];
 }
 
 @end
