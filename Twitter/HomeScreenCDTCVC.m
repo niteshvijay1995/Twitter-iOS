@@ -6,7 +6,7 @@
 //  Copyright © 2017 TNET. All rights reserved.
 //
 
-#import "TweetsCDHSCVC.h"
+#import "HomeScreenCDTCVC.h"
 #import "Tweet+CoreDataClass.h"
 #import "TweetCollectionViewCell.h"
 #import <TwitterKit/TwitterKit.h>

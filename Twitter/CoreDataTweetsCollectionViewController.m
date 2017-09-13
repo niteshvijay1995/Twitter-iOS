@@ -6,12 +6,12 @@
 //  Copyright © 2017 TNET. All rights reserved.
 //
 
-#import "CoreDataHomeScreenCollectionViewController.h"
+#import "CoreDataTweetsCollectionViewController.h"
 #import "Tweet+CoreDataProperties.h"
 #import "TweetCollectionViewCell.h"
 #import "TwitterFetcher.h"
 
-@interface CoreDataHomeScreenCollectionViewController () <UICollectionViewDelegate>
+@interface CoreDataTweetsCollectionViewController () <UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSBlockOperation *blockOperation;
 @property BOOL shouldReloadCollectionView;
@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSCache *landscapeCellSizeCache;
 @end
 
-@implementation CoreDataHomeScreenCollectionViewController
+@implementation CoreDataTweetsCollectionViewController
 
 static NSString * const reuseIdentifier = @"TweetCell";
 

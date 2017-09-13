@@ -48,8 +48,8 @@
 		0ACBACB31F5EF1F50034518E /* NewTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACB21F5EF1F50034518E /* NewTweetView.m */; };
 		0ACBACC91F601DC80034518E /* Tweet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACC71F601DC80034518E /* Tweet+CoreDataProperties.m */; };
 		0ACBACCC1F601E8D0034518E /* Tweet+TwitterTweetParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACCB1F601E8D0034518E /* Tweet+TwitterTweetParser.m */; };
-		0ACBACCF1F602E0D0034518E /* CoreDataHomeScreenCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACCE1F602E0D0034518E /* CoreDataHomeScreenCollectionViewController.m */; };
-		0ACBACD31F612C1E0034518E /* TweetsCDHSCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACD21F612C1E0034518E /* TweetsCDHSCVC.m */; };
+		0ACBACCF1F602E0D0034518E /* CoreDataTweetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACCE1F602E0D0034518E /* CoreDataTweetsCollectionViewController.m */; };
+		0ACBACD31F612C1E0034518E /* HomeScreenCDTCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACD21F612C1E0034518E /* HomeScreenCDTCVC.m */; };
 		0ACBACD71F6132A20034518E /* AppDelegate+MOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBACD61F6132A20034518E /* AppDelegate+MOC.m */; };
 		65CEC2F4FF20E4E6400C7382 /* libPods-TwitterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E023468DAFF4BCB4D9525D8D /* libPods-TwitterTests.a */; };
 		7F2B6538DAA3E3776144586C /* libPods-Twitter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010AF09E2AA118E4AEB005E /* libPods-Twitter.a */; };
@@ -144,10 +144,10 @@
 		0ACBACC71F601DC80034518E /* Tweet+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+CoreDataProperties.m"; sourceTree = "<group>"; };
 		0ACBACCA1F601E8D0034518E /* Tweet+TwitterTweetParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tweet+TwitterTweetParser.h"; sourceTree = "<group>"; };
 		0ACBACCB1F601E8D0034518E /* Tweet+TwitterTweetParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tweet+TwitterTweetParser.m"; sourceTree = "<group>"; };
-		0ACBACCD1F602E0D0034518E /* CoreDataHomeScreenCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHomeScreenCollectionViewController.h; sourceTree = "<group>"; };
-		0ACBACCE1F602E0D0034518E /* CoreDataHomeScreenCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHomeScreenCollectionViewController.m; sourceTree = "<group>"; };
-		0ACBACD11F612C1E0034518E /* TweetsCDHSCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetsCDHSCVC.h; sourceTree = "<group>"; };
-		0ACBACD21F612C1E0034518E /* TweetsCDHSCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetsCDHSCVC.m; sourceTree = "<group>"; };
+		0ACBACCD1F602E0D0034518E /* CoreDataTweetsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTweetsCollectionViewController.h; sourceTree = "<group>"; };
+		0ACBACCE1F602E0D0034518E /* CoreDataTweetsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTweetsCollectionViewController.m; sourceTree = "<group>"; };
+		0ACBACD11F612C1E0034518E /* HomeScreenCDTCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenCDTCVC.h; sourceTree = "<group>"; };
+		0ACBACD21F612C1E0034518E /* HomeScreenCDTCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenCDTCVC.m; sourceTree = "<group>"; };
 		0ACBACD51F6132A20034518E /* AppDelegate+MOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+MOC.h"; sourceTree = "<group>"; };
 		0ACBACD61F6132A20034518E /* AppDelegate+MOC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MOC.m"; sourceTree = "<group>"; };
 		39802BB1F61BC44163C792E2 /* Pods-TwitterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterTests/Pods-TwitterTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -400,10 +400,10 @@
 			isa = PBXGroup;
 			children = (
 				0ACBACD41F6132570034518E /* MOC-Depricated */,
-				0ACBACCD1F602E0D0034518E /* CoreDataHomeScreenCollectionViewController.h */,
-				0ACBACCE1F602E0D0034518E /* CoreDataHomeScreenCollectionViewController.m */,
-				0ACBACD11F612C1E0034518E /* TweetsCDHSCVC.h */,
-				0ACBACD21F612C1E0034518E /* TweetsCDHSCVC.m */,
+				0ACBACCD1F602E0D0034518E /* CoreDataTweetsCollectionViewController.h */,
+				0ACBACCE1F602E0D0034518E /* CoreDataTweetsCollectionViewController.m */,
+				0ACBACD11F612C1E0034518E /* HomeScreenCDTCVC.h */,
+				0ACBACD21F612C1E0034518E /* HomeScreenCDTCVC.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -692,7 +692,7 @@
 				0A25240C1F62AD2F00B62720 /* CoreDataController.m in Sources */,
 				0A98C7221F69009E00E3BDD4 /* TWImageCache+CoreDataProperties.m in Sources */,
 				0A98C7251F6901D500E3BDD4 /* TWImageCache+TWImageLoader.m in Sources */,
-				0ACBACD31F612C1E0034518E /* TweetsCDHSCVC.m in Sources */,
+				0ACBACD31F612C1E0034518E /* HomeScreenCDTCVC.m in Sources */,
 				0A98C7211F69009E00E3BDD4 /* TWImageCache+CoreDataClass.m in Sources */,
 				0A2869921F4D78CC00F3135A /* NavigationHelper.m in Sources */,
 				0A28699E1F4D8F9500F3135A /* FetchFollowingListTVC.m in Sources */,
@@ -700,7 +700,7 @@
 				0A2524261F67AB6100B62720 /* Me+CoreDataClass.m in Sources */,
 				0ACBACCC1F601E8D0034518E /* Tweet+TwitterTweetParser.m in Sources */,
 				0A2869981F4D87BD00F3135A /* FollowingTableViewController.m in Sources */,
-				0ACBACCF1F602E0D0034518E /* CoreDataHomeScreenCollectionViewController.m in Sources */,
+				0ACBACCF1F602E0D0034518E /* CoreDataTweetsCollectionViewController.m in Sources */,
 				0A2869A41F4DA5DA00F3135A /* CustomUserDetailCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

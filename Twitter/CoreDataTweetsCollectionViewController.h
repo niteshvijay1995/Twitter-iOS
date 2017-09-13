@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface CoreDataHomeScreenCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate>
+@interface CoreDataTweetsCollectionViewController : UICollectionViewController
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 

@@ -6,9 +6,9 @@
 //  Copyright © 2017 TNET. All rights reserved.
 //
 
-#import "CoreDataHomeScreenCollectionViewController.h"
+#import "CoreDataTweetsCollectionViewController.h"
 
-@interface TweetsCDHSCVC : CoreDataHomeScreenCollectionViewController
+@interface HomeScreenCDTCVC : CoreDataTweetsCollectionViewController
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
