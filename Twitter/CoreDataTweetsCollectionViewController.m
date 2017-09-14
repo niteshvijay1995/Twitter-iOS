@@ -1,4 +1,4 @@
-//
+///
 //  CoreDataHomeScreenCollectionViewController.m
 //  Twitter
 //
@@ -38,14 +38,13 @@
     } else {
         if (self.debug) NSLog(@"[%@ %@] no NSFetchedResultsController (yet?)", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     }
-    //[self.collectionView reloadData];
+    [self.collectionView reloadData];
 }
 
 - (void)setFetchedResultsController:(NSFetchedResultsController *)newfrc {
     NSFetchedResultsController *oldfrc = _fetchedResultsController;
     if (newfrc != oldfrc) {
         _fetchedResultsController = newfrc;
-        newfrc.delegate = self;
         if ((!self.title || [self.title isEqualToString:oldfrc.fetchRequest.entity.name]) && (!self.navigationController || !self.navigationItem.title)) {
             self.title = newfrc.fetchRequest.entity.name;
         }
@@ -56,6 +55,7 @@
             if (self.debug) NSLog(@"[%@ %@] reset to nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
             [self.collectionView reloadData];
         }
+        newfrc.delegate = self;
     }
 }
 
@@ -120,6 +120,7 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
+    NSLog(@"DidChangeObject type:%lu",(unsigned long)type);
     __weak UICollectionView *collectionView = self.collectionView;
     switch (type) {
         case NSFetchedResultsChangeInsert: {
@@ -128,6 +129,7 @@
                     self.shouldReloadCollectionView = YES;
                 } else {
                     [self.blockOperation addExecutionBlock:^{
+                        NSLog(@"%@", collectionView);
                         [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
                     }];
                 }
@@ -150,6 +152,7 @@
             
         case NSFetchedResultsChangeUpdate: {
             [self.blockOperation addExecutionBlock:^{
+                //FIX-ME
                 [collectionView reloadItemsAtIndexPaths:@[indexPath]];
             }];
             break;
@@ -169,6 +172,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    NSLog(@"DidChangeContent");
     if (self.shouldReloadCollectionView) {
         [self.collectionView reloadData];
     } else {
