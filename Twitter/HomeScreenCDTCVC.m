@@ -96,8 +96,6 @@
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest: request managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
 }
 
-static NSString * const reuseIdentifier = @"TweetCell";
-
 - (void)startHomeTimelineFetch:(NSTimer *)timer {
     [self startHomeTimelineFetch];
 }
