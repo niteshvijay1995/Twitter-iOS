@@ -53,6 +53,10 @@ static NSString * const reuseIdentifier = @"TweetCell";
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
+- (void)disableRefreshControl {
+    [self.refreshControl removeFromSuperview];
+}
+
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

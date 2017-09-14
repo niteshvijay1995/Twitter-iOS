@@ -13,4 +13,6 @@
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
+- (void)disableRefreshControl;
+
 @end
