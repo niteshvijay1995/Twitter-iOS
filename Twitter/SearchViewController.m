@@ -40,6 +40,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    [self.searchBar becomeFirstResponder];
     self.searchBar.delegate = self;
     self.searchResultsCVC = [[self childViewControllers] firstObject];
     [self.searchResultsCVC disableRefreshControl];
