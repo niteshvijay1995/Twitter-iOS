@@ -25,9 +25,9 @@
         twImage = [NSEntityDescription insertNewObjectForEntityForName:@"TWImageCache" inManagedObjectContext:context];
         twImage.url = url;
     }
-    NSString *imagePath = [self imagePathForUrl:url];
+    NSString *imagePath = [self encodeUrl:url];
     NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-    [imageData writeToFile:imagePath atomically:NO];
+    [imageData writeToFile:[self imagePathForUrl:imagePath] atomically:NO];
     twImage.filePath = imagePath;
     [context save:NULL];
     return twImage;
@@ -43,7 +43,7 @@
         NSLog(@"Error in reading TWImageCache");
     } else if ([matches count]){
         TWImageCache *twImage = [matches firstObject];
-        image = [UIImage imageWithContentsOfFile:twImage.filePath];
+        image = [UIImage imageWithContentsOfFile:[self imagePathForUrl:twImage.filePath]];
     }
     return image;
 }
@@ -54,9 +54,9 @@
 }
 
 + (NSString *)imagePathForUrl:(NSString *)url {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, NO);
     NSString *documentDirectory = [paths objectAtIndex:0];
-    return [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",[self encodeUrl:url]]];
+    return [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",url]];
 }
 
 @end
