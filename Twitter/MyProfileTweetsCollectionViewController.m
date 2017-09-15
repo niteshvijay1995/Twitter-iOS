@@ -10,6 +10,7 @@
 #import <TwitterKit/TwitterKit.h>
 #import "TwitterFetcher.h"
 #import "Tweet+TwitterTweetParser.h"
+#import "UserProfileZeroCVCell.h"
 
 @interface MyProfileTweetsCollectionViewController ()
 
@@ -23,6 +24,7 @@
     [super viewDidLoad];
     [self disableRefreshControl];
     [self fetchNewTweets];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"UserProfileCellZero" bundle:NULL] forCellWithReuseIdentifier:@"UserCellZero"];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -31,8 +33,34 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.tweetList count];
+    return [self.tweetList count] + 1;
     
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item == 0) {
+        UserProfileZeroCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCellZero" forIndexPath:indexPath];
+        [self configureUserZeroCell:cell];
+        return cell;
+    }
+    else {
+        NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:indexPath.item-1 inSection:indexPath.section];
+        return [super collectionView:collectionView cellForItemAtIndexPath:newIndexPath];
+    }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item == 0) {
+        return CGSizeMake([UIScreen mainScreen].bounds.size.width, 150);
+    }
+    else {
+        NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:indexPath.item-1 inSection:indexPath.section];
+        return [super collectionView:collectionView
+                              layout:collectionViewLayout
+              sizeForItemAtIndexPath:newIndexPath];
+    }
 }
 
 - (Tweet *)getTweetForIndexPath:(NSIndexPath *)indexPath {
@@ -71,6 +99,13 @@
         NSLog(@"Error: %@", clientError);
         [self.refreshControl endRefreshing];
     }
+}
+
+- (void)configureUserZeroCell:(UserProfileZeroCVCell *)cell {
+    cell.profileImageView.clipsToBounds = YES;
+    cell.profileImageView.layer.cornerRadius = cell.profileImageView.bounds.size.height/2;
+    self.navigationController.navigationBar.backgroundColor = cell.profileBackgroundImageView.backgroundColor;
+    self.navigationController.navigationBar.alpha = 1;
 }
 
 @end

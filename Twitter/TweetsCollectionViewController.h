@@ -15,4 +15,8 @@
 
 - (void)disableRefreshControl;
 
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+
 @end

@@ -10,6 +10,8 @@
 		0A00469B1F6949ED0041E226 /* TweetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00469A1F6949ED0041E226 /* TweetsCollectionViewController.m */; };
 		0A0046A61F6A94B30041E226 /* MyProfileTweetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0046A51F6A94B30041E226 /* MyProfileTweetsCollectionViewController.m */; };
 		0A0046AE1F6BADB60041E226 /* NVNormalTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0046AD1F6BADB60041E226 /* NVNormalTweet.m */; };
+		0A0046B21F6BC7530041E226 /* UserProfileCellZero.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A0046B11F6BC7530041E226 /* UserProfileCellZero.xib */; };
+		0A0046B51F6BCE6F0041E226 /* UserProfileZeroCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0046B41F6BCE6F0041E226 /* UserProfileZeroCVCell.m */; };
 		0A1D43341F4EA83D00D6DECD /* TwitterFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D43331F4EA83D00D6DECD /* TwitterFetcher.m */; };
 		0A1D433C1F4ECD6100D6DECD /* UserProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D433B1F4ECD6100D6DECD /* UserProfileTableViewController.m */; };
 		0A1D433F1F4ECE5200D6DECD /* FetchUserProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D433E1F4ECE5200D6DECD /* FetchUserProfileTVC.m */; };
@@ -76,6 +78,9 @@
 		0A0046AA1F6BAC360041E226 /* NVTweet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVTweet.h; sourceTree = "<group>"; };
 		0A0046AC1F6BADB60041E226 /* NVNormalTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNormalTweet.h; sourceTree = "<group>"; };
 		0A0046AD1F6BADB60041E226 /* NVNormalTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVNormalTweet.m; sourceTree = "<group>"; };
+		0A0046B11F6BC7530041E226 /* UserProfileCellZero.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileCellZero.xib; sourceTree = "<group>"; };
+		0A0046B31F6BCE6F0041E226 /* UserProfileZeroCVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileZeroCVCell.h; sourceTree = "<group>"; };
+		0A0046B41F6BCE6F0041E226 /* UserProfileZeroCVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileZeroCVCell.m; sourceTree = "<group>"; };
 		0A1D43321F4EA83D00D6DECD /* TwitterFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFetcher.h; sourceTree = "<group>"; };
 		0A1D43331F4EA83D00D6DECD /* TwitterFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFetcher.m; sourceTree = "<group>"; };
 		0A1D433A1F4ECD6100D6DECD /* UserProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileTableViewController.h; sourceTree = "<group>"; };
@@ -220,6 +225,9 @@
 			children = (
 				0A0046A41F6A94B30041E226 /* MyProfileTweetsCollectionViewController.h */,
 				0A0046A51F6A94B30041E226 /* MyProfileTweetsCollectionViewController.m */,
+				0A0046B11F6BC7530041E226 /* UserProfileCellZero.xib */,
+				0A0046B31F6BCE6F0041E226 /* UserProfileZeroCVCell.h */,
+				0A0046B41F6BCE6F0041E226 /* UserProfileZeroCVCell.m */,
 			);
 			name = MyProfile;
 			sourceTree = "<group>";
@@ -590,6 +598,7 @@
 			files = (
 				0A1D43411F4F551500D6DECD /* UserProfileTweetTableViewCell.xib in Resources */,
 				0A2869781F4D75B400F3135A /* LaunchScreen.storyboard in Resources */,
+				0A0046B21F6BC7530041E226 /* UserProfileCellZero.xib in Resources */,
 				0A8A892E1F57FDCE004A6606 /* TweetOptionsFooterBar.xib in Resources */,
 				0A2869A61F4DA61B00F3135A /* CustomUserDetailCell.xib in Resources */,
 				0A2869731F4D75B400F3135A /* Main.storyboard in Resources */,
@@ -719,6 +728,7 @@
 				0A98C70C1F67CD7000E3BDD4 /* DownloaderQueue.m in Sources */,
 				0A2524251F679DD500B62720 /* Me+MeParser.m in Sources */,
 				0A2524051F615FD000B62720 /* Tweet+CoreDataClass.m in Sources */,
+				0A0046B51F6BCE6F0041E226 /* UserProfileZeroCVCell.m in Sources */,
 				0A1D43441F4F557D00D6DECD /* UserProfileTweetTableViewCell.m in Sources */,
 				0A8A891C1F540E44004A6606 /* TweetCollectionViewCell.m in Sources */,
 				0A28698F1F4D780900F3135A /* LoginViewController.m in Sources */,
