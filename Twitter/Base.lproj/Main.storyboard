@@ -74,7 +74,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2B-Zj-jjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3833" y="-490"/>
+            <point key="canvasLocation" x="3905" y="-1227"/>
         </scene>
         <!--Following-->
         <scene sceneID="znE-fE-JS1">
@@ -89,7 +89,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="160"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p0J-4h-hpx" id="lhn-7R-Eyz">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="159.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jtp-l0-zP5">
@@ -164,7 +164,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0DW-f0-irc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3833" y="199"/>
+            <point key="canvasLocation" x="3905" y="-391"/>
         </scene>
         <!--Fetch User ProfileTVC-->
         <scene sceneID="tsJ-k5-fki">
@@ -183,7 +183,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CX2-Nu-fQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4679" y="199"/>
+            <point key="canvasLocation" x="4830" y="-391"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FfW-lb-QqZ">
@@ -200,6 +200,7 @@
                         <segue destination="ljY-Mr-bem" kind="relationship" relationship="viewControllers" id="xhI-Wi-siG"/>
                         <segue destination="779-12-HVJ" kind="relationship" relationship="viewControllers" id="Ikk-Ph-gwo"/>
                         <segue destination="4Kw-lM-CsA" kind="relationship" relationship="viewControllers" id="doy-cb-cQ9"/>
+                        <segue destination="RFV-wT-gV2" kind="relationship" relationship="viewControllers" id="rRt-WU-ikz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOO-U0-WmF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -223,7 +224,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FKc-OR-sLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2916" y="200"/>
+            <point key="canvasLocation" x="2988" y="-390"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="7LB-cG-BxZ">
@@ -275,7 +276,42 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2916" y="939.58020989505258"/>
+            <point key="canvasLocation" x="2988" y="331"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="yPA-NL-aYQ">
+            <objects>
+                <collectionViewController id="RFV-wT-gV2" customClass="MyProfileTweetsCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="kqw-59-C1X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qrU-E5-0ra">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nbN-nq-BCB">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="RFV-wT-gV2" id="iCi-d6-h81"/>
+                            <outlet property="delegate" destination="RFV-wT-gV2" id="0Na-ya-MoN"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="38x-95-ykg"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xTV-zd-ccC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2988" y="1093"/>
         </scene>
         <!--Home-->
         <scene sceneID="IVD-MY-Xlv">
@@ -298,7 +334,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3sM-CV-hX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2916" y="-489"/>
+            <point key="canvasLocation" x="2988" y="-1227"/>
         </scene>
         <!--Core Data Tweets Collection View Controller-->
         <scene sceneID="aEd-OY-nsN">
@@ -332,12 +368,13 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6RI-qN-TJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3754" y="949"/>
+            <point key="canvasLocation" x="3905" y="331"/>
         </scene>
     </scenes>
     <resources>
         <image name="following_icon" width="25" height="25"/>
         <image name="home_icon" width="25" height="25"/>
+        <image name="profile" width="25" height="25"/>
         <image name="quill" width="24" height="24"/>
         <image name="twitter_verified_icon" width="158" height="158"/>
     </resources>
