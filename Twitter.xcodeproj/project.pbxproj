@@ -72,6 +72,7 @@
 		0A00469A1F6949ED0041E226 /* TweetsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetsCollectionViewController.m; sourceTree = "<group>"; };
 		0A0046A41F6A94B30041E226 /* MyProfileTweetsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileTweetsCollectionViewController.h; sourceTree = "<group>"; };
 		0A0046A51F6A94B30041E226 /* MyProfileTweetsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileTweetsCollectionViewController.m; sourceTree = "<group>"; };
+		0A0046AA1F6BAC360041E226 /* NVTweet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVTweet.h; sourceTree = "<group>"; };
 		0A1D43321F4EA83D00D6DECD /* TwitterFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFetcher.h; sourceTree = "<group>"; };
 		0A1D43331F4EA83D00D6DECD /* TwitterFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFetcher.m; sourceTree = "<group>"; };
 		0A1D433A1F4ECD6100D6DECD /* UserProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileTableViewController.h; sourceTree = "<group>"; };
@@ -220,6 +221,14 @@
 			name = MyProfile;
 			sourceTree = "<group>";
 		};
+		0A0046A91F6BAC140041E226 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0A0046AA1F6BAC360041E226 /* NVTweet.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		0A1D43351F4EAC1400D6DECD /* FollowingList */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +348,7 @@
 		0A2869671F4D75B400F3135A /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				0A0046A91F6BAC140041E226 /* Protocols */,
 				0A0046A01F6A945D0041E226 /* MyProfile */,
 				0A00469C1F6958320041E226 /* Deprecated */,
 				0A0046981F6949C10041E226 /* TweetsCollectionViewController */,
