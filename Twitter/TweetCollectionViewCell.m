@@ -141,7 +141,7 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     
 }
 
-- (void)configureStaticCellFromCoreDataTweet:(Tweet *)tweet {
+- (void)configureStaticCellFromCoreDataTweet:(NSObject<NVTweet> *)tweet {
     self.tweetCellViewWidthConstraint.constant = [self screenWidth] - (2*LEFT_RIGHT_CELL_INSET);
     self.tweetLabel.attributedText = (NSAttributedString *)tweet.text;
     if (tweet.isRetweet) {
@@ -168,7 +168,7 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
     }
 }
 
-- (void)configureCellFromCoreDataTweet:(Tweet *)tweet {
+- (void)configureCellFromCoreDataTweet:(NSObject<NVTweet> *)tweet {
     self.tweetCellViewWidthConstraint.constant = [self screenWidth] - (2*LEFT_RIGHT_CELL_INSET);
     self.tweetLabel.attributedText = (NSAttributedString *)tweet.text;
     if (tweet.isRetweet) {

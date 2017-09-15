@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *tweetCellView;
 
 - (void)configureCellFromTweet:(NSDictionary *)tweet;
-- (void)configureCellFromCoreDataTweet:(Tweet *)tweet;
-- (void)configureStaticCellFromCoreDataTweet:(Tweet *)tweet;
+- (void)configureCellFromCoreDataTweet:(NSObject<NVTweet> *)tweet;
+- (void)configureStaticCellFromCoreDataTweet:(NSObject<NVTweet> *)tweet;
 
 @end

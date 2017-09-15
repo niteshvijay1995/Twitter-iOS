@@ -10,6 +10,7 @@
 #import "TwitterFetcher.h"
 #import "TweetCollectionViewCell.h"
 #import "Tweet+TwitterTweetParser.h"
+#import "NVTweet.h"
 
 @interface TweetsCollectionViewController ()
 
@@ -74,8 +75,8 @@ static NSString * const reuseIdentifier = @"TweetCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TweetCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    Tweet *tweet = [self getTweetForIndexPath:indexPath];
-    [cell configureCellFromCoreDataTweet:tweet];
+    NSObject<NVTweet> *nvTweet = [self getTweetForIndexPath:indexPath];
+    [cell configureCellFromCoreDataTweet:nvTweet];
     return cell;
 }
 
@@ -84,7 +85,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    Tweet *tweet = [self getTweetForIndexPath:indexPath];
+    NSObject<NVTweet> *tweet = [self getTweetForIndexPath:indexPath];
     id size;
     if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation)) {
         size = [self.portraitCellSizeCache objectForKey:tweet.id];
@@ -122,7 +123,7 @@ static NSString * const reuseIdentifier = @"TweetCell";
 }
 
 #pragma mark - Abstract methods
-- (Tweet *)getTweetForIndexPath:(NSIndexPath *)indexPath {
+- (NSObject<NVTweet> *)getTweetForIndexPath:(NSIndexPath *)indexPath {
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
     return nil;

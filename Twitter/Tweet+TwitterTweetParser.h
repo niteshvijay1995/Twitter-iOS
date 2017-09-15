@@ -7,8 +7,9 @@
 //
 
 #import "Tweet+CoreDataProperties.h"
+#import "NVTweet.h"
 
-@interface Tweet (TwitterTweetParser)
+@interface Tweet (TwitterTweetParser) <NVTweet>
 
 + (Tweet *)tweetWithTweetDictionary:(NSDictionary *)tweetDictionary inManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)laodTweetsFromTweetArray:(NSArray *)tweets intoManagedObjectContext:(NSManagedObjectContext *)context;
