@@ -58,6 +58,7 @@
     imageButton.clipsToBounds = YES;
     imageButton.frame = CGRectMake(0, 0,32, 32);
     imageButton.layer.cornerRadius = 0.5 * imageButton.bounds.size.height;
+    [imageButton addTarget:self action:@selector(myProfile:) forControlEvents:UIControlEventTouchUpInside];
     self.profileImageButton.customView = imageButton;
 }
 
@@ -148,6 +149,11 @@
 - (IBAction)composeTweet:(id)sender {
     NewTweetView *newTweetViewController = [[NewTweetView alloc] init];
     [self presentViewController:newTweetViewController animated:YES completion:nil];
+}
+
+- (void)myProfile:(id)sender {
+    NSLog(@"Profile change");
+    self.tabBarController.selectedIndex = 3;
 }
 
 @end
