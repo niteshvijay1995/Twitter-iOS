@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A00469B1F6949ED0041E226 /* TweetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00469A1F6949ED0041E226 /* TweetsCollectionViewController.m */; };
 		0A0046A61F6A94B30041E226 /* MyProfileTweetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0046A51F6A94B30041E226 /* MyProfileTweetsCollectionViewController.m */; };
+		0A0046AE1F6BADB60041E226 /* NVNormalTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0046AD1F6BADB60041E226 /* NVNormalTweet.m */; };
 		0A1D43341F4EA83D00D6DECD /* TwitterFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D43331F4EA83D00D6DECD /* TwitterFetcher.m */; };
 		0A1D433C1F4ECD6100D6DECD /* UserProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D433B1F4ECD6100D6DECD /* UserProfileTableViewController.m */; };
 		0A1D433F1F4ECE5200D6DECD /* FetchUserProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D433E1F4ECE5200D6DECD /* FetchUserProfileTVC.m */; };
@@ -73,6 +74,8 @@
 		0A0046A41F6A94B30041E226 /* MyProfileTweetsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileTweetsCollectionViewController.h; sourceTree = "<group>"; };
 		0A0046A51F6A94B30041E226 /* MyProfileTweetsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileTweetsCollectionViewController.m; sourceTree = "<group>"; };
 		0A0046AA1F6BAC360041E226 /* NVTweet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVTweet.h; sourceTree = "<group>"; };
+		0A0046AC1F6BADB60041E226 /* NVNormalTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNormalTweet.h; sourceTree = "<group>"; };
+		0A0046AD1F6BADB60041E226 /* NVNormalTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVNormalTweet.m; sourceTree = "<group>"; };
 		0A1D43321F4EA83D00D6DECD /* TwitterFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFetcher.h; sourceTree = "<group>"; };
 		0A1D43331F4EA83D00D6DECD /* TwitterFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFetcher.m; sourceTree = "<group>"; };
 		0A1D433A1F4ECD6100D6DECD /* UserProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileTableViewController.h; sourceTree = "<group>"; };
@@ -229,6 +232,15 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		0A0046AB1F6BAD880041E226 /* NormalTweet */ = {
+			isa = PBXGroup;
+			children = (
+				0A0046AC1F6BADB60041E226 /* NVNormalTweet.h */,
+				0A0046AD1F6BADB60041E226 /* NVNormalTweet.m */,
+			);
+			name = NormalTweet;
+			sourceTree = "<group>";
+		};
 		0A1D43351F4EAC1400D6DECD /* FollowingList */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,7 +324,7 @@
 			name = Me;
 			sourceTree = "<group>";
 		};
-		0A2524221F679DA800B62720 /* Tweet */ = {
+		0A2524221F679DA800B62720 /* CoreDataTweet */ = {
 			isa = PBXGroup;
 			children = (
 				0ACBACC41F601DC80034518E /* Tweet+CoreDataClass.h */,
@@ -322,7 +334,7 @@
 				0ACBACCA1F601E8D0034518E /* Tweet+TwitterTweetParser.h */,
 				0ACBACCB1F601E8D0034518E /* Tweet+TwitterTweetParser.m */,
 			);
-			name = Tweet;
+			name = CoreDataTweet;
 			sourceTree = "<group>";
 		};
 		0A28695C1F4D75B400F3135A = {
@@ -456,8 +468,9 @@
 		12125EBD1F61510C0083DA0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0A0046AB1F6BAD880041E226 /* NormalTweet */,
 				0A98C7141F68FFA900E3BDD4 /* Twitter.xcdatamodeld */,
-				0A2524221F679DA800B62720 /* Tweet */,
+				0A2524221F679DA800B62720 /* CoreDataTweet */,
 				0A2524211F679D9500B62720 /* Me */,
 				0A98C7131F68FCA700E3BDD4 /* ImageCache */,
 			);
@@ -719,6 +732,7 @@
 				0A2869951F4D7D6D00F3135A /* HomeScreenCollectionViewController.m in Sources */,
 				0A2524271F67AB6600B62720 /* Me+CoreDataProperties.m in Sources */,
 				0A28696D1F4D75B400F3135A /* AppDelegate.m in Sources */,
+				0A0046AE1F6BADB60041E226 /* NVNormalTweet.m in Sources */,
 				0A28696A1F4D75B400F3135A /* main.m in Sources */,
 				0A8A89271F5692CE004A6606 /* ImageCache.m in Sources */,
 				0A1D43471F4F598B00D6DECD /* TwitterUser.m in Sources */,
