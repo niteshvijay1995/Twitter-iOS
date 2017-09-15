@@ -39,42 +39,45 @@
         [context save:NULL];
     } else {
         tweet = [NSEntityDescription insertNewObjectForEntityForName:@"Tweet" inManagedObjectContext:context];
-        tweet.id = [NSString stringWithFormat:@"%@",[tweetDictionary valueForKeyPath:TWITTER_TWEET_ID]];
-        tweet.favorited = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITED_FLAG] boolValue];
-        tweet.retweeted = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEETED_FLAG] boolValue];
-        tweet.isRetweet = [tweetDictionary valueForKey:TWITTER_TWEET_RETWEET_STATUS]?YES:NO;
-        NSDictionary *user = [tweetDictionary valueForKeyPath:TWITTER_TWEET_USER];
-        if (tweet.isRetweet) {
-            tweet.retweetedBy = [user valueForKeyPath:TWITTER_USER_FULL_NAME];
-            user = [tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEET_USER];
-            NSDictionary *retweetDictionary = [tweetDictionary valueForKeyPath:TWITTER_RETWEET];
-            tweet.text = [self getAttributedStringForTweet:retweetDictionary];
-            tweet.favoriteCount = [[retweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT] intValue];
-        }
-        else {
-            tweet.text = [self getAttributedStringForTweet:tweetDictionary];
-            tweet.favoriteCount = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT] intValue];
-        }
-        tweet.profileImageUrl = [user valueForKey:TWITTER_USER_PROFILE_IMAGE];
-        tweet.userFullName = [user valueForKeyPath:TWITTER_USER_FULL_NAME];
-        tweet.isVerifiedUser = [[NSString stringWithFormat:@"%@", [user valueForKey:TWITTER_USER_VERIFIED_FLAG]] isEqualToString:@"1"];
-        tweet.isMediaAttached = [tweetDictionary valueForKeyPath:TWITTER_TWEET_MEDIA] ? YES : NO ;
-        if (tweet.isMediaAttached) {
-            NSArray *medias = [tweetDictionary valueForKeyPath:TWITTER_TWEET_MEDIA];
-            tweet.mediaUrl = [medias.firstObject valueForKeyPath:TWITTER_TWEET_MEDIA_URL];
-        }
-        
-        tweet.retweetCount = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT] intValue];
+        [self parseTweetDictionary:tweetDictionary inTweet:tweet];
     }
     return tweet;
 }
-
 
 // OPTIMIZE-ME
 + (void)laodTweetsFromTweetArray:(NSArray *)tweets intoManagedObjectContext:(NSManagedObjectContext *)context {
     for (NSDictionary *tweet in tweets) {
         [self tweetWithTweetDictionary:tweet inManagedObjectContext:context];
     }
+}
+
++ (void)parseTweetDictionary:(NSDictionary *)tweetDictionary inTweet:(Tweet *)tweet {
+    tweet.id = [NSString stringWithFormat:@"%@",[tweetDictionary valueForKeyPath:TWITTER_TWEET_ID]];
+    tweet.favorited = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITED_FLAG] boolValue];
+    tweet.retweeted = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEETED_FLAG] boolValue];
+    tweet.isRetweet = [tweetDictionary valueForKey:TWITTER_TWEET_RETWEET_STATUS]?YES:NO;
+    NSDictionary *user = [tweetDictionary valueForKeyPath:TWITTER_TWEET_USER];
+    if (tweet.isRetweet) {
+        tweet.retweetedBy = [user valueForKeyPath:TWITTER_USER_FULL_NAME];
+        user = [tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEET_USER];
+        NSDictionary *retweetDictionary = [tweetDictionary valueForKeyPath:TWITTER_RETWEET];
+        tweet.text = [self getAttributedStringForTweet:retweetDictionary];
+        tweet.favoriteCount = [[retweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT] intValue];
+    }
+    else {
+        tweet.text = [self getAttributedStringForTweet:tweetDictionary];
+        tweet.favoriteCount = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITE_COUNT] intValue];
+    }
+    tweet.profileImageUrl = [user valueForKey:TWITTER_USER_PROFILE_IMAGE];
+    tweet.userFullName = [user valueForKeyPath:TWITTER_USER_FULL_NAME];
+    tweet.isVerifiedUser = [[NSString stringWithFormat:@"%@", [user valueForKey:TWITTER_USER_VERIFIED_FLAG]] isEqualToString:@"1"];
+    tweet.isMediaAttached = [tweetDictionary valueForKeyPath:TWITTER_TWEET_MEDIA] ? YES : NO ;
+    if (tweet.isMediaAttached) {
+        NSArray *medias = [tweetDictionary valueForKeyPath:TWITTER_TWEET_MEDIA];
+        tweet.mediaUrl = [medias.firstObject valueForKeyPath:TWITTER_TWEET_MEDIA_URL];
+    }
+    
+    tweet.retweetCount = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEET_COUNT] intValue];
 }
 
 + (NSMutableAttributedString *)getAttributedStringForTweet:(NSDictionary *)tweet {
