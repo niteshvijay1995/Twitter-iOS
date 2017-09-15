@@ -10,6 +10,7 @@
 #import "TwitterTweet.h"
 #import "TwitterFetcher.h"
 #import <UIKit/UIKit.h>
+#import "NVNormalTweet.h"
 
 @implementation Tweet (TwitterTweetParser)
 
@@ -51,7 +52,17 @@
     }
 }
 
-+ (void)parseTweetDictionary:(NSDictionary *)tweetDictionary inTweet:(Tweet *)tweet {
++ (NSArray *)loadTweetFromTweetsArray:(NSArray *)tweets {
+    NSMutableArray *tweetList = [[NSMutableArray alloc] init];
+    for (NSDictionary *tweetDictionary in tweets) {
+        NVNormalTweet *normalTweet = [[NVNormalTweet alloc] init];
+        [self parseTweetDictionary:tweetDictionary inTweet:normalTweet];
+        [tweetList addObject:normalTweet];
+    }
+    return tweetList;
+}
+
++ (void)parseTweetDictionary:(NSDictionary *)tweetDictionary inTweet:(NSObject <NVTweet> *)tweet {
     tweet.id = [NSString stringWithFormat:@"%@",[tweetDictionary valueForKeyPath:TWITTER_TWEET_ID]];
     tweet.favorited = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_FAVORITED_FLAG] boolValue];
     tweet.retweeted = [[tweetDictionary valueForKeyPath:TWITTER_TWEET_RETWEETED_FLAG] boolValue];
