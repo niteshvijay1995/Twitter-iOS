@@ -56,7 +56,10 @@
             [client sendTwitterRequest:request completion:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                 if (data) {
                     NSError *jsonError;
-                    NSMutableArray *newTweetDictionaryList = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];                }
+                    NSMutableArray *newTweetDictionaryList = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+                    self.tweetList = [Tweet loadTweetFromTweetsArray:newTweetDictionaryList];
+                    [self.collectionView reloadData];
+                }
                 else {
                     NSLog(@"Error: %@", connectionError);
                     [self.refreshControl endRefreshing];

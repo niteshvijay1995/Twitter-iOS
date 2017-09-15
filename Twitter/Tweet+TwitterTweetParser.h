@@ -13,6 +13,6 @@
 
 + (Tweet *)tweetWithTweetDictionary:(NSDictionary *)tweetDictionary inManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)laodTweetsFromTweetArray:(NSArray *)tweets intoManagedObjectContext:(NSManagedObjectContext *)context;
-+ (NSArray *)loadTweetFromTweetsArray:(NSArray *)tweets;
++ (NSMutableArray *)loadTweetFromTweetsArray:(NSArray *)tweets;
 
 @end

@@ -52,7 +52,7 @@
     }
 }
 
-+ (NSArray *)loadTweetFromTweetsArray:(NSArray *)tweets {
++ (NSMutableArray *)loadTweetFromTweetsArray:(NSArray *)tweets {
     NSMutableArray *tweetList = [[NSMutableArray alloc] init];
     for (NSDictionary *tweetDictionary in tweets) {
         NVNormalTweet *normalTweet = [[NVNormalTweet alloc] init];
