@@ -200,7 +200,7 @@
                         <segue destination="ljY-Mr-bem" kind="relationship" relationship="viewControllers" id="xhI-Wi-siG"/>
                         <segue destination="779-12-HVJ" kind="relationship" relationship="viewControllers" id="Ikk-Ph-gwo"/>
                         <segue destination="4Kw-lM-CsA" kind="relationship" relationship="viewControllers" id="doy-cb-cQ9"/>
-                        <segue destination="RFV-wT-gV2" kind="relationship" relationship="viewControllers" id="rRt-WU-ikz"/>
+                        <segue destination="STg-1k-jvE" kind="relationship" relationship="viewControllers" id="rRt-WU-ikz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOO-U0-WmF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -278,11 +278,11 @@
             </objects>
             <point key="canvasLocation" x="2988" y="331"/>
         </scene>
-        <!--Profile-->
+        <!--My Profile Tweets Collection View Controller-->
         <scene sceneID="yPA-NL-aYQ">
             <objects>
                 <collectionViewController id="RFV-wT-gV2" customClass="MyProfileTweetsCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="kqw-59-C1X">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="kqw-59-C1X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -307,11 +307,11 @@
                             <outlet property="delegate" destination="RFV-wT-gV2" id="0Na-ya-MoN"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="38x-95-ykg"/>
+                    <navigationItem key="navigationItem" id="dDz-9J-HTI"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xTV-zd-ccC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2988" y="1093"/>
+            <point key="canvasLocation" x="3927.1999999999998" y="1092.5037481259371"/>
         </scene>
         <!--Home-->
         <scene sceneID="IVD-MY-Xlv">
@@ -369,6 +369,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6RI-qN-TJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3905" y="331"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="qAH-En-7KR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="STg-1k-jvE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="38x-95-ykg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hT4-xK-PPJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RFV-wT-gV2" kind="relationship" relationship="rootViewController" id="3ky-w2-Grc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BKh-oS-eIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2988" y="1092.5037481259371"/>
         </scene>
     </scenes>
     <resources>
