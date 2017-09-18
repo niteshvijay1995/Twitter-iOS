@@ -129,6 +129,7 @@
 		0A32CF581F58425700FF4A0F /* TweetOptionsFooterBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetOptionsFooterBarView.h; sourceTree = "<group>"; };
 		0A32CF591F58425700FF4A0F /* TweetOptionsFooterBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetOptionsFooterBarView.m; sourceTree = "<group>"; };
 		0A429DC61F53ED94005C856A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0A5A1E171F6F9C4A00A2100E /* NVUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVUser.h; sourceTree = "<group>"; };
 		0A8A89181F540A4A004A6606 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
 		0A8A891A1F540E44004A6606 /* TweetCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetCollectionViewCell.h; sourceTree = "<group>"; };
 		0A8A891B1F540E44004A6606 /* TweetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TweetCollectionViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -236,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0046AA1F6BAC360041E226 /* NVTweet.h */,
+				0A5A1E171F6F9C4A00A2100E /* NVUser.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
