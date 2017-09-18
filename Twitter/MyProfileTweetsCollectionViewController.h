@@ -7,7 +7,10 @@
 //
 
 #import "TweetsCollectionViewController.h"
+#import "NVUser.h"
 
 @interface MyProfileTweetsCollectionViewController : TweetsCollectionViewController
+
+@property (strong, nonatomic) NSObject <NVUser> *user;
 
 @end

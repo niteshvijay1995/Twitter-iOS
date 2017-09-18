@@ -11,6 +11,9 @@
 #import "TwitterFetcher.h"
 #import "Tweet+TwitterTweetParser.h"
 #import "UserProfileZeroCVCell.h"
+#import "AppDelegate.h"
+#import "ImageCache.h"
+#import "DownloaderQueue.h"
 
 @interface MyProfileTweetsCollectionViewController ()
 
@@ -25,6 +28,9 @@
     [self disableRefreshControl];
     [self fetchNewTweets];
     [self.collectionView registerNib:[UINib nibWithNibName:@"UserProfileCellZero" bundle:NULL] forCellWithReuseIdentifier:@"UserCellZero"];
+    if (!self.user) {
+        self.user = ((AppDelegate *)[[UIApplication sharedApplication]delegate]).meUser;
+    }
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -101,11 +107,35 @@
     }
 }
 
+- (void)configureImageView:(UIImageView *)imageView byImageFromUrl:(NSString *)imageUrl {
+    UIImage *image = [[ImageCache sharedInstance] getCachedImageForKey:imageUrl];
+    if (image) {
+        imageView.image = image;
+    }
+    else {
+        [[DownloaderQueue sharedInstance].getImageDownloaderQueue addOperationWithBlock:^{
+            NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:imageUrl]];
+            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                if (image) {
+                    [[ImageCache sharedInstance] cacheImage:image forKey:imageUrl];
+                    imageView.image = image;
+                }
+            }];
+        }];
+    }
+}
+
 - (void)configureUserZeroCell:(UserProfileZeroCVCell *)cell {
     cell.profileImageView.clipsToBounds = YES;
     cell.profileImageView.layer.cornerRadius = cell.profileImageView.bounds.size.height/2;
+    
     self.navigationController.navigationBar.backgroundColor = cell.profileBackgroundImageView.backgroundColor;
     self.navigationController.navigationBar.alpha = 1;
+    
+    cell.userFullName.text = self.user.fullName;
+    cell.userHandle.text = self.user.screenName;
+    [self configureImageView:cell.profileImageView byImageFromUrl:self.user.profileImageUrl];
 }
 
 @end
