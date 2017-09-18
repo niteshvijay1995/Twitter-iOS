@@ -43,10 +43,7 @@ static ImageCache *sharedInstance;
         if (!imageFromCache)
         {
             [self.imageCache setObject:image forKey:key];
-            NSOperationQueue *operationQ = [DownloaderQueue sharedInstance].getImageDownloaderQueue;
-            [operationQ addOperationWithBlock:^{
-                [TWImageCache saveImage:image withUrl:key inManagedObjectContext:[CoreDataController sharedInstance].managedObjectContext];
-            }];
+            [TWImageCache saveImage:image withUrl:key inManagedObjectContext:[CoreDataController sharedInstance].managedObjectContext];
         }
     }
 }

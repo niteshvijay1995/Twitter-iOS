@@ -281,8 +281,8 @@ static float MEDIA_IMAGE_ASPECT_RATIO = 0.55;           // Aspect ratio = Height
         [self.imageDownloaderQueue addOperationWithBlock:^{
             NSData * imageData = [[NSData alloc] initWithContentsOfURL:mediaImageUrl];
             UIImage *image = [[UIImage alloc] initWithData:imageData];
-            [[ImageCache sharedInstance] cacheImage:image forKey:mediaImageUrl.absoluteString];
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [[ImageCache sharedInstance] cacheImage:image forKey:mediaImageUrl.absoluteString];
                 if ([self.mediaImageUrl.absoluteString isEqualToString:mediaImageUrl.absoluteString]) {
                     self.mediaImageView.image = image;
                 }

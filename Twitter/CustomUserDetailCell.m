@@ -52,8 +52,8 @@
         dispatch_async(imageFetchQ, ^{
             NSData * imageData = [[NSData alloc] initWithContentsOfURL: profileImageUrl];
             UIImage *image = [[UIImage alloc] initWithData:imageData];
-            [[ImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
             dispatch_async(dispatch_get_main_queue(), ^{
+                [[ImageCache sharedInstance] cacheImage:image forKey:profileImageUrl.absoluteString];
                 if ([profileImageUrl isEqual:self.profileImageUrl]) {
                     self.userProfileImage.image = image;
                 }
