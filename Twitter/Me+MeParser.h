@@ -7,8 +7,9 @@
 //
 
 #import "Me+CoreDataProperties.h"
+#import "NVUser.h"
 
-@interface Me (MeParser)
+@interface Me (MeParser) <NVUser>
 
 + (Me *)meWithUserDictionary:(NSDictionary *)userDictionary inManagedObjectContext:(NSManagedObjectContext *)context;
 
