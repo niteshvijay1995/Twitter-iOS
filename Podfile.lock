@@ -1,0 +1,18 @@
+PODS:
+  - PureLayout (3.0.2)
+  - TwitterCore (3.0.0)
+  - TwitterKit (3.1.0):
+    - TwitterCore (>= 3.0.0)
+
+DEPENDENCIES:
+  - PureLayout
+  - TwitterKit
+
+SPEC CHECKSUMS:
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
+  TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
+  TwitterKit: 21d0b22d67cb9a568cd8053972d0da7df2e0e9a0
+
+PODFILE CHECKSUM: 5d42920249c67418f18a2e92ace54e044215b729
+
+COCOAPODS: 1.3.1

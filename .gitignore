@@ -1,0 +1,13 @@
+
+Pods
+.DS_Store
+*.pbxuser
+*.mode2v3
+*.mode1v3
+.perspectivev
+*.xccheckout
+*.xcscmblueprint
+*.gcno
+xcuserdata
+DerivedData
+build
