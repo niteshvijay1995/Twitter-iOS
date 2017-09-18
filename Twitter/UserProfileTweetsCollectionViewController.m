@@ -6,7 +6,7 @@
 //  Copyright © 2017 TNET. All rights reserved.
 //
 
-#import "MyProfileTweetsCollectionViewController.h"
+#import "UserProfileTweetsCollectionViewController.h"
 #import <TwitterKit/TwitterKit.h>
 #import "TwitterFetcher.h"
 #import "Tweet+TwitterTweetParser.h"
@@ -15,22 +15,19 @@
 #import "ImageCache.h"
 #import "DownloaderQueue.h"
 
-@interface MyProfileTweetsCollectionViewController ()
+@interface UserProfileTweetsCollectionViewController ()
 
 @property (strong, nonatomic) NSMutableArray *tweetList;
 
 @end
 
-@implementation MyProfileTweetsCollectionViewController
+@implementation UserProfileTweetsCollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self disableRefreshControl];
     [self fetchNewTweets];
     [self.collectionView registerNib:[UINib nibWithNibName:@"UserProfileCellZero" bundle:NULL] forCellWithReuseIdentifier:@"UserCellZero"];
-    if (!self.user) {
-        self.user = ((AppDelegate *)[[UIApplication sharedApplication]delegate]).meUser;
-    }
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -78,7 +75,7 @@
     NSString *userID = store.session.userID;
     
     TWTRAPIClient *client = [[TWTRAPIClient alloc] initWithUserID:userID];
-    NSDictionary *params = @{@"id":userID};
+    NSDictionary *params = @{@"id":self.user.id};
     
     NSError *clientError;
     

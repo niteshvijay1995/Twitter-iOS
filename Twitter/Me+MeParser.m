@@ -29,12 +29,21 @@
         [context save:NULL];
     } else {
         me = [NSEntityDescription insertNewObjectForEntityForName:@"Me" inManagedObjectContext:context];
-        me.id = id;
-        me.profileImageUrl = [userDictionary valueForKeyPath:TWITTER_USER_PROFILE_IMAGE];
-        me.fullName = [userDictionary valueForKeyPath:TWITTER_USER_FULL_NAME];
-        me.screenName = [userDictionary valueForKeyPath:TWITTER_USER_SCREEN_NAME];
+        [self parseUserDictionary:userDictionary intoObject:me];
     }
     return me;
 }
 
++ (User *)userWithUserDictionary:(NSDictionary *)userDictionary {
+    User *user = [[User alloc] init];
+    [self parseUserDictionary:userDictionary intoObject:user];
+    return user;
+}
+
++ (void)parseUserDictionary:(NSDictionary *)userDictionary intoObject:(NSObject <NVUser> *)user {
+    user.id = [NSString stringWithFormat:@"%@",[userDictionary valueForKeyPath:TWITTER_USER_ID]];
+    user.profileImageUrl = [userDictionary valueForKeyPath:TWITTER_USER_PROFILE_IMAGE];
+    user.fullName = [userDictionary valueForKeyPath:TWITTER_USER_FULL_NAME];
+    user.screenName = [userDictionary valueForKeyPath:TWITTER_USER_SCREEN_NAME];
+}
 @end

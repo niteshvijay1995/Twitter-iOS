@@ -10,6 +10,8 @@
 #import "CustomUserDetailCell.h"
 #import "UserProfileTableViewController.h"
 #import "FetchUserProfileTVC.h"
+#import "UserProfileTweetsCollectionViewController.h"
+#import "Me+MeParser.h"
 
 @interface FollowingTableViewController ()
 
@@ -69,10 +71,9 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if(indexPath) {
             if([segue.identifier isEqualToString:@"showUserDetail"]) {
-                if ([segue.destinationViewController isKindOfClass:[FetchUserProfileTVC class]]) {
-                    UserProfileTableViewController *upTVC = (UserProfileTableViewController *)segue.destinationViewController;
-                    upTVC.userID = [NSString stringWithFormat:@"%@",[self.followingList[indexPath.row] valueForKey:@"id"]];
-                    
+                if ([segue.destinationViewController isKindOfClass:[UserProfileTweetsCollectionViewController class]]) {
+                    UserProfileTweetsCollectionViewController *uPTCVC = (UserProfileTweetsCollectionViewController *)segue.destinationViewController;
+                    uPTCVC.user = [Me userWithUserDictionary:self.followingList[indexPath.row]];
                 }
             }
         }

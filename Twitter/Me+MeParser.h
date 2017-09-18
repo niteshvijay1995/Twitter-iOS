@@ -8,9 +8,11 @@
 
 #import "Me+CoreDataProperties.h"
 #import "NVUser.h"
+#import "User.h"
 
 @interface Me (MeParser) <NVUser>
 
 + (Me *)meWithUserDictionary:(NSDictionary *)userDictionary inManagedObjectContext:(NSManagedObjectContext *)context;
++ (User *)userWithUserDictionary:(NSDictionary *)userDictionary;
 
 @end
