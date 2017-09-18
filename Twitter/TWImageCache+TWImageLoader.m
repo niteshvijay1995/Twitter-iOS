@@ -54,7 +54,7 @@
 }
 
 + (NSString *)imagePathForUrl:(NSString *)url {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, NO);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
     return [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",url]];
 }
